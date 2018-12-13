@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files 
+
+@import "../node_modules/typeface-exo/index.css";
+@import "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css";
+/*@import "../node_modules/font";
+@import "../node_modules/socicon/css/socicon.css";
+@import "../node_modules/angular-tree-component/dist/angular-tree-component.css";
+@import "../node_modules/pace-js/templates/pace-theme-flash.tmpl.css";
+@import "../node_modules/leaflet/dist/leaflet.css";
+
+*/

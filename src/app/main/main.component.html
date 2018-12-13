@@ -1,0 +1,19 @@
+<div>
+  <div style="margin: 0 1% 0 1%;">
+  
+    <nb-tabset>
+  
+      <nb-tab tabTitle="Productos" [active]="products">      
+    <app-products></app-products>
+      </nb-tab>
+    <nb-tab tabTitle="Tiendas" [active]="shops">
+    <app-shops></app-shops>
+    </nb-tab>
+    </nb-tabset>
+    </div>
+    <div class = "grid-button">              
+      <button class="btn btn-hero-info btn-demo" (click)="goToOutput()"> Calcular</button>
+       
+    </div><app-bar-pie></app-bar-pie><app-bar-chart></app-bar-chart>
+    
+  </div>

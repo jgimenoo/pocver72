@@ -1,0 +1,9 @@
+<div class="page">
+  <div class="padding-2">
+    <div class = "conttabla">
+        <ng2-smart-table [settings]="distribution" [source]="source" (deleteConfirm)="onDeleteDistri($event)" (createConfirm)="onCreateDistri($event)"
+        (editConfirm)="onEditDistri($event)"></ng2-smart-table>
+      </div>
+  </div>  
+</div>  
+<div>

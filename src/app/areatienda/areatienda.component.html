@@ -1,0 +1,9 @@
+<div class="page">
+  <div class="padding-2">
+    <div class = "conttabla">
+        <ng2-smart-table [settings]="features" [source]="source" (deleteConfirm)="onDeleteShopFeature($event)" (createConfirm)="onCreateShopFeature($event)"
+        (editConfirm)="onEditShopFeature($event)"></ng2-smart-table>
+      </div>
+  </div>  
+</div>  
+<div>

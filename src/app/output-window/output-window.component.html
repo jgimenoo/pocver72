@@ -1,0 +1,11 @@
+<div class="page">
+  <div class="padding-2">
+    <div class = "conttabla">
+      <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteOutput($event)" 
+      (createConfirm)="onCreateOutput($event)" (editConfirm)="onEditOutput($event)">
+      </ng2-smart-table>
+    <div class = "grid-button">
+      <button class="btn btn-hero-info btn-demo" (click)="goBack()"> Volver atras</button>
+    </div>
+  </div>
+</div>
