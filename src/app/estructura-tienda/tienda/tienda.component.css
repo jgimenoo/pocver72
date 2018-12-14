@@ -1,0 +1,10 @@
+.tzona {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 8px;
+    font-size: 14px;
+}
+
+.listH {
+    display: flex;
+    flex-direction: row;
+}

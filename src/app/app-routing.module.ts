@@ -3,12 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { OutputWindowComponent } from './output-window/output-window.component';
 import {MainComponent} from './main/main.component';
+import { TiendaComponent } from './estructura-tienda/tienda/tienda.component';
 
 
 const appRoutes: Routes = [{
     path: '', redirectTo: '/main', pathMatch: 'full'
 }, {
-    component: MainComponent, path: 'main'
+  component: MainComponent, path: 'main'
+}, {
+  component: TiendaComponent, path: 'estructuratienda'
 }, {
   component: OutputWindowComponent, path: 'Output'
 }, {

@@ -1,0 +1,27 @@
+.lineal {
+    position: absolute;
+}
+
+.lineal .handle {
+    position: absolute;
+    width: 24px;
+}
+
+.listH {
+    display: flex;
+    flex-direction: row;
+}
+
+.lbLinH {
+    position: relative;
+    top: -13px;
+    left: 13px;
+    font-size: 0.7em;
+}
+
+.lbLinV {
+    position: relative;
+    top: 0px;
+    left: 5px;
+    font-size: 0.7em;
+}

@@ -1,0 +1,62 @@
+.box {
+    background: #FFF;
+    border: 1px solid black;
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+}
+
+.hbox {
+    @extend .box;
+    width: 100px;
+    height: 15px;
+}
+
+.vbox {
+    @extend .box;
+    height: 100px;
+    width: 15px;
+}
+
+.small {
+    font-size: x-small;
+    padding: 3px 7px;
+}
+
+.hbox,
+.vbox {
+    .small {
+        @extend .small;
+    }
+}
+
+.vbox {
+    .small {
+        padding: 3px 4px;
+    }
+}
+
+.small.hbox {
+    @extend .box;
+    width: 50px;
+    height: 10px;
+}
+
+.small.vbox {
+    @extend .box;
+    height: 50px;
+    width: 15px;
+    padding: 3px 4px;
+}
+
+.large.hbox {
+    @extend .box;
+    width: 150px;
+    height: 20px;
+}
+
+.large.vbox {
+    @extend .box;
+    height: 150px;
+    width: 20px;
+}

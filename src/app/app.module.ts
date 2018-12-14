@@ -32,6 +32,7 @@ import { BarPieComponent } from './bar-pie/bar-pie.component';
     import { AreatiendaService } from './services/areatienda.service';
     import { DistribucionService } from './services/distribucion.service';
     import { DistritiendaService } from './services/distritienda.service';
+import { EstructuraTiendaModule } from './estructura-tienda/estructura-tienda.module';
 
 
 @NgModule({
@@ -54,7 +55,7 @@ import { BarPieComponent } from './bar-pie/bar-pie.component';
     AppRoutingModule,
     Ng2SmartTableModule,
     ChartsModule,
-
+    EstructuraTiendaModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
   ],

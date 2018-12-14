@@ -1,0 +1,42 @@
+<h1>Estructura de la tienda</h1>
+
+
+<div style="display: flex;">
+
+    <div id="menulog" style="position: absolute; left: 20px; top: 70px; width: 200px; display: block">
+        <div>
+            <div *ngFor="let m of moduloV">
+                <app-modulo [size]="m.size" [label]="m.label" [color]="m.color"></app-modulo>
+            </div>
+            <button (click)="copiarModuloV($event)">+</button>
+        </div>
+        <div class="listH" [style.height]="moduloH[0].size === 0 ? '25px' : (moduloH[0].size === 2 ? '40px' : '30px')">
+            <div *ngFor="let m of moduloH">
+                <app-modulo-hor [size]="m.size" [label]="m.label" [color]="m.color"></app-modulo-hor>
+            </div>
+            <button (click)="copiarModuloH($event)">+</button>
+        </div>
+        <div>otro elemento</div>
+    </div>
+
+    <div #ctienda id="tienda" appMovableArea cdkDropListGroup [ngStyle]="{'position': 'absolute', 'left': area.left+'px', 'top': area.top+'px'}">
+
+        <div style=" display: flex " #fila1>
+            <div #czona="appMovableZona" appMovableZona (cambioZonaLineal)="cambiarDatosZonaLineal($event.lineal, $event.zona, $event.nuevaZona, $event.pos)" (cambioZonaAlmacen)="cambiarDatosZonaAlmacen($event.almacen, $event.zona, $event.nuevaZona, $event.pos)"
+                [id]=" 'Z'+zona.id " *ngFor="let zona of [zonas[0],zonas[1]]" style="border: 1px solid black; " [style.width]="zona.width+ 'px' " [style.height]="zona.height+ 'px' ">
+                <div class="tzona">Zona {{zona.id}} - {{zona.distancia}}</div>
+                <app-lineal #cmplineal *ngFor="let lineal of zona.lineales; let i=index " [datos]="lineal" (linealSinModulos)="borrarLineal(lineal.id, zona.id)"></app-lineal>
+                <app-almacen #cmpalmacen *ngIf="zona.almacen !== null" [datos]="zona.almacen"></app-almacen>
+            </div>
+        </div>
+        <div style="display: flex " #fila2>
+            <div #czona="appMovableZona" appMovableZona (cambioZonaLineal)="cambiarDatosZonaLineal($event.lineal, $event.zona, $event.nuevaZona, $event.pos)" (cambioZonaAlmacen)="cambiarDatosZonaAlmacen($event.almacen, $event.zona, $event.nuevaZona, $event.pos)"
+                [id]=" 'Z'+zona.id " *ngFor="let zona of [zonas[2],zonas[3]] " style="border: 1px solid black; " [style.width]="zona.width+ 'px' " [style.height]="zona.height+ 'px' ">
+                <div class="tzona">Zona {{zona.id}} - {{zona.distancia}}</div>
+                <app-lineal #cmplineal *ngFor="let lineal of zona.lineales; let i=index " [datos]="lineal" (linealSinModulos)="borrarLineal(lineal.id, zona.id)"></app-lineal>
+                <app-almacen #cmpalmacen *ngIf="zona.almacen !== null" [datos]="zona.almacen"></app-almacen>
+            </div>
+        </div>
+
+    </div>
+</div>
