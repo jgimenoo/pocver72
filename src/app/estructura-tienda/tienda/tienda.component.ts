@@ -77,12 +77,16 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
       },
       modulos: [{
         id: 1,
+        zona: 1,
+        lineal: 1,
         label: '1',
         size: 0,
         horizontal: true,
         color: '#FFC6FF'
       }, {
         id: 2,
+        zona: 1,
+        lineal: 1,
         label: '2',
         size: 0,
         horizontal: true,
@@ -104,6 +108,8 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
       },
       modulos: [{
         id: 3,
+        zona: 1,
+        lineal: 2,
         label: '3',
         size: 0,
         horizontal: false,
@@ -143,12 +149,16 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
       },
       modulos: [{
         id: 4,
+        zona: 2,
+        lineal: 3,
         label: '4',
         size: 0,
         horizontal: true,
         color: '#FFC6FF'
       }, {
         id: 5,
+        zona: 2,
+        lineal: 3,
         label: '5',
         size: 0,
         horizontal: true,
@@ -239,6 +249,8 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
     zona.lineales[pos].modulos = [];
     const newmodulo = [{
       id: this.contadorModulo,
+      zona: zona.id,
+      lineal: zona.lineales[pos].id,
       label: modulo[0].label,
       size: modulo[0].size,
       horizontal: modulo[0].horizontal,
@@ -256,7 +268,8 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
     this.copiarModuloAZona(true, this.zonas[0]);
   }
 
-  borrarLineal(idLineal, idZona){
+  borrarLineal(idZona, idLineal) {
+    console.log('Se borra lineal ' + idLineal + ' de zona ' + idZona);
     const posLineal = this.obtenerPosicionLinealZona(idLineal, this.zonas[idZona - 1]);
     this.zonas[idZona - 1].lineales.splice(posLineal, 1);
     console.log(this.zonas);

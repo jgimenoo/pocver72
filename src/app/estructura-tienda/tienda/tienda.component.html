@@ -25,7 +25,7 @@
             <div #czona="appMovableZona" appMovableZona (cambioZonaLineal)="cambiarDatosZonaLineal($event.lineal, $event.zona, $event.nuevaZona, $event.pos)" (cambioZonaAlmacen)="cambiarDatosZonaAlmacen($event.almacen, $event.zona, $event.nuevaZona, $event.pos)"
                 [id]=" 'Z'+zona.id " *ngFor="let zona of [zonas[0],zonas[1]]" style="border: 1px solid black; " [style.width]="zona.width+ 'px' " [style.height]="zona.height+ 'px' ">
                 <div class="tzona">Zona {{zona.id}} - {{zona.distancia}}</div>
-                <app-lineal #cmplineal *ngFor="let lineal of zona.lineales; let i=index " [datos]="lineal" (linealSinModulos)="borrarLineal(lineal.id, zona.id)"></app-lineal>
+                <app-lineal #cmplineal *ngFor="let lineal of zona.lineales; let i=index " [datos]="lineal" (linealSinModulos)="borrarLineal($event.idZona, $event.idLineal)"></app-lineal>
                 <app-almacen #cmpalmacen *ngIf="zona.almacen !== null" [datos]="zona.almacen"></app-almacen>
             </div>
         </div>
@@ -33,7 +33,7 @@
             <div #czona="appMovableZona" appMovableZona (cambioZonaLineal)="cambiarDatosZonaLineal($event.lineal, $event.zona, $event.nuevaZona, $event.pos)" (cambioZonaAlmacen)="cambiarDatosZonaAlmacen($event.almacen, $event.zona, $event.nuevaZona, $event.pos)"
                 [id]=" 'Z'+zona.id " *ngFor="let zona of [zonas[2],zonas[3]] " style="border: 1px solid black; " [style.width]="zona.width+ 'px' " [style.height]="zona.height+ 'px' ">
                 <div class="tzona">Zona {{zona.id}} - {{zona.distancia}}</div>
-                <app-lineal #cmplineal *ngFor="let lineal of zona.lineales; let i=index " [datos]="lineal" (linealSinModulos)="borrarLineal(lineal.id, zona.id)"></app-lineal>
+                <app-lineal #cmplineal *ngFor="let lineal of zona.lineales; let i=index " [datos]="lineal" (linealSinModulos)="borrarLineal($event.idZona, $event.idLineal)"></app-lineal>
                 <app-almacen #cmpalmacen *ngIf="zona.almacen !== null" [datos]="zona.almacen"></app-almacen>
             </div>
         </div>

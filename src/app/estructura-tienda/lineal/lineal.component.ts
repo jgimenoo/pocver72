@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { CdkDragDrop, transferArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, transferArrayItem, moveItemInArray, CdkDragExit } from '@angular/cdk/drag-drop';
 import { MovableDirective } from '../../draggable/movable.directive';
 
 @Component({
@@ -9,8 +9,8 @@ import { MovableDirective } from '../../draggable/movable.directive';
 })
 export class LinealComponent implements OnInit, AfterViewInit {
 
-  @Input('datos') datos;
-  @Output('linealSinModulos') linealSinModulos = new EventEmitter<any>();
+  @Input() datos;
+  @Output() linealSinModulos = new EventEmitter<any>();
 
   @ViewChild('clineal') public movable: MovableDirective;
 
@@ -24,10 +24,12 @@ export class LinealComponent implements OnInit, AfterViewInit {
   }
 
   drop(event: CdkDragDrop<any[]>) {
+    const idZona = event.previousContainer.data[0].zona;
+    const idLineal = event.previousContainer.data[0].lineal;
     if (event.previousContainer !== event.container) {
       transferArrayItem( event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
-      if(event.previousContainer.data.length === 0){
-        this.linealSinModulos.emit();
+      if (event.previousContainer.data.length === 0) {
+        this.linealSinModulos.emit({idZona: idZona, idLineal: idLineal});
       }
     } else {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
