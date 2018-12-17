@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChildren, QueryList, Renderer2 } from '@angular/core';
 import { transferArrayItem } from '@angular/cdk/drag-drop';
+import { NbSidebarService } from '@nebular/theme/components/sidebar/sidebar.service';
 
 @Component({
   selector: 'app-tienda',
@@ -11,18 +12,20 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
 
   @ViewChildren('czona') elemZonas: QueryList<any>;
 
-  constructor(private renderer: Renderer2) { }
+  constructor(
+    private renderer: Renderer2) { }
 
-  title = 'Logistica';
-  actualizarVista = true;
-  moduloV = [{id: 0, label: '', size: 0, horizontal: false, color: '#D0FBCA'}];
-  moduloH = [{id: 0, label: '', size: 0, horizontal: true, color: '#C6C6FF'}];
-  contadorModulo = 0;
-  contadorLineal = 0;
+  moduloV = [{id: 0, label: '', size: 0, horizontal: false, color: '#fff'}];
+  moduloH = [{id: 0, label: '', size: 0, horizontal: true, color: '#fff'}];
+
+  contadorModulo = 5;
+  contadorLineal = 3;
+
   area = {
     top: 70,
-    left: 210
+    left: 250
   };
+
   zonas = [{
     id: 1,
     width: 600,
@@ -53,12 +56,42 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
     lineales: []
   }];
 
+  secciones = [{
+    id: 1,
+    nombre: 'Galletas',
+    color: '#9F9FFF'
+  }, {
+    id: 2,
+    nombre: 'Limipieza de cocina',
+    color: '#FF9F9F'
+  }, {
+    id: 3,
+    nombre: 'Legumbres',
+    color: '#9EFFFF'
+  }, {
+    id: 4,
+    nombre: 'Panaderia',
+    color: '#FF7878'
+  }, {
+    id: 5,
+    nombre: 'Pescado congelado',
+    color: '#9EFF9E'
+  }, {
+    id: 6,
+    nombre: 'Fruta',
+    color: '#45D845'
+  }, {
+    id: 7,
+    nombre: 'Verdura',
+    color: '#53B153'
+  }];
+
   ngOnInit() {
    // Construir el mapa segun lo guardado en BD
    this.zonas = [{
     id: 1,
     width: 600,
-    height: 300,
+    height: 25,
     distancia: 'Media',
     almacen: null,
     lineales: [{
@@ -119,7 +152,7 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
   }, {
     id: 2,
     width: 600,
-    height: 300,
+    height: 25,
     distancia: 'Cerca',
     almacen: {
       inicio: true,
@@ -127,7 +160,7 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
         id: 2
       },
       dd: {
-        origen_x: 410,
+        origen_x: 310,
         origen_y: 93,
         x: null,
         y: null
@@ -168,23 +201,23 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
   }, {
     id: 3,
     width: 600,
-    height: 300,
+    height: 25,
     distancia: 'Lejos',
     almacen: null,
     lineales: []
   }, {
     id: 4,
     width: 600,
-    height: 300,
+    height: 25,
     distancia: 'Media',
     almacen: null,
     lineales: []
   }];
   }
 
-  obtenerPosicionLinealZona(lineal, zona){
+  obtenerPosicionLinealZona(idLineal, zona){
     for (let i = 0; i < zona.lineales.length; i++) {
-      if (zona.lineales[i].id === lineal.id) {
+      if (zona.lineales[i].id === idLineal) {
         return i;
       }
     }
@@ -195,11 +228,10 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
     const zonaOrigen = this.zonas[idZona - 1]; // Habria que buscar la zona por id
     const zonaNueva = this.zonas[idZonaNueva - 1]; // Habria que buscar la zona por id
     const linealesZonaActual = zonaOrigen.lineales;
-    const posLineal = this.obtenerPosicionLinealZona(lineal, zonaOrigen);
+    const posLineal = this.obtenerPosicionLinealZona(lineal.id, zonaOrigen);
     linealesZonaActual.splice(posLineal, 1);
     lineal.zona = {id: zonaNueva.id};
     zonaNueva.lineales.push(lineal);
-    this.actualizarVista = false;
   }
 
   cambiarDatosZonaAlmacen(almacen, idZona, idZonaNueva, pos) {
@@ -209,25 +241,15 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
     almacen.zona = {id: zonaNueva.id};
     zonaNueva.almacen = almacen;
     // TO DO: A ver si puedo cambiar la posicion por la ultima movida, que no me sale por ser posiciones relativas
-    this.actualizarVista = false;
   }
 
   ngAfterViewInit() {
-    console.log('after view component init;');
-    // if (this.actualizarVista) {
-    //   const vzonas = this.elemZonas.toArray();
-    //   for (let i = 0; i < vzonas.length; i++) {
-    //     const zona = this.zonas[i];
-    //     for (let j = 0; j < zona.lineales.length; j++) {
-    //       zona.lineales[j].zona =  {id: zona.id};
-    //     }
-    //   }
-    // }
-    // this.actualizarVista = true;
   }
 
-  copiarModuloAZona(horizontal: boolean, zona: any) {
+  copiarModuloAZona(horizontal: boolean, idZona: number, idSeccion: number) {
     // Se crea un lineal de un modulo
+    const zona = this.zonas[idZona - 1];
+    const seccion = this.secciones[idSeccion - 1];
     zona.lineales.push([]);
     const pos = zona.lineales.length - 1;
     this.contadorLineal++;
@@ -254,25 +276,19 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
       label: modulo[0].label,
       size: modulo[0].size,
       horizontal: modulo[0].horizontal,
-      color: modulo[0].color}];
+      color: seccion.color}];
     transferArrayItem(newmodulo, zona.lineales[pos].modulos, 0, 0);
-  }
-
-  copiarModuloV(event: any) {
-    console.log('copiando modulo vertical a un nuevo lineal');
-    this.copiarModuloAZona(false, this.zonas[0]);
-  }
-
-  copiarModuloH(event: any) {
-    console.log('copiando modulo horizontal a nuevo lineal');
-    this.copiarModuloAZona(true, this.zonas[0]);
   }
 
   borrarLineal(idZona, idLineal) {
     console.log('Se borra lineal ' + idLineal + ' de zona ' + idZona);
     const posLineal = this.obtenerPosicionLinealZona(idLineal, this.zonas[idZona - 1]);
-    this.zonas[idZona - 1].lineales.splice(posLineal, 1);
-    console.log(this.zonas);
+    console.log(posLineal);
+    if(posLineal !== -1){
+      this.zonas[idZona - 1].lineales.splice(posLineal, 1);
+    } else {
+      console.error('Borrar lineal: No se ha encontrado el lineal en la zona');
+    }
   }
 
 }

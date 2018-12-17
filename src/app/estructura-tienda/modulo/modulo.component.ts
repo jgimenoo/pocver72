@@ -26,17 +26,21 @@ export class ModuloComponent implements OnInit, OnChanges {
 
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnChanges(changes: SimpleChanges) {
-    const _size = parseInt(changes.size.currentValue, 10);
-    const htmlelem = this.elem.nativeElement.children[0];
-    this.renderer.removeClass(htmlelem, 'small');
-    this.renderer.removeClass(htmlelem, 'large');
-    if ( _size === 0) {
-      this.renderer.addClass(htmlelem, 'small');
-    } else if ( _size === 2 ) {
-      this.renderer.addClass(htmlelem, 'large');
+    if (changes.size) {
+      const _size = parseInt(changes.size.currentValue, 10);
+      const htmlelem = this.elem.nativeElement.children[0];
+      this.renderer.removeClass(htmlelem, 'small');
+      this.renderer.removeClass(htmlelem, 'large');
+      if ( _size === 0) {
+        this.renderer.addClass(htmlelem, 'small');
+      } else if ( _size === 2 ) {
+        this.renderer.addClass(htmlelem, 'large');
+      }
+      this._size = _size;
     }
-    this._size = _size;
-    this.label = changes.label.currentValue;
+    if (changes.label) {
+      this.label = changes.label.currentValue;
+    }
   }
 
 }

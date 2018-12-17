@@ -1,0 +1,46 @@
+<div id="menulog">
+    <nb-card>
+        <nb-card-header>Agregar módulo</nb-card-header>
+        <nb-card-body>
+            Zona:
+            <nb-select #selectZona size="xsmall" [(selected)]="idZona" status="info">
+                <nb-option *ngFor="let zona of data.zonas; " [value]="zona.id">
+                    <div>Zona {{zona.id}}</div>
+                </nb-option>
+            </nb-select>
+            <br/> Sección:
+            <nb-select #selectSeccion size="xsmall" [(selected)]="idSeccion" status="secondary" (selectedChange)="colorearModulos($event)">
+                <nb-option *ngFor="let seccion of data.secciones;" [value]="seccion.id" class="sel">
+                    {{seccion.nombre}}
+                </nb-option>
+            </nb-select>
+            <br/> Módulo:
+            <div style="text-align: center">
+                <div *ngFor="let m of data.moduloV">
+                    <app-modulo [size]="m.size" [label]="m.label" [color]="m.color"></app-modulo>
+                </div>
+                <button (click)="copiarModulo(false,$event)">+</button>
+            </div>
+            <br/>
+            <div class="listH" [style.height]="data.moduloH[0].size === 0 ? '25px' : (data.moduloH[0].size === 2 ? '40px' : '30px')">
+                <div *ngFor="let m of data.moduloH">
+                    <app-modulo-hor [size]="m.size" [label]="m.label" [color]="m.color"></app-modulo-hor>
+                </div>
+                <button (click)="copiarModulo(true,$event)">+</button>
+            </div>
+        </nb-card-body>
+    </nb-card>
+
+    <nb-card size="small">
+        <nb-card-header>Leyenda Secciones</nb-card-header>
+        <nb-list>
+            <nb-list-item *ngFor="let seccion of data.secciones" style=" overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                <div [ngStyle]="{'display': 'inline-block', 'border': '1px solid black', 'width': '30px', 'background-color': seccion.color, 'margin-right': '10px'}">&nbsp;</div>
+                <div style="display: inline-block; font-size: 0.8em;">{{ seccion.nombre }}</div>
+            </nb-list-item>
+        </nb-list>
+
+    </nb-card>
+
+
+</div>

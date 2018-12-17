@@ -10,12 +10,21 @@ import { LinealComponent } from './lineal/lineal.component';
 import { TiendaComponent } from './tienda/tienda.component';
 import { DraggableModule } from '../draggable/draggable.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { NbSelectModule } from '@nebular/theme/components/select/select.module';
+import { NbLayoutModule, NbSidebarModule, NbCardModule, NbListModule } from '@nebular/theme';
+import { MenuComponent } from './menu/menu.component';
+
 
 @NgModule({
   imports: [
     CommonModule,
     DragDropModule,
-    DraggableModule
+    DraggableModule,
+    NbSelectModule,
+    NbLayoutModule,
+    NbSidebarModule,
+    NbCardModule,
+    NbListModule
   ],
   declarations: [
     AlmacenComponent,
@@ -25,7 +34,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ModuloComponent,
     ModuloHComponent,
     LinealComponent,
-    TiendaComponent
+    TiendaComponent,
+    MenuComponent
   ],
   exports: [
     AlmacenComponent,
