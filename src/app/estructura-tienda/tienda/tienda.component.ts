@@ -45,6 +45,9 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
     const posLineal = this.obtenerPosicionLinealZona(lineal.id, zonaOrigen);
     linealesZonaActual.splice(posLineal, 1);
     lineal.zona = {id: zonaNueva.id};
+    lineal.modulos.forEach(modulo => {
+      modulo.zona = zonaNueva.id;
+    });
     zonaNueva.lineales.push(lineal);
   }
 
