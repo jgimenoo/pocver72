@@ -20,3 +20,13 @@
     -o-user-select: none;
     user-select: none;
 }
+
+h1 {
+    width: 35%;
+}
+
+.botonera {
+    width: 65%;
+    justify-content: end;
+    text-align: right;
+}

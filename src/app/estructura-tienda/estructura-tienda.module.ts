@@ -11,7 +11,7 @@ import { TiendaComponent } from './tienda/tienda.component';
 import { DraggableModule } from '../draggable/draggable.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NbSelectModule } from '@nebular/theme/components/select/select.module';
-import { NbLayoutModule, NbSidebarModule, NbCardModule, NbListModule } from '@nebular/theme';
+import { NbLayoutModule, NbSidebarModule, NbCardModule, NbListModule, NbButtonModule } from '@nebular/theme';
 import { MenuComponent } from './menu/menu.component';
 
 
@@ -24,7 +24,8 @@ import { MenuComponent } from './menu/menu.component';
     NbLayoutModule,
     NbSidebarModule,
     NbCardModule,
-    NbListModule
+    NbListModule,
+    NbButtonModule
   ],
   declarations: [
     AlmacenComponent,

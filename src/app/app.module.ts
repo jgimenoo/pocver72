@@ -24,6 +24,8 @@ import { DistribucionComponent } from './distribucion/distribucion.component';
 import { AreatiendaComponent } from './areatienda/areatienda.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { BarPieComponent } from './bar-pie/bar-pie.component';
+import { EstructuraTiendaModule } from './estructura-tienda/estructura-tienda.module';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
     // Servicios
     import { OutputWindowService } from './services/output-window.service';
@@ -32,7 +34,7 @@ import { BarPieComponent } from './bar-pie/bar-pie.component';
     import { AreatiendaService } from './services/areatienda.service';
     import { DistribucionService } from './services/distribucion.service';
     import { DistritiendaService } from './services/distritienda.service';
-import { EstructuraTiendaModule } from './estructura-tienda/estructura-tienda.module';
+
 
 
 @NgModule({
@@ -58,6 +60,7 @@ import { EstructuraTiendaModule } from './estructura-tienda/estructura-tienda.mo
     EstructuraTiendaModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
+    DeviceDetectorModule.forRoot()
   ],
   providers: [
     OutputWindowService,

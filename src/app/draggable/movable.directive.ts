@@ -1,6 +1,7 @@
 import { Directive, HostListener, HostBinding, Input, ElementRef, Renderer2, AfterContentInit } from '@angular/core';
 import { DraggableDirective } from './draggable.directive';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 interface Position {
   x: number;
@@ -41,27 +42,28 @@ export class MovableDirective extends DraggableDirective {
   constructor(
     private sanitizer: DomSanitizer,
     protected renderer: Renderer2,
-    public element: ElementRef){
-      super(renderer, element);
+    public element: ElementRef,
+    protected device: DeviceDetectorService) {
+      super(renderer, element, device);
   }
 
   @HostListener('dragStart', ['$event'])
-  onDragStart(event: PointerEvent) {
+  onDragStart = (event: any) => {
     this._startPosition = {
-      x: event.clientX - this.position.x,
-      y: event.clientY - this.position.y
+      x: (event.clientX || event.touches[0].clientX) - this.position.x,
+      y: (event.clientY || event.touches[0].clientY) - this.position.y
     };
   }
 
   @HostListener('dragMove', ['$event'])
-  onDragMove(event: PointerEvent) {
-    this.position.x = event.clientX - this._startPosition.x;
-    this.position.y = event.clientY - this._startPosition.y;
+  onDragMove(event: any) {
+    this.position.x = (event.clientX || event.touches[0].clientX) - this._startPosition.x;
+    this.position.y = (event.clientY || event.touches[0].clientY) - this._startPosition.y;
     console.log(this.position);
   }
 
   @HostListener('dragEnd', ['$event'])
-  onDragEnd(event: PointerEvent) {
+  onDragEnd(event: any) {
     if (this.reset) {
       this.position = {x: 0, y: 0};
     }
