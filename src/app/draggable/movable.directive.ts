@@ -64,6 +64,7 @@ export class MovableDirective extends DraggableDirective {
 
   @HostListener('dragEnd', ['$event'])
   onDragEnd(event: any) {
+    debugger;
     if (this.reset) {
       this.position = {x: 0, y: 0};
     }

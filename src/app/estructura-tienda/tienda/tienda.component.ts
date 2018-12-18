@@ -29,7 +29,7 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
    this.secciones = this.mapaService.obtenerSeccionesTienda();
   }
 
-  obtenerPosicionLinealZona(idLineal, zona){
+  obtenerPosicionLinealZona(idLineal, zona) {
     for (let i = 0; i < zona.lineales.length; i++) {
       if (zona.lineales[i].id === idLineal) {
         return i;

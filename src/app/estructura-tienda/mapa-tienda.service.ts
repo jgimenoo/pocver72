@@ -37,6 +37,14 @@ export class MapaTiendaService {
       id: 7,
       nombre: 'Verdura',
       color: '#53B153'
+    }, {
+      id: 8,
+      nombre: 'Pescado fresco',
+      color: '#FEC0FE'
+    }, {
+      id: 9,
+      nombre: 'Infantil y bebés',
+      color: '#5757FB'
     }];
   }
 
@@ -56,8 +64,8 @@ export class MapaTiendaService {
           id: 1
         },
         dd: {
-          origen_x: 20,
-          origen_y: 30,
+          origen_x: 1,
+          origen_y: 1,
           x: null,
           y: null
         },

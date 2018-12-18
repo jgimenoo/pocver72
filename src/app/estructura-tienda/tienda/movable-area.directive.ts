@@ -1,4 +1,4 @@
-import { Directive, ContentChildren, QueryList, AfterContentInit, ElementRef } from '@angular/core';
+import { Directive, ContentChildren, QueryList, AfterContentInit, ElementRef, HostListener } from '@angular/core';
 import { MovableDirective } from '../../draggable/movable.directive';
 import { Subscription } from 'rxjs';
 import { LinealComponent } from '../lineal/lineal.component';
