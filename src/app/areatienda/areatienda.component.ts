@@ -66,6 +66,7 @@ export class AreatiendaComponent implements OnInit {
   }
 
 
+  
   onEditShopFeature(event) {
     if (window.confirm('Estás seguro de modificar la tienda?')) {
       event.confirm.resolve(event.newData);
