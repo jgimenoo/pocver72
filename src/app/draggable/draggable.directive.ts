@@ -21,7 +21,7 @@ export class DraggableDirective implements AfterViewInit {
     public element: ElementRef,
     protected device: DeviceDetectorService) { }
 
-  @HostListener('pointerdown', ['$event'])
+  @HostListener('mousedown', ['$event'])
   onPointerDown(event: MouseEvent): void {
     if (this.device.isDesktop() && this.establecerLimitesHandle(event.clientX, event.clientY)) {
       this.dragging = true;
@@ -43,11 +43,12 @@ export class DraggableDirective implements AfterViewInit {
     }
   }
 
-  @HostListener('document:pointermove', ['$event'])
+  @HostListener('document:mousemove', ['$event'])
   onPointerMove(event: MouseEvent): void {
     if (!this.device.isDesktop() || !this.dragging) {
       return;
     }
+
     this.dragMove.emit(event);
   }
 
@@ -59,11 +60,12 @@ export class DraggableDirective implements AfterViewInit {
     this.dragMove.emit(event);
   }
 
-  @HostListener('document:pointerup', ['$event'])
+  @HostListener('document:mouseup', ['$event'])
   onPointerUp(event: MouseEvent): void {
     if (!this.device.isDesktop() || !this.dragging) {
       return;
     }
+    console.log(event.clientX);
     this.dragging = false;
     this.dragEnd.emit(event);
   }

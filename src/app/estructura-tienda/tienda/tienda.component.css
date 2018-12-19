@@ -1,12 +1,6 @@
-.zona {
-    border: 1px solid black;
-    background: #E2E2E2;
-}
-
-.tzona {
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 8px;
-    font-size: 14px;
+#tienda {
+    width: max-content;
+    overflow: hidden;
 }
 
 #tienda * {
@@ -29,4 +23,16 @@ h1 {
     width: 65%;
     justify-content: end;
     text-align: right;
+}
+
+.zona {
+    border: 1px solid #000;
+    background: #C4C4C6;
+}
+
+.tzona {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 8px;
+    font-size: 14px;
+    color: #fff;
 }

@@ -50,21 +50,20 @@ export class MovableDirective extends DraggableDirective {
   @HostListener('dragStart', ['$event'])
   onDragStart = (event: any) => {
     this._startPosition = {
-      x: (event.clientX || event.touches[0].clientX) - this.position.x,
-      y: (event.clientY || event.touches[0].clientY) - this.position.y
+      x: (this.device.isDesktop() ? event.clientX : event.touches[0].clientX) - this.position.x,
+      y: (this.device.isDesktop() ? event.clientY : event.touches[0].clientY) - this.position.y
     };
   }
 
   @HostListener('dragMove', ['$event'])
   onDragMove(event: any) {
-    this.position.x = (event.clientX || event.touches[0].clientX) - this._startPosition.x;
-    this.position.y = (event.clientY || event.touches[0].clientY) - this._startPosition.y;
+    this.position.x = (this.device.isDesktop() ? event.clientX : event.touches[0].clientX) - this._startPosition.x;
+    this.position.y = (this.device.isDesktop() ? event.clientY : event.touches[0].clientY) - this._startPosition.y;
     console.log(this.position);
   }
 
   @HostListener('dragEnd', ['$event'])
   onDragEnd(event: any) {
-    debugger;
     if (this.reset) {
       this.position = {x: 0, y: 0};
     }

@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapaTiendaService {
 
-  constructor(public http: HttpClient) { }
+  constructor(
+    public http: HttpClient,
+    private device: DeviceDetectorService) { }
 
   obtenerSeccionesTienda() {
     return [{
@@ -49,51 +52,37 @@ export class MapaTiendaService {
   }
 
   obtenerZonasTienda(){
-    return [{
+    // Sera la llamada get
+    const data = [{
       id: 1,
-      width: 600,
-      height: 25,
+      saved_width: 500,
+      saved_height: 400,
+      saved_desktop: true,
       distancia: 'Media',
       almacen: null,
       lineales: [{
         id: 1,
         horizontal: true,
-        size: 0,
-        inicio: true,
-        zona: {
-          id: 1
-        },
         dd: {
-          origen_x: 1,
-          origen_y: 1,
+          origen_x: 271,
+          origen_y: 11,
           x: null,
           y: null
         },
         modulos: [{
           id: 1,
-          zona: 1,
-          lineal: 1,
-          label: '1',
-          size: 0,
-          horizontal: true,
-          color: '#FFC6FF'
+          colorSeccion: '#FFC6FF'
         }, {
           id: 2,
-          zona: 1,
-          lineal: 1,
-          label: '2',
-          size: 0,
-          horizontal: true,
-          color: '#FFC6FF'
+          colorSeccion: '#FFC6FF'
+        }, {
+          id: 5,
+          colorSeccion: '#FFC6FF'
         }]
       }, {
         id: 2,
         horizontal: false,
         size: 0,
-        inicio: true,
-        zona: {
-          id: 1
-        },
         dd: {
           origen_x: 60,
           origen_y: 120,
@@ -102,26 +91,18 @@ export class MapaTiendaService {
         },
         modulos: [{
           id: 3,
-          zona: 1,
-          lineal: 2,
-          label: '3',
-          size: 0,
-          horizontal: false,
-          color: '#9F9FFF'
+          colorSeccion: '#9F9FFF'
         }]
       }]
     }, {
       id: 2,
-      width: 600,
-      height: 25,
+      saved_width: 500,
+      saved_height: 400,
+      saved_desktop: true,
       distancia: 'Cerca',
       almacen: {
-        inicio: true,
-        zona: {
-          id: 2
-        },
         dd: {
-          origen_x: 110,
+          origen_x: 310,
           origen_y: 93,
           x: null,
           y: null
@@ -130,49 +111,77 @@ export class MapaTiendaService {
       lineales: [{
         id: 3,
         horizontal: true,
-        size: 0,
-        inicio: true,
-        zona: {
-          id: 2
-        },
         dd: {
-          origen_x: 70,
-          origen_y: 30,
+          origen_x: 411,
+          origen_y: 19,
           x: null,
           y: null
         },
         modulos: [{
           id: 4,
-          zona: 2,
-          lineal: 3,
-          label: '4',
-          size: 0,
-          horizontal: true,
-          color: '#FFC6FF'
-        }, {
-          id: 5,
-          zona: 2,
-          lineal: 3,
-          label: '5',
-          size: 0,
-          horizontal: true,
-          color: '#FFC6FF'
+          colorSeccion: '#FFC6FF'
         }]
       }]
     }, {
       id: 3,
-      width: 600,
-      height: 25,
+      saved_width: 500,
+      saved_height: 400,
+      saved_desktop: true,
       distancia: 'Lejos',
       almacen: null,
       lineales: []
     }, {
       id: 4,
-      width: 600,
-      height: 25,
+      saved_width: 500,
+      saved_height: 400,
+      saved_desktop: true,
       distancia: 'Media',
       almacen: null,
       lineales: []
     }];
+    return this.procesarZonasTienda(data);
+  }
+
+  procesarZonasTienda(zonas){
+    let sizeModulo;
+    let widthZona;
+    let heightZona;
+    let sizeAlmacen;
+    if (this.device.isDesktop()) {
+      sizeModulo = 1;
+      sizeAlmacen = 1;
+      widthZona = 500;
+      heightZona = 400;
+    } else {
+      sizeModulo = 0;
+      sizeAlmacen = 0;
+      widthZona = 350;
+      heightZona = 290;
+    }
+    zonas.forEach(zona => {
+      zona.width = widthZona; // Revisar
+      zona.height = heightZona; // Revisar
+      if (zona.almacen) {
+        zona.almacen.size = sizeAlmacen;
+        zona.almacen.zona = {
+          id: zona.id
+        };
+      }
+      zona.lineales.forEach(lineal => {
+        lineal.zona = {
+          id: zona.id
+        };
+        lineal.modulos.forEach(modulo => {
+          modulo.zona = zona.id;
+          modulo.lineal = lineal.id;
+          modulo.label = lineal.id + '';
+          modulo.size = sizeModulo;
+          modulo.horizontal = lineal.horizontal;
+          modulo.color = modulo.colorSeccion;
+          delete modulo.colorSeccion;
+        });
+      });
+    });
+    return zonas;
   }
 }

@@ -1,6 +1,9 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, QueryList, Renderer2 } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChildren, QueryList, Renderer2, ViewChild, ContentChildren } from '@angular/core';
 import { transferArrayItem } from '@angular/cdk/drag-drop';
 import { MapaTiendaService } from '../mapa-tienda.service';
+import { MovableAreaDirective } from './movable-area.directive';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { MovableZonaDirective } from './movable-zona.directive';
 
 @Component({
   selector: 'app-tienda',
@@ -10,12 +13,15 @@ import { MapaTiendaService } from '../mapa-tienda.service';
 export class TiendaComponent implements  OnInit, AfterViewInit  {
 
 
-  @ViewChildren('czona') elemZonas: QueryList<any>;
+  @ViewChildren('czona') elemZonas: QueryList<MovableZonaDirective>;
+  @ViewChild('ctienda') elemTienda: MovableAreaDirective;
 
-  constructor(private mapaService: MapaTiendaService) { }
+  constructor(
+    private mapaService: MapaTiendaService,
+    private device: DeviceDetectorService) { }
 
-  moduloV = [{id: 0, label: '', size: 0, horizontal: false, color: '#fff'}];
-  moduloH = [{id: 0, label: '', size: 0, horizontal: true, color: '#fff'}];
+  moduloV = [{id: 0, label: '', size: this.device.isDesktop() ? 1 : 0, horizontal: false, color: '#fff'}];
+  moduloH = [{id: 0, label: '', size: this.device.isDesktop() ? 1 : 0, horizontal: true, color: '#fff'}];
 
   contadorModulo = 5;
   contadorLineal = 3;
@@ -38,8 +44,8 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
     return -1;
   }
 
-  cambiarDatosZonaLineal(lineal, idZona, idZonaNueva, pos) {
-    const zonaOrigen = this.zonas[idZona - 1]; // Habria que buscar la zona por id
+  cambiarDatosZonaLineal(lineal, idZonaOrigen, idZonaNueva, pos) {
+    const zonaOrigen = this.zonas[idZonaOrigen - 1]; // Habria que buscar la zona por id
     const zonaNueva = this.zonas[idZonaNueva - 1]; // Habria que buscar la zona por id
     const linealesZonaActual = zonaOrigen.lineales;
     const posLineal = this.obtenerPosicionLinealZona(lineal.id, zonaOrigen);
@@ -51,16 +57,53 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
     zonaNueva.lineales.push(lineal);
   }
 
-  cambiarDatosZonaAlmacen(almacen, idZona, idZonaNueva, pos) {
-    const zonaOrigen = this.zonas[idZona - 1];
+  cambiarDatosZonaAlmacen(almacen, idZonaOrigen, idZonaNueva, pos) {
+    const zonaOrigen = this.zonas[idZonaOrigen - 1];
     const zonaNueva = this.zonas[idZonaNueva - 1]; // Habria que buscar la zona por id
     zonaOrigen.almacen = null;
     almacen.zona = {id: zonaNueva.id};
     zonaNueva.almacen = almacen;
+    this.zonas.forEach(zona => {
+      zona.distancia = 'Media';
+    });
+    zonaNueva.distancia = 'Cerca';
+    if (zonaNueva.id === 1) {
+      this.zonas[3].distancia = 'Lejos';
+    } else if(zonaNueva.id === 2) {
+      this.zonas[2].distancia = 'Lejos';
+    } else if(zonaNueva.id === 3) {
+      this.zonas[1].distancia = 'Lejos';
+    } else {
+      this.zonas[0].distancia = 'Lejos';
+    }
     // TO DO: A ver si puedo cambiar la posicion por la ultima movida, que no me sale por ser posiciones relativas
   }
 
+  convertToMap(elemsMapa) {
+    const vector = [];
+    elemsMapa.forEach(element => {
+      vector[element.id] = element;
+    });
+    return vector;
+  }
+
   ngAfterViewInit() {
+    if ( (!this.device.isDesktop() && this.elemZonas.first.datos.saved_desktop)
+    || (this.device.isDesktop() && !this.elemZonas.first.datos.saved_desktop)) {
+      this.elemZonas.toArray().forEach(eZona => {
+        const vZonas = this.convertToMap(this.zonas);
+        const limitesZona = eZona.element.nativeElement.getBoundingClientRect();
+        vZonas[eZona.datos.id].lineales.forEach(lineal => {
+         lineal.dd.origen_x = Math.round(( limitesZona.width * lineal.dd.origen_x ) / vZonas[eZona.datos.id].saved_width );
+         lineal.dd.origen_y = Math.round(( limitesZona.height * lineal.dd.origen_y ) / vZonas[eZona.datos.id].saved_height);
+        });
+        if (vZonas[eZona.datos.id].almacen) {
+          const almacen = vZonas[eZona.datos.id].almacen;
+          almacen.dd.origen_x = Math.round(( limitesZona.width * almacen.dd.origen_x ) / vZonas[eZona.datos.id].saved_width );
+          almacen.dd.origen_y = Math.round(( limitesZona.height * almacen.dd.origen_y ) / vZonas[eZona.datos.id].saved_height);
+        }
+     });
+   }
   }
 
   copiarModuloAZona(horizontal: boolean, idZona: number, idSeccion: number) {
@@ -75,7 +118,6 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
     zona.lineales[pos].horizontal = horizontal;
     const modulo = ( horizontal ? this.moduloH : this.moduloV );
     zona.lineales[pos].size = modulo[0].size;
-    zona.lineales[pos].inicio = true;
     zona.lineales[pos].zona = {
       id: zona.id
     };
@@ -101,7 +143,7 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
     console.log('Se borra lineal ' + idLineal + ' de zona ' + idZona);
     const posLineal = this.obtenerPosicionLinealZona(idLineal, this.zonas[idZona - 1]);
     console.log(posLineal);
-    if(posLineal !== -1){
+    if (posLineal !== -1) {
       this.zonas[idZona - 1].lineales.splice(posLineal, 1);
     } else {
       console.error('Borrar lineal: No se ha encontrado el lineal en la zona');

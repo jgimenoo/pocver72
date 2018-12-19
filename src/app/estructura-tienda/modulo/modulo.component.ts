@@ -9,10 +9,10 @@ export class ModuloComponent implements OnInit, OnChanges {
 
   public esHorizontal: boolean;
 
-  @Input('size') size = '1';
-  @Input('label') label = '';
-  @Input('color') color = '#BBBBBB';
-  @Input('id') id = 0;
+  @Input() size = '1';
+  @Input() label = '';
+  @Input() color = '#BBBBBB';
+  @Input() id = 0;
   private _size: number;
 
 
