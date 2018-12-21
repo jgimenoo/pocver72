@@ -7,12 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+   
+    //Toastr
+    import { NbToastrModule } from '@nebular/theme'
     // Smart Table
     import { Ng2SmartTableModule } from 'ng2-smart-table';
 
     //chart pie & chartbar
-import { ChartsModule } from 'ng2-charts';
+    import { ChartsModule } from 'ng2-charts';
 
 //Components
 import { MainComponent } from './main/main.component';
@@ -58,6 +60,7 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     Ng2SmartTableModule,
     ChartsModule,
     EstructuraTiendaModule,
+    NbToastrModule.forRoot(),
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     DeviceDetectorModule.forRoot()

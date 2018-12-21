@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 import { DistritiendaService } from '../services/distritienda.service';
 import { Router } from '@angular/router';
+import { NbToastrService } from '@nebular/theme'
 
 @Component({
   selector: 'app-distritienda',
@@ -43,17 +44,17 @@ linealdistribution = {
     type: 'number',
   },
   anchomodulo: {
-    title: 'Ancho del modulo',
+    title: 'Ancho del modulo(cm)',
     filter: false,
     type: 'number',
   },
     largomodulo: {
-      title: 'Largo del modulo',
+      title: 'Largo del modulo(cm)',
       filter: false,
       type: 'number',
     },
     altomodulo: {
-      title: 'Largo del modulo',
+      title: 'Largo del modulo(cm)',
       filter: false,
       type: 'number',
     },
@@ -77,6 +78,7 @@ linealdistribution = {
  source: LocalDataSource;
  datalinealdistribution;
  constructor(private service: DistritiendaService,
+  private toastrService: NbToastrService,
   private router: Router) {
     this.source = new LocalDataSource(this.service.getLinealDistribution()); //create the source
    }
@@ -103,14 +105,42 @@ onEditLineal(event) {
   }
 }
 
+private index: number = 0; 
+result:boolean;
+
+validardata(newData) {
+  if (!isNaN(Number(newData.numodulos)) &&
+  !isNaN(Number(newData.anchomodulo)) &&
+  !isNaN(Number(newData.largomodulo)) &&
+  !isNaN(Number(newData.altomodulo)) &&
+  !isNaN(Number(newData.numbaldas)) &&
+  newData.numodulos.length !== 0 &&
+  newData.anchomodulo.length !== 0 &&
+  newData.largomodulo.length !== 0 &&
+  newData.altomodulo.length !== 0 &&
+  newData.apilamiento.length !== 0 &&
+  newData.numbaldas.length !== 0){
+    return true;
+  } 
+    return false;   
+    }
+
 onCreateLineal(event) {
-  if (window.confirm('Estás seguro de añadir esta informacion?')) {
-    event.confirm.resolve(event.newData);
-    this.service.addLineal(event.newData);
-  } else {
-    event.confirm.reject();
-  }
+this.result = this.validardata(event.newData);
+if (this.result == false){
+  
+   this.toastrService.show(
+     'Rellena todos los campos con el formato correcto para añadir la distribucion',
+     `Toaster numero: ${++this.index}`,
+     );
+ }else if (window.confirm('Estás seguro de añadir  esta informacion?')) {
+   event.confirm.resolve(event.newData);
+   this.service.addLineal(event.newData);
+ } else {
+   event.confirm.reject();
+ }
 }
+
 
 viewOutput() {
   this.router.navigate(["Output"]);

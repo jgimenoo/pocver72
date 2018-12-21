@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 import { DistribucionService } from '../services/distribucion.service';
 import { Router } from '@angular/router';
+import { NbToastrService } from '@nebular/theme'
 
 @Component({
   selector: 'app-distribucion',
@@ -80,6 +81,7 @@ distribution = {
  datadistribution;
 
   constructor(private service: DistribucionService,
+    private toastrService: NbToastrService,
     private router: Router) {
       this.source = new LocalDataSource(this.service.getDistribution()); //create the source
      }
@@ -106,8 +108,31 @@ distribution = {
     }
   }
 
+  private index: number = 0; 
+
+  result:boolean;
+  validardata(newData) {
+    if (
+    !isNaN(Number(newData.zonasec)) &&
+    !isNaN(Number(newData.cantlineales)) &&
+    newData.seccionest.length !== 0 &&
+    newData.zonasec.length !== 0 &&
+    newData.cantlineales.length !== 0 &&
+    newData.tipolineal.length !== 0){
+      return true;
+    } 
+      return false;   
+      }
+
   onCreateDistri(event) {
-    if (window.confirm('Estás seguro de añadir esta informacion?')) {
+  this.result = this.validardata(event.newData);
+   if (this.result == false){
+     
+      this.toastrService.show(
+        'Rellena todos los campos con el formato correcto para añadir la distribucion',
+        `Toaster numero: ${++this.index}`,
+        );
+    }else if (window.confirm('Estás seguro de añadir  esta informacion?')) {
       event.confirm.resolve(event.newData);
       this.service.addDistribution(event.newData);
     } else {
