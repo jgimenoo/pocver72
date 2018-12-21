@@ -12,7 +12,8 @@ interface Boundaries{
 }
 
 @Directive({
-  selector: '[appMovableArea]'
+  selector: '[appMovableArea]',
+  exportAs: 'appMovableArea'
 })
 export class MovableAreaDirective implements AfterContentInit {
   @ContentChildren(AlmacenComponent, {descendants: true}) almacenes: QueryList<AlmacenComponent>;
@@ -51,14 +52,17 @@ export class MovableAreaDirective implements AfterContentInit {
   }
 
   establecerLimitesArea(movable: MovableDirective) {
-    const viewRect: ClientRect = this.element.nativeElement.getBoundingClientRect();
+    const areaRect: ClientRect = this.element.nativeElement.getBoundingClientRect();
     const movableRect: ClientRect = movable.element.nativeElement.getBoundingClientRect();
     this.boundaries = {
-      minX: viewRect.left - movableRect.left + movable.position.x,
-      maxX: viewRect.right - movableRect.right + movable.position.x,
-      minY: viewRect.top - movableRect.top + movable.position.y,
-      maxY: viewRect.bottom - movableRect.bottom + movable.position.y
+      minX: areaRect.left - movableRect.left + movable.position.x,
+      maxX: areaRect.right - movableRect.right + movable.position.x,
+      minY: areaRect.top - movableRect.top + movable.position.y,
+      maxY: areaRect.bottom - movableRect.bottom + movable.position.y
     }
+    console.log(areaRect);
+    console.log(movableRect);
+    console.log(this.boundaries);
   };
 
   controlarLimitesArea(movable: MovableDirective) {

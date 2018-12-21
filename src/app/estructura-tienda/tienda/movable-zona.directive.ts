@@ -20,6 +20,7 @@ export class MovableZonaDirective implements AfterContentInit {
   @ContentChildren('cmpalmacen') public almacenes: QueryList<AlmacenComponent>;
   @ContentChildren('cmplineal') public lineales: QueryList<LinealComponent>;
 
+  @Input() datos: any;
   @Output() cambioZonaAlmacen = new EventEmitter<any>();
   @Output() cambioZonaLineal = new EventEmitter<any>();
 
@@ -28,7 +29,7 @@ export class MovableZonaDirective implements AfterContentInit {
   private subscriptionsLineal: Subscription[] = [];
 
   constructor(
-    private element: ElementRef) { }
+    public element: ElementRef) { }
 
   ngAfterContentInit(): void {
     // Para actualizar las cajas que se creen despues
@@ -64,12 +65,12 @@ export class MovableZonaDirective implements AfterContentInit {
     }
   };
 
-  cambiarDeZonaAlmacen(almacen, zona, nuevaZona){
+  cambiarDeZonaAlmacen(almacen, zona, nuevaZona) {
     console.log('cambio de zona ' + zona + ' a zona ' + nuevaZona);
     this.cambioZonaAlmacen.emit({almacen: almacen.datos, zona: zona, nuevaZona: nuevaZona, pos: almacen.movable.position});
   }
 
-  cambiarDeZonaLineal(lineal, zona, nuevaZona){
+  cambiarDeZonaLineal(lineal, zona, nuevaZona) {
     console.log('cambio de zona ' + zona + ' a zona ' + nuevaZona);
     this.cambioZonaLineal.emit({lineal: lineal.datos, zona: zona, nuevaZona: nuevaZona, pos: lineal.movable.position});
   }
@@ -150,6 +151,6 @@ export class MovableZonaDirective implements AfterContentInit {
         this.cambiarDeZonaLineal(lineal, 4, 3);
       }
     }
-  }  
+  }
 
 }

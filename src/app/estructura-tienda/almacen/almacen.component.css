@@ -14,3 +14,13 @@
     left: 5px;
     top: 5px;
 }
+
+.small {
+    padding: 40px;
+    width: 130px;
+}
+
+.large {
+    width: 200px;
+    padding: 80px;
+}
