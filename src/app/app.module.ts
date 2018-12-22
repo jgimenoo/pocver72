@@ -8,8 +8,14 @@ import { AppComponent } from './app.component';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
+=======
+   
+    //Toastr
+    import { NbToastrModule } from '@nebular/theme'
+>>>>>>> 6a0b8ac4a1270024356d584b553cf87b2c46ec77
 =======
    
     //Toastr
