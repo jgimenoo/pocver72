@@ -10,8 +10,8 @@ export class ProductsserviceService {
   dataproducts = [
     {
       idProduct: "Ron",     // nombre del producto
-      format: "pale",              // pale, medio pale o caja
-      seccion:"alcohol",
+      format: "Pale",              // pale, medio pale o caja
+      seccion:"Alcohol",
       volumentotal: "500",         // ancho x alto x largo
       anchoproducto: "10",         // ancho del producto
       altoproducto: "5",           // alto del producto
@@ -20,9 +20,9 @@ export class ProductsserviceService {
       facing:"80",                 // facing total 
     },  
     {
-    idProduct: "calamares",        
-    format: "pale", 
-    seccion:"pescado",                
+    idProduct: "Calamares",        
+    format: "Pale", 
+    seccion:"Pescado",                
     volumentotal: "500",               
     anchoproducto: "90",                   
     altoproducto: "60",           
@@ -32,9 +32,9 @@ export class ProductsserviceService {
 
     },
     {
-      idProduct: "ginebra",        
-      format: "mediopale", 
-      seccion:"alcohol",                
+      idProduct: "Ginebra",        
+      format: "Mediopale", 
+      seccion:"Alcohol",                
       volumentotal: "800",               
       anchoproducto: "90",                   
       altoproducto: "60",           
@@ -45,30 +45,30 @@ export class ProductsserviceService {
       }];
    
    format = [
-    {value: '1', title: 'Pale'},
-    {value: '2', title: 'Medio pale'},
-    {value: '3', title: 'Caja'},
+    {value: 'Pale', title: 'Pale'},
+    {value: 'Medio Pale', title: 'Medio Pale'},
+    {value: 'Caja', title: 'Caja'},
     ];
    seccion = [
-    {value: '1', title: 'Perfumeria'},
-    {value: '2', title: 'Alcoholes'},
-    {value: '3', title: 'Horno'},
-    {value: '4', title: 'Pescado'},
-    {value: '5', title: 'Fruta y verdura'},
-    {value: '6', title: 'Carne'},
+    {value: 'Perfumeria', title: 'Perfumeria'},
+    {value: 'Alcoholes', title: 'Alcoholes'},
+    {value: 'Horno', title: 'Horno'},
+    {value: 'Pescado', title: 'Pescado'},
+    {value: 'Fruta y verdura', title: 'Fruta y verdura'},
+    {value: 'Carne', title: 'Carne'},
   ];
 
   seccion2 = [
-    {code: '1', title: 'Perfumeria',value:54},
-    {code: '2', title: 'Alcoholes',value:58},
-    {code: '3', title: 'Horno',value:25},
-    {code: '4', title: 'Pescado',value:42},
-    {code: '5', title: 'Fruta y verdura',value:54},
-    {code: '6', title: 'Carne',value:44},
+    {code: 'Perfumeria', title: 'Perfumeria',value:54},
+    {code: 'Alcoholes', title: 'Alcoholes',value:58},
+    {code: 'Horno', title: 'Horno',value:25},
+    {code: 'Pescado', title: 'Pescado',value:42},
+    {code: 'Fruta y verdura', title: 'Fruta y verdura',value:54},
+    {code: 'Carne', title: 'Carne',value:44},
   ];
 
 
-  dataSeccion2: any[] = [{data: [54, 58, 25, 42, 54, 44], label: 'Productos'}];
+  dataSeccion2: any[] = [{data: [54, 58, 25, 42, 54, 44], label: 'Cantidad de productos por tipo'}];
   labelsSeccion2: any = new Array();
 
   dataSeccion3 =  [54, 58, 25, 42, 54, 44];

@@ -5,8 +5,9 @@
     justify-content: center;
 }
 
-.sel {
-    background-color: white;
-    color: black;
-    font-size: 0.8em;
+select {
+    border-radius: 0.5rem;
+    margin: 0px 0px 1em 0px;
+    font-size: 0.9em;
+    padding: 4px;
 }

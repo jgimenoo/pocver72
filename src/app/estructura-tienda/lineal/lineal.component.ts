@@ -28,10 +28,12 @@ export class LinealComponent implements OnInit, AfterViewInit {
     const idLineal = event.previousContainer.data[0].lineal;
     const idLinealNuevo = event.container.data[0].lineal;
     const idZonaNueva = event.container.data[0].zona;
+    const horizontalNuevo = event.container.data[0].horizontal;
     if (event.previousContainer !== event.container) {
       transferArrayItem( event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
       event.container.data[event.currentIndex].lineal = idLinealNuevo;
       event.container.data[event.currentIndex].zona = idZonaNueva;
+      event.container.data[event.currentIndex].horizontal = horizontalNuevo;
       if (event.previousContainer.data.length === 0) {
         this.linealSinModulos.emit({idZona: idZona, idLineal: idLineal});
       }

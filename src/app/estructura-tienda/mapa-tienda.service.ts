@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,138 +12,22 @@ export class MapaTiendaService {
     public http: HttpClient,
     private device: DeviceDetectorService) { }
 
+  BASE_URL = 'localhost:4200';
+
   obtenerSeccionesTienda() {
-    return [{
-      id: 1,
-      nombre: 'Galletas',
-      color: '#9F9FFF'
-    }, {
-      id: 2,
-      nombre: 'Limipieza de cocina',
-      color: '#FF9F9F'
-    }, {
-      id: 3,
-      nombre: 'Legumbres',
-      color: '#9EFFFF'
-    }, {
-      id: 4,
-      nombre: 'Panaderia',
-      color: '#FF7878'
-    }, {
-      id: 5,
-      nombre: 'Pescado congelado',
-      color: '#9EFF9E'
-    }, {
-      id: 6,
-      nombre: 'Fruta',
-      color: '#45D845'
-    }, {
-      id: 7,
-      nombre: 'Verdura',
-      color: '#53B153'
-    }, {
-      id: 8,
-      nombre: 'Pescado fresco',
-      color: '#FEC0FE'
-    }, {
-      id: 9,
-      nombre: 'Infantil y bebés',
-      color: '#5757FB'
-    }];
+    return this.http.get(this.BASE_URL + '/seccionesMapa').pipe(map( (resp: any) => {
+      return resp;
+    }));
   }
 
   obtenerZonasTienda(){
     // Sera la llamada get
-    const data = [{
-      id: 1,
-      saved_width: 500,
-      saved_height: 400,
-      saved_desktop: true,
-      distancia: 'Media',
-      almacen: null,
-      lineales: [{
-        id: 1,
-        horizontal: true,
-        dd: {
-          origen_x: 271,
-          origen_y: 11,
-          x: null,
-          y: null
-        },
-        modulos: [{
-          id: 1,
-          colorSeccion: '#FFC6FF'
-        }, {
-          id: 2,
-          colorSeccion: '#FFC6FF'
-        }, {
-          id: 5,
-          colorSeccion: '#FFC6FF'
-        }]
-      }, {
-        id: 2,
-        horizontal: false,
-        size: 0,
-        dd: {
-          origen_x: 60,
-          origen_y: 120,
-          x: null,
-          y: null
-        },
-        modulos: [{
-          id: 3,
-          colorSeccion: '#9F9FFF'
-        }]
-      }]
-    }, {
-      id: 2,
-      saved_width: 500,
-      saved_height: 400,
-      saved_desktop: true,
-      distancia: 'Cerca',
-      almacen: {
-        dd: {
-          origen_x: 310,
-          origen_y: 93,
-          x: null,
-          y: null
-        }
-      },
-      lineales: [{
-        id: 3,
-        horizontal: true,
-        dd: {
-          origen_x: 411,
-          origen_y: 19,
-          x: null,
-          y: null
-        },
-        modulos: [{
-          id: 4,
-          colorSeccion: '#FFC6FF'
-        }]
-      }]
-    }, {
-      id: 3,
-      saved_width: 500,
-      saved_height: 400,
-      saved_desktop: true,
-      distancia: 'Lejos',
-      almacen: null,
-      lineales: []
-    }, {
-      id: 4,
-      saved_width: 500,
-      saved_height: 400,
-      saved_desktop: true,
-      distancia: 'Media',
-      almacen: null,
-      lineales: []
-    }];
-    return this.procesarZonasTienda(data);
+    return this.http.get(this.BASE_URL + '/zonasMapa').pipe(map( (resp: any) => {
+      return this.procesarZonasTienda(resp);
+    }));
   }
 
-  procesarZonasTienda(zonas){
+  procesarZonasTienda(zonas) {
     let sizeModulo;
     let widthZona;
     let heightZona;

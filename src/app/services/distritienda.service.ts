@@ -14,7 +14,7 @@ export class DistritiendaService {
       anchomodulo:"50",
       largomodulo:"200",
       altomodulo: "80",
-      apilamiento:"vertical",
+      apilamiento:"Vertical",
       numbaldas:"20",
     },  
     {
@@ -22,12 +22,12 @@ export class DistritiendaService {
       anchomodulo:"50",
       largomodulo:"200",
       altomodulo: "80",
-      apilamiento:"vertical",
+      apilamiento:"Vertical",
       numbaldas:"20",
     }];
     Apilamiento= [
-      {value: '1', title: 'Vertical'},
-      {value: '2', title: 'Horizontal'},
+      {value: 'Vertical', title: 'Vertical'},
+      {value: 'Horizontal', title: 'Horizontal'},
       ];  
       getLinealDistribution() {
         return this.datalinealdistribution;
@@ -71,3 +71,4 @@ export class DistritiendaService {
         return this.Apilamiento;
        }
 }
+

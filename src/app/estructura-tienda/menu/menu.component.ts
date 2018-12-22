@@ -1,28 +1,36 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit,
+   OnChanges, SimpleChanges } from '@angular/core';
+   import { NbSelectComponent } from '@nebular/theme/components/select/select.component';
+
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit, AfterViewInit {
+export class MenuComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() data;
 
   @Output() botonModulo = new EventEmitter<any>();
+  @ViewChild('selectZona') selZona: NbSelectComponent<any>;
 
-  idZona;
-  idSeccion;
+  idZona = 1;
+  idSeccion = 1;
 
   constructor() { }
 
   ngOnInit() {
+
   }
 
   ngAfterViewInit() {
-    this.idZona = 1;
-    this.idSeccion = 1;
-    this.colorearModulos(1);
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    if (changes.data) {
+      this.colorearModulos(1);
+    }
   }
 
   copiarModulo(horizontal: boolean, event: any) {
@@ -30,8 +38,10 @@ export class MenuComponent implements OnInit, AfterViewInit {
   }
 
   colorearModulos(idSeccion){
-    this.data.moduloH[0].color = this.data.secciones[idSeccion - 1].color;
-    this.data.moduloV[0].color = this.data.secciones[idSeccion - 1].color;
+    if (this.data.secciones && this.data.secciones[idSeccion - 1]) {
+      this.data.moduloH[0].color = this.data.secciones[idSeccion - 1].color;
+      this.data.moduloV[0].color = this.data.secciones[idSeccion - 1].color;
+    }
   }
 
 }

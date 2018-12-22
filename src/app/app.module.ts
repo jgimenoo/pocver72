@@ -7,12 +7,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+<<<<<<< HEAD
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
+=======
+   
+    //Toastr
+    import { NbToastrModule } from '@nebular/theme'
+>>>>>>> 6a0b8ac4a1270024356d584b553cf87b2c46ec77
     // Smart Table
     import { Ng2SmartTableModule } from 'ng2-smart-table';
 
     //chart pie & chartbar
-import { ChartsModule } from 'ng2-charts';
+    import { ChartsModule } from 'ng2-charts';
 
 //Components
 import { MainComponent } from './main/main.component';
@@ -34,6 +41,8 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     import { AreatiendaService } from './services/areatienda.service';
     import { DistribucionService } from './services/distribucion.service';
     import { DistritiendaService } from './services/distritienda.service';
+import { InMemoryDataServiceService } from './in-memory-data-service.service';
+import { environment } from '../../../../Angular adv/tutorialdragdrop/src/environments/environment';
 
 
 
@@ -58,9 +67,12 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     Ng2SmartTableModule,
     ChartsModule,
     EstructuraTiendaModule,
+    NbToastrModule.forRoot(),
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
-    DeviceDetectorModule.forRoot()
+    DeviceDetectorModule.forRoot(),
+    environment.production ? [] :
+     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataServiceService, { delay: 100 })  // Para emular base de datos
   ],
   providers: [
     OutputWindowService,

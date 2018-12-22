@@ -13,6 +13,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NbSelectModule } from '@nebular/theme/components/select/select.module';
 import { NbLayoutModule, NbSidebarModule, NbCardModule, NbListModule, NbButtonModule } from '@nebular/theme';
 import { MenuComponent } from './menu/menu.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { MenuComponent } from './menu/menu.component';
     CommonModule,
     DragDropModule,
     DraggableModule,
+    FormsModule,
     NbSelectModule,
     NbLayoutModule,
     NbSidebarModule,

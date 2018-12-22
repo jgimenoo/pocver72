@@ -9,21 +9,21 @@ export class DistribucionService {
   constructor(private http: HttpClient) { }
   datadistribution = [
     {
-      seccionest:"perfumeria",
+      seccionest:"Perfumeria",
       zonasec:"1",
       cantlineales:"2",
-      tipolineal: "normal",      
+      tipolineal: "Normal",      
     },  
     {
-      seccionest:"carne",
+      seccionest:"Carne",
       zonasec:"3",
       cantlineales:"8",
-      tipolineal: "refrigerado",             
+      tipolineal: "Refrigerado",             
     }];
 
     LinealTipo= [
-      {value: '1', title: 'Normal'},
-      {value: '2', title: 'Refrigerado'},
+      {value: 'Normal', title: 'Normal'},
+      {value: 'Refrigerado', title: 'Refrigerado'},
       ];
       SecZona= [
         {value: '1', title: '1'},
@@ -32,12 +32,12 @@ export class DistribucionService {
         {value: '4', title: '4'},
       ];
       SecDistri=[
-        {value: '1', title: 'Perfumeria'},
-        {value: '2', title: 'Alcoholes'},
-        {value: '3', title: 'Horno'},
-        {value: '4', title: 'Pescado'}, 
-        {value: '5', title: 'Fruta y verdura'},
-        {value: '6', title: 'Carne'},
+        {value: 'Perfumeria', title: 'Perfumeria'},
+        {value: 'Alcoholes', title: 'Alcoholes'},
+        {value: 'Horno', title: 'Horno'},
+        {value: 'Pescado', title: 'Pescado'}, 
+        {value: 'Fruta y verdura', title: 'Fruta y verdura'},
+        {value: 'Carne', title: 'Carne'},
       ]
 
 

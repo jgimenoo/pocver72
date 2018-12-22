@@ -12,20 +12,20 @@
 
     <nb-layout-column style="padding: 0; padding-left: 25px; text-align: -webkit-center; position: fixed">
 
-        <div style=" display: flex; width: max-content; ">
+        <div style=" display: flex; width: max-content; " *ngIf="zonas.length > 2">
             <div class="tzona" [style.width]="zonas[0].width+ 'px' ">Zona {{zonas[0].id}} - {{zonas[0].distancia}}</div>
             <div class="tzona" [style.width]="zonas[1].width+ 'px' ">Zona {{zonas[1].id}} - {{zonas[1].distancia}}</div>
         </div>
 
         <div #ctienda="appMovableArea" id="tienda" appMovableArea cdkDropListGroup>
-            <div style=" display: flex; padding: 0; width: max-content; overflow: hidden;" #fila1>
+            <div style=" display: flex; padding: 0; width: max-content; overflow: hidden;" #fila1 *ngIf="zonas.length > 3">
                 <div #czona="appMovableZona" appMovableZona [datos]="zona" (cambioZonaLineal)="cambiarDatosZonaLineal($event.lineal, $event.zona, $event.nuevaZona, $event.pos)" (cambioZonaAlmacen)="cambiarDatosZonaAlmacen($event.almacen, $event.zona, $event.nuevaZona, $event.pos)"
                     [id]=" 'Z'+zona.id " *ngFor="let zona of [zonas[0],zonas[1]]" class="zona" [style.width]="zona.width+ 'px' " [style.height]="zona.height+ 'px' ">
                     <app-lineal #cmplineal *ngFor="let lineal of zona.lineales; let i=index " [datos]="lineal" (linealSinModulos)="borrarLineal($event.idZona, $event.idLineal)"></app-lineal>
                     <app-almacen #cmpalmacen *ngIf="zona.almacen !== null" [datos]="zona.almacen"></app-almacen>
                 </div>
             </div>
-            <div style="display: flex; padding: 0; width: max-content; overflow: hidden;" #fila2 [style.width]="zonas[2].width+zonas[3].width + 'px' ">
+            <div style="display: flex; padding: 0; width: max-content; overflow: hidden;" #fila2 [style.width]="zonas[2].width+zonas[3].width + 'px' " *ngIf="zonas.length > 3">
                 <div #czona="appMovableZona" appMovableZona [datos]="zona" (cambioZonaLineal)="cambiarDatosZonaLineal($event.lineal, $event.zona, $event.nuevaZona, $event.pos)" (cambioZonaAlmacen)="cambiarDatosZonaAlmacen($event.almacen, $event.zona, $event.nuevaZona, $event.pos)"
                     [id]=" 'Z'+zona.id " *ngFor="let zona of [zonas[2],zonas[3]] " class="zona" [style.width]="zona.width+ 'px' " [style.height]="zona.height+ 'px' ">
                     <app-lineal #cmplineal *ngFor="let lineal of zona.lineales; let i=index " [datos]="lineal" (linealSinModulos)="borrarLineal($event.idZona, $event.idLineal)"></app-lineal>
@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div style=" display: flex; width: max-content">
+        <div style=" display: flex; width: max-content" *ngIf="zonas.length > 3">
             <div class="tzona" [style.width]="zonas[2].width+ 'px' ">Zona {{zonas[2].id}} - {{zonas[2].distancia}}</div>
             <div class="tzona" [style.width]="zonas[3].width+ 'px' ">Zona {{zonas[3].id}} - {{zonas[3].distancia}}</div>
         </div>

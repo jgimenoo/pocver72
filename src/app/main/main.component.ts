@@ -24,4 +24,7 @@ export class MainComponent implements OnInit {
   goToOutput(){
     this.router.navigate(["Output"]);
   }
+  goToestructura(){
+    this.router.navigate(["estructuratienda"])
+  }
 }

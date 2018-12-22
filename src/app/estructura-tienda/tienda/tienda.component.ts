@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, QueryList, Renderer2, ViewChild, ContentChildren } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChildren, QueryList, Renderer2, ViewChild, OnChanges, SimpleChanges, Input, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { transferArrayItem } from '@angular/cdk/drag-drop';
 import { MapaTiendaService } from '../mapa-tienda.service';
 import { MovableAreaDirective } from './movable-area.directive';
@@ -10,7 +10,7 @@ import { MovableZonaDirective } from './movable-zona.directive';
   templateUrl: './tienda.component.html',
   styleUrls: ['./tienda.component.css']
 })
-export class TiendaComponent implements  OnInit, AfterViewInit  {
+export class TiendaComponent implements  OnInit, AfterViewInit   {
 
 
   @ViewChildren('czona') elemZonas: QueryList<MovableZonaDirective>;
@@ -18,21 +18,29 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
 
   constructor(
     private mapaService: MapaTiendaService,
-    private device: DeviceDetectorService) { }
+    private device: DeviceDetectorService,
+    private cd: ChangeDetectorRef) {}
 
   moduloV = [{id: 0, label: '', size: this.device.isDesktop() ? 1 : 0, horizontal: false, color: '#fff'}];
   moduloH = [{id: 0, label: '', size: this.device.isDesktop() ? 1 : 0, horizontal: true, color: '#fff'}];
 
-  contadorModulo = 5;
+  contadorModulo = 19;
   contadorLineal = 3;
 
   zonas = [];
   secciones = [];
+  posicionRevisada = false;
 
   ngOnInit() {
    // Construir el mapa segun lo guardado en BD
-   this.zonas = this.mapaService.obtenerZonasTienda();
-   this.secciones = this.mapaService.obtenerSeccionesTienda();
+   // this.zonas = this.mapaService.obtenerZonasTienda();
+   this.mapaService.obtenerSeccionesTienda().subscribe(dataSecciones => {
+    this.secciones = dataSecciones;
+    this.mapaService.obtenerZonasTienda().subscribe(data => {
+      this.zonas = data;
+    });
+    });
+
   }
 
   obtenerPosicionLinealZona(idLineal, zona) {
@@ -87,9 +95,10 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
     return vector;
   }
 
-  ngAfterViewInit() {
-    if ( (!this.device.isDesktop() && this.elemZonas.first.datos.saved_desktop)
-    || (this.device.isDesktop() && !this.elemZonas.first.datos.saved_desktop)) {
+   revisarPosicionLineales() {
+    if ( (!this.device.isDesktop() && this.elemZonas.first && this.elemZonas.first.datos.saved_desktop)
+    || (this.device.isDesktop() && this.elemZonas.first && !this.elemZonas.first.datos.saved_desktop)) {
+      console.log('cambiando posiciones');
       this.elemZonas.toArray().forEach(eZona => {
         const vZonas = this.convertToMap(this.zonas);
         const limitesZona = eZona.element.nativeElement.getBoundingClientRect();
@@ -103,7 +112,19 @@ export class TiendaComponent implements  OnInit, AfterViewInit  {
           almacen.dd.origen_y = Math.round(( limitesZona.height * almacen.dd.origen_y ) / vZonas[eZona.datos.id].saved_height);
         }
      });
+     this.posicionRevisada = true;
    }
+   }
+
+  ngAfterViewInit() {
+    // Hay que seleccionar los combos
+    this.elemZonas.changes.subscribe(() => {
+      if (!this.posicionRevisada) {
+        this.revisarPosicionLineales();
+      }
+      this.cd.detectChanges();
+    });
+    this.elemZonas.notifyOnChanges();
   }
 
   copiarModuloAZona(horizontal: boolean, idZona: number, idSeccion: number) {

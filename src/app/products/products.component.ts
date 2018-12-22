@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 import { ProductsserviceService } from '../services/productsservice.service';
 import { Router } from '@angular/router';
-//import { ToasterService, ToasterConfig } from 'angular2-toaster';
+import { NbToastrService } from '@nebular/theme'
 
 @Component({
   selector: 'app-products',
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   //services
   optionsformat = this.service.getFormat();
   optionsseccion = this.service.getSeccion();
-  //private toasterService: ToasterService;
+
   
   mainproducts = {
     actions: {
@@ -94,21 +94,14 @@ import { Router } from '@angular/router';
       },
     } 
    }
-  
-
-  /* public config: ToasterConfig = new ToasterConfig({
-    tapToDismiss: false,
-    positionClass: 'toast-center'
-  });*/
 
   source: LocalDataSource;
   dataproducts;
 
   constructor(private service: ProductsserviceService,
-    //toasterService: ToasterService,
+    private toastrService: NbToastrService,
     private router: Router) { 
     this.source = new LocalDataSource(this.service.getDataProducts()); //create the source
-    //this.toasterService = toasterService;
   }
     
   ngOnInit() {
@@ -119,10 +112,8 @@ import { Router } from '@angular/router';
   if (window.confirm('Estás seguro de eliminar el producto?')) {
       event.confirm.resolve(event.dataproducts);
       this.service.deleteProduct(event.dataproducts);
-      //this.toasterService.pop('success', 'Success', 'Ha borrado su producto satisfactoriamente');
     } else {
-      event.confirm.reject();
-      //this.toasterService.pop('error', 'Error', 'Vuelva a intentarlo por favor'); 
+      event.confirm.reject(); 
     }
   }
 
@@ -131,26 +122,55 @@ import { Router } from '@angular/router';
     if (window.confirm('Estás seguro de modificar el producto?')) {
       event.confirm.resolve(event.newData);
       this.service.editProduct(event.newData);
-      //this.toasterService.pop('success', 'Success', 'Ha borrado su producto satisfactoriamente');
     } else {
       event.confirm.reject();
-      //this.toasterService.pop('error', 'Error', 'Vuelva a intentarlo por favor'); 
     }
   }
 
-  onCreateProduct(event) {
-    if (window.confirm('Estás seguro de añadir el producto?')) {
-      event.confirm.resolve(event.newData);
-      this.service.addProduct(event.newData);
-      //this.toasterService.pop('success', 'Success', 'Ha borrado su producto satisfactoriamente');
-    } else {
-      event.confirm.reject();
-      //this.toasterService.pop('error', 'Error', 'Vuelva a intentarlo por favor'); 
+  private index: number = 0; 
+  result:boolean;
+
+validardata(newData) {
+  if (!isNaN(Number(newData.volumentotal)) &&
+  !isNaN(Number(newData.anchoproducto)) &&
+  !isNaN(Number(newData.altoproducto)) &&
+  !isNaN(Number(newData.largoproducto)) &&
+  !isNaN(Number(newData.stock)) &&
+  !isNaN(Number(newData.facing)) &&
+  newData.idProduct.length !== 0 &&
+  newData.format.length !== 0 &&
+  newData.seccion.length !== 0 &&
+  newData.volumentotal.length !== 0 &&
+  newData.anchoproducto.length !== 0 &&
+  newData.altoproducto.length !== 0 &&
+  newData.largoproducto.length !== 0 &&
+  newData.stock.length !== 0 &&
+  newData.facing.length !== 0){ 
+  return true;
+}
+    return false;   
     }
-  }
+
+
+  onCreateProduct(event) {
+  this.result = this.validardata(event.newData);
+if (this.result == false){
+  
+   this.toastrService.show(
+     'Rellena todos los campos con el formato correcto para añadir el producto',
+     `Toaster numero: ${++this.index}`,
+     );
+ }else if (window.confirm('Estás seguro de añadir el producto?')) {
+   event.confirm.resolve(event.newData);
+   this.service.addProduct(event.newData);
+ } else {
+   event.confirm.reject();
+ }
+}
 
   viewOutput() {
     this.router.navigate(["Output"]);
   }
 }
+
 

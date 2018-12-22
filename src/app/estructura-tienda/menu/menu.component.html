@@ -3,17 +3,14 @@
         <nb-card-header>Agregar módulo</nb-card-header>
         <nb-card-body>
             Zona:
-            <nb-select #selectZona size="xsmall" [(selected)]="idZona" status="info">
-                <nb-option *ngFor="let zona of data.zonas; " [value]="zona.id">
-                    <div>Zona {{zona.id}}</div>
-                </nb-option>
-            </nb-select>
+            <br/>
+            <select #selectZona [(ngModel)]="idZona">
+                <option *ngFor="let zona of data.zonas;" [ngValue]="zona.id">Zona {{zona.id}}</option>
+            </select>
             <br/> Sección:
-            <nb-select #selectSeccion size="xsmall" [(selected)]="idSeccion" status="secondary" (selectedChange)="colorearModulos($event)">
-                <nb-option *ngFor="let seccion of data.secciones;" [value]="seccion.id" class="sel">
-                    {{seccion.nombre}}
-                </nb-option>
-            </nb-select>
+            <select #selectSeccion (ngModelChange)="colorearModulos($event)" [(ngModel)]="idSeccion">
+                <option *ngFor="let seccion of data.secciones;" [ngValue]="seccion.id">{{seccion.nombre}}</option>
+            </select>
             <br/> Módulo:
             <div style="text-align: center">
                 <div *ngFor="let m of data.moduloV">
