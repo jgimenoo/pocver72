@@ -27,6 +27,22 @@ export class MapaTiendaService {
     }));
   }
 
+  obtenerDistanciasAlmacen(zonas, zonaAlmacen) {
+    zonas.forEach(zona => {
+      zona.distancia = 'Media';
+    });
+    zonaAlmacen.distancia = 'Cerca';
+    if (zonaAlmacen.id === 1) {
+      zonas[3].distancia = 'Lejos';
+    } else if (zonaAlmacen.id === 2) {
+      zonas[2].distancia = 'Lejos';
+    } else if (zonaAlmacen.id === 3) {
+      zonas[1].distancia = 'Lejos';
+    } else {
+      zonas[0].distancia = 'Lejos';
+    }
+  }
+
   procesarZonasTienda(zonas) {
     let sizeModulo;
     let widthZona;
@@ -43,19 +59,33 @@ export class MapaTiendaService {
       widthZona = 350;
       heightZona = 290;
     }
+    let zonaAlmacen;
     zonas.forEach(zona => {
       zona.width = widthZona; // Revisar
       zona.height = heightZona; // Revisar
       if (zona.almacen) {
+        zonaAlmacen = zona;
         zona.almacen.size = sizeAlmacen;
         zona.almacen.zona = {
           id: zona.id
         };
+        zona.almacen.dd = {
+          origen_x: zona.almacen.origen_x,
+          origen_y: zona.almacen.origen_y
+        };
+        delete zona.almacen.origen_x;
+        delete zona.almacen.origen_y;
       }
       zona.lineales.forEach(lineal => {
         lineal.zona = {
           id: zona.id
         };
+        lineal.dd = {
+          origen_x: lineal.origen_x,
+          origen_y: lineal.origen_y
+        };
+        delete lineal.origen_x;
+        delete lineal.origen_y;
         lineal.modulos.forEach(modulo => {
           modulo.zona = zona.id;
           modulo.lineal = lineal.id;
@@ -67,6 +97,7 @@ export class MapaTiendaService {
         });
       });
     });
+    this.obtenerDistanciasAlmacen(zonas, zonaAlmacen);
     return zonas;
   }
 }

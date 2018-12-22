@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core'; 
 import { CommonModule } from '@angular/common';
 import { AlmacenComponent } from './almacen/almacen.component';
 import { MovableAreaDirective } from './tienda/movable-area.directive';

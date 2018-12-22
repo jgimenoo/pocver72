@@ -15,17 +15,12 @@ export class InMemoryDataServiceService implements InMemoryDbService{
         saved_width: 500,
         saved_height: 400,
         saved_desktop: true,
-        distancia: 'Media',
         almacen: null,
         lineales: [{
           id: 1,
           horizontal: true,
-          dd: {
-            origen_x: 271,
-            origen_y: 11,
-            x: null,
-            y: null
-          },
+          origen_x: 271,
+          origen_y: 11,
           modulos: [{
             id: 15,
             colorSeccion: '#FFC6FF'
@@ -40,12 +35,8 @@ export class InMemoryDataServiceService implements InMemoryDbService{
           id: 2,
           horizontal: false,
           size: 0,
-          dd: {
-            origen_x: 60,
-            origen_y: 120,
-            x: null,
-            y: null
-          },
+          origen_x: 60,
+          origen_y: 120,
           modulos: [{
             id: 18,
             colorSeccion: '#9F9FFF'
@@ -56,24 +47,15 @@ export class InMemoryDataServiceService implements InMemoryDbService{
         saved_width: 500,
         saved_height: 400,
         saved_desktop: true,
-        distancia: 'Cerca',
         almacen: {
-          dd: {
             origen_x: 310,
-            origen_y: 93,
-            x: null,
-            y: null
-          }
+            origen_y: 93
         },
         lineales: [{
           id: 3,
           horizontal: true,
-          dd: {
-            origen_x: 411,
-            origen_y: 19,
-            x: null,
-            y: null
-          },
+          origen_x: 411,
+          origen_y: 19,
           modulos: [{
             id: 19,
             colorSeccion: '#FFC6FF'
@@ -84,7 +66,6 @@ export class InMemoryDataServiceService implements InMemoryDbService{
         saved_width: 500,
         saved_height: 400,
         saved_desktop: true,
-        distancia: 'Lejos',
         almacen: null,
         lineales: []
       }, {
@@ -92,7 +73,6 @@ export class InMemoryDataServiceService implements InMemoryDbService{
         saved_width: 500,
         saved_height: 400,
         saved_desktop: true,
-        distancia: 'Media',
         almacen: null,
         lineales: []
       }],

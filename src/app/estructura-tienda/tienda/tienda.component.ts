@@ -71,20 +71,7 @@ export class TiendaComponent implements  OnInit, AfterViewInit   {
     zonaOrigen.almacen = null;
     almacen.zona = {id: zonaNueva.id};
     zonaNueva.almacen = almacen;
-    this.zonas.forEach(zona => {
-      zona.distancia = 'Media';
-    });
-    zonaNueva.distancia = 'Cerca';
-    if (zonaNueva.id === 1) {
-      this.zonas[3].distancia = 'Lejos';
-    } else if(zonaNueva.id === 2) {
-      this.zonas[2].distancia = 'Lejos';
-    } else if(zonaNueva.id === 3) {
-      this.zonas[1].distancia = 'Lejos';
-    } else {
-      this.zonas[0].distancia = 'Lejos';
-    }
-    // TO DO: A ver si puedo cambiar la posicion por la ultima movida, que no me sale por ser posiciones relativas
+    this.mapaService.obtenerDistanciasAlmacen(this.zonas, zonaNueva);
   }
 
   convertToMap(elemsMapa) {
