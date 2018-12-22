@@ -7,20 +7,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
-=======
-   
     //Toastr
-    import { NbToastrModule } from '@nebular/theme'
->>>>>>> 6a0b8ac4a1270024356d584b553cf87b2c46ec77
-=======
-   
-    //Toastr
-    import { NbToastrModule } from '@nebular/theme'
->>>>>>> 6a0b8ac4a1270024356d584b553cf87b2c46ec77
+    import { NbToastrModule } from '@nebular/theme';
+
     // Smart Table
     import { Ng2SmartTableModule } from 'ng2-smart-table';
 
