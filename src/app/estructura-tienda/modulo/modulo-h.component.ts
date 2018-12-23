@@ -8,8 +8,8 @@ import { ModuloComponent } from './modulo.component';
 })
 export class ModuloHComponent extends ModuloComponent implements OnInit {
 
-  constructor(protected elem: ElementRef, protected renderer: Renderer2) {
-    super(elem, renderer);
+  constructor(public element: ElementRef, protected renderer: Renderer2) {
+    super(element, renderer);
     this.esHorizontal = true;
    }
 

@@ -20,7 +20,7 @@ export class MovableAreaDirective implements AfterContentInit {
   @ContentChildren(LinealComponent, {descendants: true}) lineales: QueryList<LinealComponent>;
 
   // tslint:disable-next-line:no-shadowed-variable
-  constructor(private element: ElementRef) { }
+  constructor(public element: ElementRef) { }
 
   private boundaries: Boundaries;
   private subscriptionsAlmacen: Subscription[] = [];

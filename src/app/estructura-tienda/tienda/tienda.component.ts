@@ -27,6 +27,7 @@ export class TiendaComponent implements  OnInit, AfterViewInit   {
   contadorModulo = 19;
   contadorLineal = 3;
 
+  idTienda = 1;  // Este dato se pasa por parametro
   zonas = [];
   secciones = [];
   posicionRevisada = false;
@@ -34,12 +35,11 @@ export class TiendaComponent implements  OnInit, AfterViewInit   {
   ngOnInit() {
    // Construir el mapa segun lo guardado en BD
    // this.zonas = this.mapaService.obtenerZonasTienda();
-   this.mapaService.obtenerSeccionesTienda().subscribe(dataSecciones => {
-    this.secciones = dataSecciones;
-    this.mapaService.obtenerZonasTienda().subscribe(data => {
-      this.zonas = data;
-    });
-    });
+   this.mapaService.obtenerZonasTienda(this.idTienda).subscribe(data => {
+    this.idTienda = data.idTienda;
+    this.zonas = data.zonas;
+    this.secciones = data.secciones;
+  });
 
   }
 
@@ -131,9 +131,7 @@ export class TiendaComponent implements  OnInit, AfterViewInit   {
     };
     zona.lineales[pos].dd = {
       origen_x: 20,
-      origen_y: 40,
-      x: null,
-      y: null
+      origen_y: 40
     };
     zona.lineales[pos].modulos = [];
     const newmodulo = [{
@@ -143,6 +141,7 @@ export class TiendaComponent implements  OnInit, AfterViewInit   {
       label: modulo[0].label,
       size: modulo[0].size,
       horizontal: modulo[0].horizontal,
+      seccion: seccion.id,
       color: seccion.color}];
     transferArrayItem(newmodulo, zona.lineales[pos].modulos, 0, 0);
   }
@@ -150,12 +149,29 @@ export class TiendaComponent implements  OnInit, AfterViewInit   {
   borrarLineal(idZona, idLineal) {
     console.log('Se borra lineal ' + idLineal + ' de zona ' + idZona);
     const posLineal = this.obtenerPosicionLinealZona(idLineal, this.zonas[idZona - 1]);
-    console.log(posLineal);
     if (posLineal !== -1) {
       this.zonas[idZona - 1].lineales.splice(posLineal, 1);
     } else {
       console.error('Borrar lineal: No se ha encontrado el lineal en la zona');
     }
+  }
+
+  revisarSiBorrarModulo(event: any) {
+    const posTienda = this.elemTienda.element.nativeElement.getBoundingClientRect();
+    const posModulo = event.moduloData.dd;
+    if (posModulo.y < posTienda.top || posModulo.y > posTienda.bottom || posModulo.x < posTienda.left || posModulo.x > posTienda.right) {
+      console.log('sobrepasados limites de tienda, se borra el modulo');
+      event.modulosLineal.splice(event.posLineal, 1);
+      if (event.modulosLineal.length === 0) {
+        this.borrarLineal(event.moduloData.zona, event.moduloData.lineal);
+      }
+    }
+  }
+
+  guardarZonas() {
+    this.mapaService.guardarMapaTienda(this.idTienda, this.zonas, this.secciones).subscribe(data => {
+     console.log('Guardado mapa lineales de tienda');  // Revisar este put
+    });
   }
 
 }

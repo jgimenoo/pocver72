@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +15,9 @@ export class MapaTiendaService {
 
   BASE_URL = 'localhost:4200';
 
-  obtenerSeccionesTienda() {
-    return this.http.get(this.BASE_URL + '/seccionesMapa').pipe(map( (resp: any) => {
-      return resp;
-    }));
-  }
-
-  obtenerZonasTienda(){
+  obtenerZonasTienda(idTienda: number){
     // Sera la llamada get
-    return this.http.get(this.BASE_URL + '/zonasMapa').pipe(map( (resp: any) => {
+    return this.http.get(this.BASE_URL + '/mapaTienda/' + idTienda).pipe(map( (resp: any) => {
       return this.procesarZonasTienda(resp);
     }));
   }
@@ -43,11 +38,14 @@ export class MapaTiendaService {
     }
   }
 
-  procesarZonasTienda(zonas) {
+  procesarZonasTienda(resp: any) {
     let sizeModulo;
     let widthZona;
     let heightZona;
     let sizeAlmacen;
+    const idTienda = resp.id;
+    const zonas = resp.zonas;
+    const secciones = resp.secciones;
     if (this.device.isDesktop()) {
       sizeModulo = 1;
       sizeAlmacen = 1;
@@ -98,6 +96,51 @@ export class MapaTiendaService {
       });
     });
     this.obtenerDistanciasAlmacen(zonas, zonaAlmacen);
-    return zonas;
+    return {idTienda: idTienda, zonas: zonas, secciones: secciones};
+  }
+
+  guardarMapaTienda(idTienda: number, zonas: any, secciones: any): Observable<any> {
+    const url = this.BASE_URL + '/mapaTienda/' + idTienda;
+    const zonasBD = [];
+    zonas.forEach(zona => {
+      zonasBD.push({
+        id: zona.id,
+        saved_width: zona.saved_width,
+        saved_height: zona.saved_height,
+        saved_desktop: this.device.isDesktop(),
+        almacen: zona.almacen || null,
+        lineales: []
+      });
+      const zonaBD = zonasBD[zonasBD.length - 1];
+      if (zona.almacen !== null) {
+        zonaBD.almacen.origen_x = zona.almacen.dd.origen_x;
+        zonaBD.almacen.origen_y = zona.almacen.dd.origen_y;
+      }
+      zona.lineales.forEach(lineal => {
+        zonaBD.lineales.push({
+          id: lineal.id,
+          horizontal: lineal.horizontal,
+          origen_x: lineal.dd.origen_x,
+          origen_y: lineal.dd.origen_y,
+          modulos: []
+        });
+        const linealBD = zonaBD.lineales[zonaBD.lineales.length - 1];
+        lineal.modulos.forEach(modulo => {
+          linealBD.modulos.push({
+            id: modulo.id,
+            seccion: modulo.seccion,
+            colorSeccion: modulo.color // Esto se deberia quitar cuando no sea mockup
+          });
+        });
+      });
+    });
+    const tiendaBD = {
+      id: idTienda,
+      secciones: secciones,  // Esto se deberia quitar cuando no sea mockup
+      zonas: zonasBD
+    };
+    return this.http.put(url, tiendaBD).pipe(map( (resp: any) => {
+      return resp;
+    }));
   }
 }

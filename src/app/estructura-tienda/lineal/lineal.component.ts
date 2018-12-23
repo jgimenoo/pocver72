@@ -11,6 +11,7 @@ export class LinealComponent implements OnInit, AfterViewInit {
 
   @Input() datos;
   @Output() linealSinModulos = new EventEmitter<any>();
+  @Output() moduloSinMover = new EventEmitter<any>();
 
   @ViewChild('clineal') public movable: MovableDirective;
 
@@ -23,7 +24,7 @@ export class LinealComponent implements OnInit, AfterViewInit {
 
   }
 
-  drop(event: CdkDragDrop<any[]>) {
+  dropped(event: CdkDragDrop<any[]>) {
     const idZona = event.previousContainer.data[0].zona;
     const idLineal = event.previousContainer.data[0].lineal;
     const idLinealNuevo = event.container.data[0].lineal;
@@ -38,8 +39,24 @@ export class LinealComponent implements OnInit, AfterViewInit {
         this.linealSinModulos.emit({idZona: idZona, idLineal: idLineal});
       }
     } else {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      if (event.previousIndex !== event.currentIndex) {
+        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      } else {
+        // Se borra el item si sale del area
+        this.moduloSinMover.emit({
+          modulosLineal: event.container.data,
+          moduloData: event.container.data[event.currentIndex],
+          posLineal: event.currentIndex});
+      }
     }
+  }
+
+  movedModulo(event: any) {
+    // Se guarda la posicion del modulo
+    event.source.data.dd = {
+      x: event.pointerPosition.x,
+      y: event.pointerPosition.y
+    };
   }
 
 }

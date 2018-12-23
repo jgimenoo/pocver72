@@ -16,7 +16,7 @@ export class ModuloComponent implements OnInit, OnChanges {
   private _size: number;
 
 
-  constructor(protected elem: ElementRef, protected renderer: Renderer2) {
+  constructor(public element: ElementRef, protected renderer: Renderer2) {
     this.esHorizontal = false;
    }
 
@@ -28,7 +28,7 @@ export class ModuloComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes.size) {
       const _size = parseInt(changes.size.currentValue, 10);
-      const htmlelem = this.elem.nativeElement.children[0];
+      const htmlelem = this.element.nativeElement.children[0];
       this.renderer.removeClass(htmlelem, 'small');
       this.renderer.removeClass(htmlelem, 'large');
       if ( _size === 0) {

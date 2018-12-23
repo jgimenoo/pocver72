@@ -14,6 +14,7 @@ import { NbSelectModule } from '@nebular/theme/components/select/select.module';
 import { NbLayoutModule, NbSidebarModule, NbCardModule, NbListModule, NbButtonModule } from '@nebular/theme';
 import { MenuComponent } from './menu/menu.component';
 import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './../app-routing.module';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { FormsModule } from '@angular/forms';
     NbSidebarModule,
     NbCardModule,
     NbListModule,
-    NbButtonModule
+    NbButtonModule,
+    AppRoutingModule
   ],
   declarations: [
     AlmacenComponent,
