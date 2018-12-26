@@ -2,10 +2,10 @@
     position: absolute;
     background: gray;
     border: 1px solid black;
-    padding: 60px;
+    padding: 80px;
     text-align: center;
     color: #fff;
-    width: 180px;
+    width: 230px;
 }
 
 .almacen .handle {
@@ -16,11 +16,11 @@
 }
 
 .small {
-    padding: 40px;
-    width: 130px;
+    padding: 60px;
+    width: 180px;
 }
 
 .large {
-    width: 200px;
-    padding: 80px;
+    width: 250px;
+    padding: 100px;
 }

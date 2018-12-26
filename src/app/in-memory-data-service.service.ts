@@ -93,8 +93,8 @@ export class InMemoryDataServiceService implements InMemoryDbService{
           saved_height: 400,
           saved_desktop: true,
           almacen: {
-              origen_x: 310,
-              origen_y: 93
+              origen_x: 265,
+              origen_y: 215
           },
           lineales: [{
             id: 3,

@@ -17,6 +17,7 @@ export class MenuComponent implements OnInit, AfterViewInit, OnChanges {
 
   idZona = 1;
   idSeccion = 1;
+  refrigerado = false;
 
   constructor() { }
 
@@ -34,7 +35,7 @@ export class MenuComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   copiarModulo(horizontal: boolean, event: any) {
-      this.botonModulo.emit({horizontal: horizontal, idZona: this.idZona, idSeccion: this.idSeccion});
+    this.botonModulo.emit({horizontal: horizontal, idZona: this.idZona, idSeccion: this.idSeccion, refrigerado: this.refrigerado});
   }
 
   colorearModulos(idSeccion){

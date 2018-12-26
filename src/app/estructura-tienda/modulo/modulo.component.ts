@@ -8,13 +8,13 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange, Eleme
 export class ModuloComponent implements OnInit, OnChanges {
 
   public esHorizontal: boolean;
+  private _size: number;
 
   @Input() size = '1';
   @Input() label = '';
   @Input() color = '#BBBBBB';
   @Input() id = 0;
-  private _size: number;
-
+  @Input() ancho = false;
 
   constructor(public element: ElementRef, protected renderer: Renderer2) {
     this.esHorizontal = false;
@@ -26,9 +26,9 @@ export class ModuloComponent implements OnInit, OnChanges {
 
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnChanges(changes: SimpleChanges) {
+    const htmlelem = this.element.nativeElement.children[0];
     if (changes.size) {
       const _size = parseInt(changes.size.currentValue, 10);
-      const htmlelem = this.element.nativeElement.children[0];
       this.renderer.removeClass(htmlelem, 'small');
       this.renderer.removeClass(htmlelem, 'large');
       if ( _size === 0) {
@@ -40,6 +40,14 @@ export class ModuloComponent implements OnInit, OnChanges {
     }
     if (changes.label) {
       this.label = changes.label.currentValue;
+    }
+    if (changes.ancho) {
+      const doWide = changes.ancho.currentValue;
+      if (doWide) {
+        this.renderer.addClass(htmlelem, 'wide');
+      } else {
+        this.renderer.removeClass(htmlelem, 'wide');
+      }     
     }
   }
 

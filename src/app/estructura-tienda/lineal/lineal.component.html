@@ -8,8 +8,8 @@
     <div cdkDropList *ngIf="datos.modulos.length > 0" [class.listH]="datos.horizontal" [cdkDropListOrientation]="datos.horizontal ? 'horizontal' : 'vertical'" [cdkDropListData]="datos.modulos" (cdkDropListDropped)="dropped($event)">
         <div [class]="datos.horizontal ? 'lbLinH' : 'lbLinV'">L{{datos.id}}</div>
         <div cdkDrag [cdkDragData]="modulo" *ngFor="let modulo of datos.modulos" (cdkDragMoved)="movedModulo($event)">
-            <app-modulo-hor [label]="modulo.id" [size]="modulo.size" [label]="modulo.label" [color]="modulo.color" *ngIf="datos.horizontal"></app-modulo-hor>
-            <app-modulo [label]="modulo.id" [size]="modulo.size" [label]="modulo.label" [color]="modulo.color" *ngIf="!datos.horizontal"></app-modulo>
+            <app-modulo-hor (ondblclick)="verModulo($event)" [label]="modulo.id" [size]="modulo.size" [label]="modulo.label" [color]="modulo.color" [ancho]="datos.refrigerado" *ngIf="datos.horizontal"></app-modulo-hor>
+            <app-modulo (ondblclick)="verModulo($event)" [label]="modulo.id" [size]="modulo.size" [label]="modulo.label" [color]="modulo.color" [ancho]="datos.refrigerado" *ngIf="!datos.horizontal"></app-modulo>
         </div>
     </div>
 </div>

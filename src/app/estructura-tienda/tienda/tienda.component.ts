@@ -21,8 +21,8 @@ export class TiendaComponent implements  OnInit, AfterViewInit   {
     private device: DeviceDetectorService,
     private cd: ChangeDetectorRef) {}
 
-  moduloV = [{id: 0, label: '', size: this.device.isDesktop() ? 1 : 0, horizontal: false, color: '#fff'}];
-  moduloH = [{id: 0, label: '', size: this.device.isDesktop() ? 1 : 0, horizontal: true, color: '#fff'}];
+  moduloV = [{id: 0, label: '', size: this.device.isDesktop() ? 1 : 0, horizontal: false, color: '#fff', ancho: false}];
+  moduloH = [{id: 0, label: '', size: this.device.isDesktop() ? 1 : 0, horizontal: true, color: '#fff', ancho: false}];
 
   contadorModulo = 19;
   contadorLineal = 3;
@@ -95,8 +95,8 @@ export class TiendaComponent implements  OnInit, AfterViewInit   {
         });
         if (vZonas[eZona.datos.id].almacen) {
           const almacen = vZonas[eZona.datos.id].almacen;
-          almacen.dd.origen_x = Math.round(( limitesZona.width * almacen.dd.origen_x ) / vZonas[eZona.datos.id].saved_width );
-          almacen.dd.origen_y = Math.round(( limitesZona.height * almacen.dd.origen_y ) / vZonas[eZona.datos.id].saved_height);
+          almacen.dd.origen_x = Math.round(( limitesZona.width * almacen.dd.origen_x ) / vZonas[eZona.datos.id].saved_width ) - 20;
+          almacen.dd.origen_y = Math.round(( limitesZona.height * almacen.dd.origen_y ) / vZonas[eZona.datos.id].saved_height) - 10;
         }
      });
      this.posicionRevisada = true;
@@ -114,7 +114,7 @@ export class TiendaComponent implements  OnInit, AfterViewInit   {
     this.elemZonas.notifyOnChanges();
   }
 
-  copiarModuloAZona(horizontal: boolean, idZona: number, idSeccion: number) {
+  copiarModuloAZona(horizontal: boolean, idZona: number, idSeccion: number, refrigerado: boolean) {
     // Se crea un lineal de un modulo
     const zona = this.zonas[idZona - 1];
     const seccion = this.secciones[idSeccion - 1];
@@ -126,6 +126,7 @@ export class TiendaComponent implements  OnInit, AfterViewInit   {
     zona.lineales[pos].horizontal = horizontal;
     const modulo = ( horizontal ? this.moduloH : this.moduloV );
     zona.lineales[pos].size = modulo[0].size;
+    zona.lineales[pos].refrigerado = refrigerado;
     zona.lineales[pos].zona = {
       id: zona.id
     };
@@ -169,6 +170,7 @@ export class TiendaComponent implements  OnInit, AfterViewInit   {
   }
 
   guardarZonas() {
+    // TO DO : Antes de llamar al servicio hay que guardar las nuevas posiciones de inicio
     this.mapaService.guardarMapaTienda(this.idTienda, this.zonas, this.secciones).subscribe(data => {
      console.log('Guardado mapa lineales de tienda');  // Revisar este put
     });

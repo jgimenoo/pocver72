@@ -59,4 +59,8 @@ export class LinealComponent implements OnInit, AfterViewInit {
     };
   }
 
+  verModulo(event: any){
+    console.log('doble click modulo');
+  }
+
 }

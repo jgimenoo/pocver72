@@ -14,10 +14,18 @@
     height: 25px;
 }
 
+.hbox.wide {
+    height: 50px;
+}
+
 .vbox {
     @extend .box;
     height: 50px;
     width: 30px;
+}
+
+.vbox.wide {
+    width: 60px;
 }
 
 .small {
@@ -44,11 +52,19 @@
     height: 20px;
 }
 
+.small.hbox.wide {
+    height: 40px;
+}
+
 .small.vbox {
     @extend .box;
     height: 30px;
     width: 25px;
     padding: 3px 4px;
+}
+
+.small.vbox.wide {
+    width: 50px;
 }
 
 .large.hbox {
@@ -57,8 +73,16 @@
     height: 40px;
 }
 
+.large.hbox.wide {
+    height: 80px;
+}
+
 .large.vbox {
     @extend .box;
     height: 150px;
     width: 45px;
+}
+
+.large.vbox.wide {
+    width: 90px;
 }

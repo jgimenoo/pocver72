@@ -8,7 +8,7 @@
     </nb-layout-header>
 
     <nb-sidebar>
-        <app-menu [data]="{zonas: zonas, secciones: secciones, moduloH: moduloH, moduloV: moduloV}" (botonModulo)="copiarModuloAZona($event.horizontal, $event.idZona, $event.idSeccion)"></app-menu>
+        <app-menu [data]="{zonas: zonas, secciones: secciones, moduloH: moduloH, moduloV: moduloV}" (botonModulo)="copiarModuloAZona($event.horizontal, $event.idZona, $event.idSeccion, $event.refrigerado)"></app-menu>
     </nb-sidebar>
 
     <nb-layout-column style="padding: 0; padding-left: 25px; text-align: -webkit-center; position: fixed">
