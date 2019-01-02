@@ -31,6 +31,10 @@ import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { BarPieComponent } from './bar-pie/bar-pie.component';
 import { EstructuraTiendaModule } from './estructura-tienda/estructura-tienda.module';
 import { DeviceDetectorModule } from 'ngx-device-detector';
+import { environment } from 'src/environments/environment';
+    
+import { InMemoryDataServiceService } from './in-memory-data-service.service';
+import { EstructuraModuloModule } from './estructura-modulo/estructura-modulo.module';
 
     // Servicios
     import { OutputWindowService } from './services/output-window.service';
@@ -39,8 +43,8 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     import { AreatiendaService } from './services/areatienda.service';
     import { DistribucionService } from './services/distribucion.service';
     import { DistritiendaService } from './services/distritienda.service';
-import { InMemoryDataServiceService } from './in-memory-data-service.service';
-import { environment } from '../../../../Angular adv/tutorialdragdrop/src/environments/environment';
+
+
 
 
 
@@ -65,6 +69,7 @@ import { environment } from '../../../../Angular adv/tutorialdragdrop/src/enviro
     Ng2SmartTableModule,
     ChartsModule,
     EstructuraTiendaModule,
+    EstructuraModuloModule,
     NbToastrModule.forRoot(),
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
