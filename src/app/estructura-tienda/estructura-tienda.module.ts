@@ -11,7 +11,8 @@ import { TiendaComponent } from './tienda/tienda.component';
 import { DraggableModule } from '../draggable/draggable.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NbSelectModule } from '@nebular/theme/components/select/select.module';
-import { NbLayoutModule, NbSidebarModule, NbCardModule, NbListModule, NbButtonModule, NbCheckboxModule } from '@nebular/theme';
+import { NbLayoutModule, NbSidebarModule, NbCardModule, 
+  NbListModule, NbButtonModule, NbCheckboxModule } from '@nebular/theme';
 import { MenuComponent } from './menu/menu.component';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './../app-routing.module';

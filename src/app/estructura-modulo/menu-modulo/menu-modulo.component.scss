@@ -1,0 +1,50 @@
+$alto: 80px;
+$ancho: 80px;
+$sizeBoton: 30px;
+.botones {
+    margin: 0 auto;
+    position: relative;
+    height: $alto;
+    width: $ancho;
+}
+
+.boton {
+    /*estructura*/
+    position: relative;
+    width: $sizeBoton;
+    height: $sizeBoton;
+    background-color: black;
+    border-radius: 50%;
+    position: absolute;
+    /*texto*/
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    user-select: none;
+}
+
+#arriba,
+#abajo {
+    left: ($ancho / 2) - ($sizeBoton / 2);
+}
+
+#abajo {
+    bottom: 0;
+}
+
+#izquierda,
+#derecha,
+#zoomIn,
+#zoomOut {
+    top: ($alto / 2) - ($sizeBoton / 2);
+}
+
+#derecha {
+    right: 0;
+}
+
+#zoomOut {
+    right: 10px;
+}

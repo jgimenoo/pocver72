@@ -59,7 +59,6 @@ export class MovableDirective extends DraggableDirective {
   onDragMove(event: any) {
     this.position.x = (this.device.isDesktop() ? event.clientX : event.touches[0].clientX) - this._startPosition.x;
     this.position.y = (this.device.isDesktop() ? event.clientY : event.touches[0].clientY) - this._startPosition.y;
-    console.log(this.position);
   }
 
   @HostListener('dragEnd', ['$event'])

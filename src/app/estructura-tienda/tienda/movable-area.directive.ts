@@ -60,10 +60,7 @@ export class MovableAreaDirective implements AfterContentInit {
       minY: areaRect.top - movableRect.top + movable.position.y,
       maxY: areaRect.bottom - movableRect.bottom + movable.position.y
     }
-    console.log(areaRect);
-    console.log(movableRect);
-    console.log(this.boundaries);
-  };
+  }
 
   controlarLimitesArea(movable: MovableDirective) {
     movable.position.x = Math.max( this.boundaries.minX, movable.position.x);

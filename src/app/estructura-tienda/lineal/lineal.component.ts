@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CdkDragDrop, transferArrayItem, moveItemInArray, CdkDragExit } from '@angular/cdk/drag-drop';
 import { MovableDirective } from '../../draggable/movable.directive';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lineal',
@@ -15,13 +16,18 @@ export class LinealComponent implements OnInit, AfterViewInit {
 
   @ViewChild('clineal') public movable: MovableDirective;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
   ngAfterViewInit() {
 
+  }
+
+  guardarPosicion(clineal){
+    this.datos.dd.x = clineal.position.x;
+    this.datos.dd.y = clineal.position.y;
   }
 
   dropped(event: CdkDragDrop<any[]>) {
@@ -59,8 +65,9 @@ export class LinealComponent implements OnInit, AfterViewInit {
     };
   }
 
-  verModulo(event: any){
+  verProductosModulo(idLineal: number, idModulo: number){
     console.log('doble click modulo');
+    this.router.navigate(['modulo', idLineal, idModulo]);
   }
 
 }

@@ -113,15 +113,16 @@ export class MapaTiendaService {
       });
       const zonaBD = zonasBD[zonasBD.length - 1];
       if (zona.almacen !== null) {
-        zonaBD.almacen.origen_x = zona.almacen.dd.origen_x;
-        zonaBD.almacen.origen_y = zona.almacen.dd.origen_y;
+        zonaBD.almacen.origen_x = zona.almacen.dd.x || zona.almacen.dd.origen_x;
+        zonaBD.almacen.origen_y = zona.almacen.dd.y || zona.almacen.dd.origen_y;
       }
       zona.lineales.forEach(lineal => {
         zonaBD.lineales.push({
           id: lineal.id,
           horizontal: lineal.horizontal,
-          origen_x: lineal.dd.origen_x,
-          origen_y: lineal.dd.origen_y,
+          origen_x: lineal.dd.x || lineal.dd.origen_x,
+          origen_y: lineal.dd.y || lineal.dd.origen_y,
+          refrigerado: lineal.refrigerado,
           modulos: []
         });
         const linealBD = zonaBD.lineales[zonaBD.lineales.length - 1];

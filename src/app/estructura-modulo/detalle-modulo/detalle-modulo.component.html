@@ -1,0 +1,27 @@
+<nb-layout>
+
+    <nb-layout-header fixed>
+        <a style="margin-right: 10px;" routerLink="/estructuratienda" routerLinkActive="active"><img src='../../../assets/img/back-button-32.png' style="width: 16px; height: 16px;" /></a>
+        <h1>Distribución de productos en módulo {{idModulo}} de lineal {{idLineal}}</h1>
+    </nb-layout-header>
+
+    <nb-sidebar>
+        <app-menu-modulo (rotarModulo)="rotarModulo($event.x, $event.y)" (zoomModulo)="escalarModulo($event)"></app-menu-modulo>
+    </nb-sidebar>
+    <nb-layout-column style="padding:0">
+        <div class="contenedor">
+            <div appMovable style="transform-style: preserve-3d; cursor: move;">
+                <div class="box" [ngStyle]="{'transform': 'rotateX('+girarModulo.x+'deg) rotateY('+girarModulo.y+'deg) scale3d('+zoom+', '+zoom+', '+zoom+')'}">
+                    <div class="back"></div>
+                    <div class="left"></div>
+                    <div class="right"></div>
+                    <div #balda *ngFor="let balda of datosBalda.baldas; let i = index" class="balda" [ngStyle]="{'transform': 'rotateX(-90deg) translateZ(' + ( (((N-i)*altoPantalla)/N) - (largoPantalla/2) ) + 'px)'}"></div>
+                    <app-grupo-productos *ngFor="let grupo of grupoProductos;" [data]="grupo" [dataBalda]="datosBalda" [inicioX]="datosBalda.baldas[grupo.balda-1].posXProductos"></app-grupo-productos>
+                </div>
+            </div>
+        </div>
+    </nb-layout-column>
+
+
+
+</nb-layout>

@@ -1,0 +1,38 @@
+$color: hsla(22, 100%, 64%, 1);
+:host {
+    perspective: inherit;
+    transform-style: preserve-3d;
+    position: absolute;
+}
+
+.producto {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+
+.producto .face {
+    position: absolute;
+    background: $color;
+    color: black;
+    font-size: .1em;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.producto .back,
+.producto .front {
+    @extend .face;
+}
+
+.producto .right,
+.producto .left {
+    @extend .face;
+}
+
+.producto .top,
+.producto .bottom {
+    @extend .face;
+}

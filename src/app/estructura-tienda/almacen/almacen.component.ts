@@ -25,6 +25,11 @@ export class AlmacenComponent implements OnInit, AfterViewInit, OnChanges  {
 
   }
 
+  guardarPosicion(calmacen) {
+    this.datos.dd.x = calmacen.position.x;
+    this.datos.dd.y = calmacen.position.y;
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes.datos) {
       const _size = parseInt(changes.datos.currentValue.size, 10);

@@ -29,7 +29,7 @@
             <div style="display: flex; padding: 0; width: max-content; overflow: hidden;" #fila2 [style.width]="zonas[2].width+zonas[3].width + 'px' " *ngIf="zonas.length > 3">
                 <div #czona="appMovableZona" appMovableZona [datos]="zona" (cambioZonaLineal)="cambiarDatosZonaLineal($event.lineal, $event.zona, $event.nuevaZona, $event.pos)" (cambioZonaAlmacen)="cambiarDatosZonaAlmacen($event.almacen, $event.zona, $event.nuevaZona, $event.pos)"
                     [id]=" 'Z'+zona.id " *ngFor="let zona of [zonas[2],zonas[3]] " class="zona" [style.width]="zona.width+ 'px' " [style.height]="zona.height+ 'px' ">
-                    <app-lineal #cmplineal *ngFor="let lineal of zona.lineales; let i=index " [datos]="lineal" (linealSinModulos)="borrarLineal($event.idZona, $event.idLineal)"></app-lineal>
+                    <app-lineal #cmplineal *ngFor="let lineal of zona.lineales; let i=index " [datos]="lineal" (linealSinModulos)="borrarLineal($event.idZona, $event.idLineal)" (moduloSinMover)="revisarSiBorrarModulo($event)"></app-lineal>
                     <app-almacen #cmpalmacen *ngIf="zona.almacen !== null" [datos]="zona.almacen"></app-almacen>
                 </div>
             </div>

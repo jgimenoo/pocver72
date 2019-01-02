@@ -4,7 +4,8 @@ import { DraggableHandleDirective } from './draggable-handle.directive';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Directive({
-  selector: '[appDraggable]'
+  selector: '[appDraggable]',
+  exportAs: 'appDraggable'
 })
 export class DraggableDirective implements AfterViewInit {
 
@@ -48,7 +49,6 @@ export class DraggableDirective implements AfterViewInit {
     if (!this.device.isDesktop() || !this.dragging) {
       return;
     }
-
     this.dragMove.emit(event);
   }
 
@@ -65,7 +65,6 @@ export class DraggableDirective implements AfterViewInit {
     if (!this.device.isDesktop() || !this.dragging) {
       return;
     }
-    console.log(event.clientX);
     this.dragging = false;
     this.dragEnd.emit(event);
   }

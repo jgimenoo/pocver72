@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { OutputWindowComponent } from './output-window/output-window.component';
 import {MainComponent} from './main/main.component';
 import { TiendaComponent } from './estructura-tienda/tienda/tienda.component';
+import { DetalleModuloComponent } from './estructura-modulo/detalle-modulo/detalle-modulo.component';
 
 
 const appRoutes: Routes = [{
@@ -14,6 +15,8 @@ const appRoutes: Routes = [{
   component: TiendaComponent, path: 'estructuratienda'
 }, {
   component: OutputWindowComponent, path: 'Output'
+}, {
+  component: DetalleModuloComponent, path: 'modulo/:idLineal/:idModulo'
 }, {
     path: '**', redirectTo: '/main', pathMatch: 'full'
 }];

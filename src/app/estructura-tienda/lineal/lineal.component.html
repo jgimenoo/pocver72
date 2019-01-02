@@ -1,4 +1,4 @@
-<div #clineal="appMovable" appMovable [startPosition]="{x: datos.dd.origen_x, y: datos.dd.origen_y}" class="lineal">
+<div #clineal="appMovable" appMovable [startPosition]="{x: datos.dd.origen_x, y: datos.dd.origen_y}" (dragEnd)="guardarPosicion(clineal)" class="lineal">
     <div [ngStyle]="datos.horizontal ? {'left': '-15px'} : {'top':'-25px'}" appDraggableHandle #handle="appDraggableHandle">
         <svg width="24px" fill="gray" viewBox="0 0 24 24">
         <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
@@ -8,8 +8,8 @@
     <div cdkDropList *ngIf="datos.modulos.length > 0" [class.listH]="datos.horizontal" [cdkDropListOrientation]="datos.horizontal ? 'horizontal' : 'vertical'" [cdkDropListData]="datos.modulos" (cdkDropListDropped)="dropped($event)">
         <div [class]="datos.horizontal ? 'lbLinH' : 'lbLinV'">L{{datos.id}}</div>
         <div cdkDrag [cdkDragData]="modulo" *ngFor="let modulo of datos.modulos" (cdkDragMoved)="movedModulo($event)">
-            <app-modulo-hor (ondblclick)="verModulo($event)" [label]="modulo.id" [size]="modulo.size" [label]="modulo.label" [color]="modulo.color" [ancho]="datos.refrigerado" *ngIf="datos.horizontal"></app-modulo-hor>
-            <app-modulo (ondblclick)="verModulo($event)" [label]="modulo.id" [size]="modulo.size" [label]="modulo.label" [color]="modulo.color" [ancho]="datos.refrigerado" *ngIf="!datos.horizontal"></app-modulo>
+            <app-modulo-hor (dblclick)="verProductosModulo(datos.id, modulo.id)" [label]="modulo.id" [size]="modulo.size" [label]="modulo.label" [color]="modulo.color" [ancho]="datos.refrigerado" *ngIf="datos.horizontal"></app-modulo-hor>
+            <app-modulo (dblclick)="verProductosModulo(datos.id, modulo.id)" [label]="modulo.id" [size]="modulo.size" [label]="modulo.label" [color]="modulo.color" [ancho]="datos.refrigerado" *ngIf="!datos.horizontal"></app-modulo>
         </div>
     </div>
 </div>
