@@ -10,10 +10,6 @@ export class AreatiendaService {
     {
       largo: "22",     
       ancho: "35",        
-    },  
-    {
-      largo: "42",     
-      ancho: "55",             
     }];
 
     getFeatureShops() {

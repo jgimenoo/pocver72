@@ -10,39 +10,49 @@ import { NbToastrService } from '@nebular/theme'
   styleUrls: ['./areatienda.component.css']
 })
 export class AreatiendaComponent implements OnInit {
-  
+  /*settings = {
+    hideSubHeader: true, 
+  }
+  */
   features = {
+    
     actions: {
+      add: false,
+      delete: false,
       columnTitle: 'Area de la Tienda',
     },
 
-    add: {
+/*    add: {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
       confirmCreate: true,
       active: true
     },
+    */
     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
       confirmSave: true
     },
-    delete: {
+/*    delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true
     },
+    */
     columns: {
     largo: {    
       title: 'Largo de la Tienda(m)',
       filter: false,
+      renderComponent: null,
       type: 'number',
     },
     ancho: {
       title: 'Ancho de la tienda(m)',
+      renderComponent: null,
       filter: false,
-        type: 'number',
+      type: 'number',
     }
   }
 }
