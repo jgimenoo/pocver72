@@ -1,0 +1,9 @@
+<div appMovable style="transform-style: preserve-3d; cursor: move;">
+    <div class="box" [ngStyle]="{'transform': 'rotateX('+modulo.girar.x+'deg) rotateY('+modulo.girar.y+'deg) scale3d('+modulo.zoom+', '+modulo.zoom+', '+modulo.zoom+')'}">
+        <div class="back"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+        <div #balda *ngFor="let balda of datosBalda.baldas; let i = index" class="balda" [ngStyle]="{'transform': 'rotateX(-90deg) translateZ(' + ( (((numBaldas-i)*modulo.alto)/numBaldas) - (modulo.largo/2) ) + 'px)'}"></div>
+        <app-grupo-productos *ngFor="let grupo of grupoProductos;" [data]="grupo" [dataBalda]="datosBalda" [inicioX]="datosBalda.baldas[grupo.balda-1].posXProductos"></app-grupo-productos>
+    </div>
+</div>

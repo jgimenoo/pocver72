@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DetalleModuloComponent } from './detalle-modulo/detalle-modulo.component';
 import { FormsModule } from '@angular/forms';
@@ -8,6 +8,7 @@ import { ProductoVisualComponent } from './producto-visual/producto-visual.compo
 import { MenuModuloComponent } from './menu-modulo/menu-modulo.component';
 import { DraggableModule } from '../draggable/draggable.module';
 import { GrupoProductosComponent } from './grupo-productos/grupo-productos.component';
+import { ModuloVisualComponent } from './modulo-visual/modulo-visual.component';
 
 @NgModule({
   imports: [
@@ -23,9 +24,11 @@ import { GrupoProductosComponent } from './grupo-productos/grupo-productos.compo
     DetalleModuloComponent,
     ProductoVisualComponent,
     MenuModuloComponent,
-    GrupoProductosComponent],
+    GrupoProductosComponent,
+    ModuloVisualComponent],
   exports: [
     DetalleModuloComponent
-  ]
+  ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class EstructuraModuloModule { }

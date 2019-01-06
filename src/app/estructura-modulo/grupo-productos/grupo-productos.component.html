@@ -1,1 +1,3 @@
-<app-producto-visual *ngFor="let producto of data.productos;" [labelFront]="data.horizontal ? data.id : ''" [labelTop]="data.horizontal ? '' : data.id" [data]="producto" [alto]="data.alto" [ancho]="data.ancho" [largo]="data.largo" [ngStyle]="{'top': producto.y+'px', 'left': producto.x+'px', 'transform': 'translateZ('+producto.z+'px)'}"></app-producto-visual>
+<app-producto-visual *ngFor="let producto of data.productos;" [imgTop]="data.imagen.top" [imgFront]="data.imagen.front" [imgLeft]="data.imagen.left" [imgRight]="data.imagen.right" [data]="producto" [alto]="data.alto" [ancho]="data.ancho" [largo]="data.largo"
+    [ngStyle]="{'top': producto.y+'px', 'left': producto.x+'px', 'transform': 'translateZ('+producto.z+'px)'}">
+</app-producto-visual>

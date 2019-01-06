@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
-import { OuterSubscriber } from 'rxjs/internal/OuterSubscriber';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-grupo-productos',
@@ -13,15 +12,17 @@ export class GrupoProductosComponent implements OnInit{
   @Input() inicioX = 0;  // Posicion desde la que comienza a colocar productos
 
   private _finalX = 0;
+  private proporcion = 3.125;
 
-  separadorProducto = 5;
+  separadorProducto = 2;
+  separadorProductoAlto = 1;
 
   constructor() { }
 
   ngOnInit() {
-    this.data.largo = (this.data.largoReal * this.dataBalda.largo) / this.dataBalda.largoReal;
-    this.data.ancho =  (this.data.anchoReal * this.dataBalda.ancho) / this.dataBalda.anchoReal;
-    this.data.alto =  (this.data.altoReal * this.dataBalda.alto) / this.dataBalda.altoReal;
+    this.data.largo = this.data.largoReal * this.proporcion;
+    this.data.ancho =  this.data.anchoReal * this.proporcion;
+    this.data.alto =  this.data.altoReal * this.proporcion;
     for (let i = 0; i < this.data.cantidad; i++) {
       this.data.productos.push({
         x: 0,
@@ -29,8 +30,8 @@ export class GrupoProductosComponent implements OnInit{
         z: 0
       });
     }
-    const maxProdsLargo = Math.trunc(this.dataBalda.largo / this.data.largo);
-    const maxProdsAlto = Math.trunc(this.dataBalda.alto / this.data.alto);
+    const maxProdsLargo = Math.trunc(this.dataBalda.largo / (this.data.largo + this.separadorProducto));
+    const maxProdsAlto = Math.trunc(this.dataBalda.alto / (this.data.alto + this.separadorProductoAlto));
     let maxProdsFila;
     let totalFilas;
     let totalColumnas;
@@ -61,8 +62,8 @@ export class GrupoProductosComponent implements OnInit{
     let contadorY = 0;
     let contadorZ = (this.dataBalda.largo / 2) - (this.data.largo / 2);
     this.data.productos.forEach( prod => {
-      prod.x = contadorX;
-      prod.y = (this.dataBalda.alto * this.data.balda) - this.data.alto - contadorY;
+      prod.x = this.separadorProducto + contadorX;
+      prod.y = -1 + (this.dataBalda.alto * this.data.balda) - this.data.alto - contadorY;
       prod.z = contadorZ;
       contadorProductos ++;
       if (!this.data.horizontal) {
@@ -71,7 +72,7 @@ export class GrupoProductosComponent implements OnInit{
           contadorY = 0;
           contadorZ -= prod.largo + this.separadorProducto;
         } else {
-          contadorY += this.data.alto;
+          contadorY += this.data.alto + this.separadorProductoAlto;
         }
       } else {
         if ((contadorProductos % maxProdsFila) === 0 && this.data.horizontal) {
@@ -87,7 +88,7 @@ export class GrupoProductosComponent implements OnInit{
     if (!this.data.horizontal) {
       this._finalX = this.inicioX + this.data.ancho + this.separadorProducto;
     } else {
-      this._finalX = this.inicioX + ((maxProdsFila + this.separadorProducto) * this.data.ancho);
+      this._finalX = this.inicioX + ((this.separadorProducto + this.data.ancho) * maxProdsFila);
     }
     this.dataBalda.baldas[this.data.balda - 1].posXProductos = this._finalX;
 

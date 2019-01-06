@@ -1,11 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-menu-modulo',
   templateUrl: './menu-modulo.component.html',
   styleUrls: ['./menu-modulo.component.scss']
 })
-export class MenuModuloComponent implements OnInit {
+export class MenuModuloComponent implements OnInit, AfterViewInit  {
 
   @Output() rotarModulo = new EventEmitter<any>();
   @Output() zoomModulo = new EventEmitter<any>();
@@ -43,6 +43,11 @@ export class MenuModuloComponent implements OnInit {
       this.escala = 1;
     }
     this.zoomModulo.emit(this.escala);
+  }
+  
+  ngAfterViewInit() {
+
+
   }
 
 }

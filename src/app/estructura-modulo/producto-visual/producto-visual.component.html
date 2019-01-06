@@ -1,8 +1,8 @@
 <div class="producto" [ngStyle]="{'width': ancho + 'px', 'height': alto + 'px'}">
-    <div class="top" [ngStyle]="{'width': ancho + 'px', 'height': largo + 'px', 'transform': 'rotateX(90deg) translateZ('+((largo/2))+'px)'}">{{labelTop}}</div>
+    <div class="top" [ngStyle]="{'width': ancho + 'px', 'height': largo + 'px', 'transform': 'rotateX(90deg) translateZ('+((largo/2))+'px)'}"><img alt="" [src]="imgTop" *ngIf="imgTop" /></div>
     <div class="bottom" [ngStyle]="{'width': ancho + 'px', 'height': largo + 'px', 'transform': 'rotateX(-90deg) translateZ('+(alto-(largo/2))+'px)'}"></div>
-    <div class="left" [ngStyle]="{'width': largo + 'px', 'height': alto + 'px', 'transform': 'rotateY(-90deg) translateZ('+(largo/2)+'px)'}"></div>
-    <div class="right" [ngStyle]="{'width': largo + 'px', 'height': alto + 'px', 'transform': 'rotateY(90deg) translateZ('+(ancho-(largo/2))+'px)'}"></div>
-    <div class="front" [ngStyle]="{'width': ancho + 'px', 'height': alto + 'px', 'transform': 'translateZ('+(largo/2)+'px)'}">{{labelFront}}</div>
+    <div class="left" [ngStyle]="{'width': largo + 'px', 'height': alto + 'px', 'transform': 'rotateY(-90deg) translateZ('+(largo/2)+'px)'}"><img alt="" [src]="imgLeft" *ngIf="imgLeft" /></div>
+    <div class="right" [ngStyle]="{'width': largo + 'px', 'height': alto + 'px', 'transform': 'rotateY(90deg) translateZ('+(ancho-(largo/2))+'px)'}"><img alt="" [src]="imgRight" *ngIf="imgRight" /></div>
+    <div class="front" [ngStyle]="{'width': ancho + 'px', 'height': alto + 'px', 'transform': 'translateZ('+(largo/2)+'px)'}"><img alt="" [src]="imgFront" *ngIf="imgFront" /></div>
     <div class="back" [ngStyle]="{'width': ancho + 'px', 'height': alto + 'px', 'transform': 'rotateY(-180deg) translateZ('+(largo/2)+'px)'}"></div>
 </div>

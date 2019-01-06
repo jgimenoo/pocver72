@@ -1,0 +1,111 @@
+$ancho: 400px;
+$alto: 500px;
+$largo: 93.75px;
+$color: hsla(187, 70%, 62%, 0.7);
+$colorBack: rgba(35, 165, 182, 0.7);
+$colorBalda: rgb(71, 137, 180);
+$bordeBalda: rgb(46, 89, 117);
+:host {
+    width: 100%;
+    height: 100%;
+    perspective: 3000px;
+    overflow: hidden;
+    display: inline-flex;
+    justify-content: center;
+    place-items: center;
+}
+
+.dimensionesModulo {
+    width: $ancho;
+    height: $alto;
+}
+
+// .contenedor {
+//     width: 100%;
+//     height: 100%;
+//     perspective: 3000px;
+//     overflow: hidden;
+//     display: inline-flex;
+//     justify-content: center;
+//     place-items: center;
+// }
+.box {
+    @extend .dimensionesModulo;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+
+.box .face {
+    position: absolute;
+    background: $color;
+}
+
+.box .back {
+    @extend .face;
+    background: $colorBack;
+    @extend .dimensionesModulo;
+}
+
+.box .right,
+.box .left {
+    @extend .face;
+    width: $largo;
+    height: $alto;
+}
+
+.box .top,
+.box .bottom {
+    @extend .face;
+    width: $ancho;
+    height: $largo;
+}
+
+.box .balda {
+    @extend .face;
+    background: $colorBalda;
+    width: $ancho;
+    height: $largo;
+    border: 2px solid $bordeBalda;
+}
+
+.box .right {
+    transform: rotateY( 90deg) translateZ($ancho - ($largo/2));
+}
+
+.box .back {
+    transform: rotateY(-180deg) translateZ( $largo/2);
+}
+
+.box .left {
+    transform: rotateY(-90deg) translateZ($largo/2);
+}
+
+.box .top {
+    transform: rotateX( 90deg) translateZ($largo/2);
+}
+
+.box .bottom {
+    transform: rotateX(-90deg) translateZ($alto - ($largo/2));
+}
+
+// Animacion:
+.box.show-back {
+    transform: translateZ( -$alto/4) rotateY(-180deg);
+}
+
+.box.show-right {
+    transform: translateZ(-$ancho/2) rotateY( -90deg);
+}
+
+.box.show-left {
+    transform: translateZ(-$ancho/2) rotateY( 90deg);
+}
+
+.box.show-top {
+    transform: translateZ(-$largo) rotateX( -90deg);
+}
+
+.box.show-bottom {
+    transform: translateZ(-$largo) rotateX( 90deg);
+}
