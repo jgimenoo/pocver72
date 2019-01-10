@@ -1,14 +1,26 @@
 :host /deep/ ng2-smart-table tbody > tr > td:nth-child(2)  { 
   text-align: center;
+
 }
 :host /deep/ ng2-smart-table tbody > tr > td:nth-child(3)  { 
   text-align: right;
+
 }
 :host /deep/ ng2-smart-table tbody > tr > td:nth-child(4)  { 
   text-align: right;
+  
 }
 :host /deep/ ng2-smart-table tbody > tr > td:nth-child(5)  { 
   text-align: center;
+  
+}
+
+:host /deep/ ng2-smart-table input {
+  color: black;
+}
+
+:host /deep/ ng2-smart-table select {
+  color: black;
 }
 
 .page {
@@ -25,3 +37,4 @@
     justify-content: center;
     width: 100%;  
   }
+

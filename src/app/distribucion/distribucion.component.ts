@@ -99,8 +99,31 @@ distribution = {
   }
 
 
+  private index0: number = 0; 
+
+  result0:boolean;
+  validardata0(newData) {
+    if (
+    !isNaN(Number(newData.zonasec)) &&
+    !isNaN(Number(newData.cantlineales)) &&
+    newData.seccionest.length !== 0 &&
+    newData.zonasec.length !== 0 &&
+    newData.cantlineales.length !== 0 &&
+    newData.tipolineal.length !== 0){
+      return true;
+    } 
+      return false;   
+      }
+
   onEditDistri(event) {
-    if (window.confirm('Estás seguro de modificar esta informacion?')) {
+    this.result0 = this.validardata0(event.newData);
+    if (this.result0 == false){
+      
+       this.toastrService.show(
+         'Rellena todos los campos con el formato correcto para añadir la distribucion',
+         `Toaster numero: ${++this.index0}`,
+         );
+     }else if (window.confirm('Estás seguro de modificar esta informacion?')) {
       event.confirm.resolve(event.newData);
       this.service.editDistribution(event.newData);
     } else {

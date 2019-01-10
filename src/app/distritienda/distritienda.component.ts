@@ -95,9 +95,34 @@ if (window.confirm('¿Estás seguro de eliminar este lineal?')) {
   }
 }
 
+private index0: number = 0; 
+result0:boolean;
 
+validardata0(newData) {
+  if (!isNaN(Number(newData.numodulos)) &&
+  !isNaN(Number(newData.anchomodulo)) &&
+  !isNaN(Number(newData.largomodulo)) &&
+  !isNaN(Number(newData.altomodulo)) &&
+  !isNaN(Number(newData.numbaldas)) &&
+  newData.numodulos.length !== 0 &&
+  newData.anchomodulo.length !== 0 &&
+  newData.largomodulo.length !== 0 &&
+  newData.altomodulo.length !== 0 &&
+  newData.apilamiento.length !== 0 &&
+  newData.numbaldas.length !== 0){
+    return true;
+  } 
+    return false;   
+    }
 onEditLineal(event) {
-  if (window.confirm('¿Estás seguro de modificar este lineal?')) {
+  this.result0 = this.validardata0(event.newData);
+  if (this.result0 == false){
+    
+     this.toastrService.show(
+       'Rellena todos los campos con el formato correcto para añadir la distribucion',
+       `Toaster numero: ${++this.index0}`,
+       );
+   }else if (window.confirm('¿Estás seguro de modificar este lineal?')) {
     event.confirm.resolve(event.newData);
     this.service.editLineal(event.newData);
   } else {

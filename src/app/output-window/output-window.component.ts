@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 import { OutputWindowService } from '../services/output-window.service';
 import { Router } from '@angular/router';
-
+import { NbToastrService } from '@nebular/theme'
 
 
 @Component({
@@ -43,17 +43,17 @@ export class OutputWindowComponent implements OnInit {
       balda: {
         title: 'Balda',
         filter: false,
-          type: 'text',
+          type: 'number',
       },
       orden: {
         title: 'Orden',
         filter: false,
-          type: 'text',
+          type: 'number',
       },
       apilamiento: {
         title: 'Apilamiento',
         filter: false,
-        type: 'text'
+        type: 'number'
       }
   }
 }
@@ -61,6 +61,7 @@ export class OutputWindowComponent implements OnInit {
   source: LocalDataSource;
   
   constructor(private service: OutputWindowService,
+             private toastrService: NbToastrService,
               private router: Router,) {
     this.source = new LocalDataSource(this.service.getDataOutput())
   
@@ -81,9 +82,31 @@ export class OutputWindowComponent implements OnInit {
     }
   }
 
+  private index0: number = 0; 
+  result0:boolean;
+  validardata0(newData) {
+    if (
+    !isNaN(Number(newData.balda)) &&
+    !isNaN(Number(newData.orden)) &&
+    !isNaN(Number(newData.apilamiento)) &&
+    newData.idProducto.length !== 0 &&
+    newData.balda.length !== 0 &&
+    newData.orden.length !== 0 &&
+    newData.apilamiento.length !== 0){
+      return true;
+    } 
+      return false;   
+      }
 
   onEditOutput(event) {
-    if (window.confirm('Estás seguro de modificar el producto?')) {
+        this.result0 = this.validardata0(event.newData);
+    if (this.result0 == false){
+      
+       this.toastrService.show(
+         'Rellena todos los campos con el formato correcto para añadir la distribucion',
+         `Toaster numero: ${++this.index0}`,
+         );
+     }else if (window.confirm('Estás seguro de modificar el producto?')) {
       event.confirm.resolve(event.newData);
       this.service.editOutput(event.newData);
       
@@ -93,8 +116,30 @@ export class OutputWindowComponent implements OnInit {
     }
   }
 
+  private index: number = 0; 
+  result:boolean;
+  validardata(newData) {
+    if (
+    !isNaN(Number(newData.balda)) &&
+    !isNaN(Number(newData.orden)) &&
+    !isNaN(Number(newData.apilamiento)) &&
+    newData.idProducto.length !== 0 &&
+    newData.balda.length !== 0 &&
+    newData.orden.length !== 0 &&
+    newData.apilamiento.length !== 0){
+      return true;
+    } 
+      return false;   
+      }
   onCreateOutput(event) {
-    if (window.confirm('Estás seguro de añadir el producto?')) {
+    this.result = this.validardata(event.newData);
+   if (this.result == false){
+     
+      this.toastrService.show(
+        'Rellena todos los campos con el formato correcto para añadir la distribucion',
+        `Toaster numero: ${++this.index}`,
+        );
+    }else if (window.confirm('Estás seguro de añadir el producto?')) {
       event.confirm.resolve(event.newData);
       this.service.addOutput(event.newData);
       

@@ -45,12 +45,14 @@ export class AreatiendaComponent implements OnInit {
     largo: {    
       title: 'Largo de la Tienda(m)',
       filter: false,
+      editable:true,
       renderComponent: null,
       type: 'number',
     },
     ancho: {
       title: 'Ancho de la tienda(m)',
       renderComponent: null,
+      editable:true,
       filter: false,
       type: 'number',
     }
@@ -77,9 +79,28 @@ export class AreatiendaComponent implements OnInit {
     }
   }
 
+  private index0: number = 0; 
+
+  result0:boolean;
+  validardata0(newData) {
+    if (!isNaN(Number(newData.largo)) &&
+    !isNaN(Number(newData.ancho)) &&
+    newData.largo.length !== 0
+    && newData.ancho.length !== 0){
+      return true;
+    } 
+      return false;   
+      }
 
   onEditShopFeature(event) {
-    if (window.confirm('Estás seguro de modificar la tienda?')) {
+    this.result0 = this.validardata0(event.newData);
+    if (this.result0 == false){
+      
+       this.toastrService.show(
+         'Rellena todos los campos con el formato correcto para añadir la tienda',
+         `Toaster numero: ${++this.index0}`,
+         );
+  }else if  (window.confirm('Estás seguro de modificar la tienda?')) {
       event.confirm.resolve(event.newData);
       this.service.editShopFeature(event.newData);
     } else {

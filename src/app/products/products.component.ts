@@ -117,9 +117,39 @@ import { NbToastrService } from '@nebular/theme'
     }
   }
 
+  private index0: number = 0; 
+  result0:boolean;
 
+validardata0(newData) {
+  if (!isNaN(Number(newData.volumentotal)) &&
+  !isNaN(Number(newData.anchoproducto)) &&
+  !isNaN(Number(newData.altoproducto)) &&
+  !isNaN(Number(newData.largoproducto)) &&
+  !isNaN(Number(newData.stock)) &&
+  !isNaN(Number(newData.facing)) &&
+  newData.idProduct.length !== 0 &&
+  newData.format.length !== 0 &&
+  newData.seccion.length !== 0 &&
+  newData.volumentotal.length !== 0 &&
+  newData.anchoproducto.length !== 0 &&
+  newData.altoproducto.length !== 0 &&
+  newData.largoproducto.length !== 0 &&
+  newData.stock.length !== 0 &&
+  newData.facing.length !== 0){ 
+  return true;
+}
+    return false;   
+    }
+    
   onEditProduct(event) {
-    if (window.confirm('Estás seguro de modificar el producto?')) {
+    this.result0 = this.validardata0(event.newData);
+    if (this.result0 == false){
+      
+       this.toastrService.show(
+         'Rellena todos los campos con el formato correcto para añadir el producto',
+         `Toaster numero: ${++this.index}`,
+         );
+     }else if (window.confirm('Estás seguro de modificar el producto?')) {
       event.confirm.resolve(event.newData);
       this.service.editProduct(event.newData);
     } else {

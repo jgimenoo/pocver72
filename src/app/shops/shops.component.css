@@ -1,3 +1,10 @@
+:host /deep/ ng2-smart-table input {
+  color: black;
+}
+
+:host /deep/ ng2-smart-table select {
+  color: black;
+}
 .page {
     width: 100%;
     height: 100%;
