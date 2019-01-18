@@ -8,10 +8,13 @@ export class OutputWindowService {
 
   constructor(private http: HttpClient) { }
   data = [{
-    idProducto:"Ron",
-    balda:3,
-    orden:2,
-    apilamiento:2,
+idProduct:"1",
+productname:"Ron",
+unidades:"25",
+modulo:"2",
+balda:"3",
+seccion:"1",
+area:"7054"
   }];
 
   getDataOutput() {
@@ -30,10 +33,13 @@ console.log(event);
 editOutput(event) {
   this.http
     .post<any>(`${config.basePath}output-window/editOutput`, {
-      idProducto: event.idProducto,
-      balda: event.balda,
-      orden: event.orden,
-      apilamiento: event.apilamiento,
+      idProduct:event.idProduct,
+      productname:event.productname,
+      unidades:event.unidades,
+      modulo:event.modulo,
+      balda:event.balda,
+      seccion:event.seccion,
+      area:event.area
     })
     .subscribe();
 }
@@ -41,10 +47,13 @@ editOutput(event) {
 addOutput(event) {
   this.http
     .post<any>(`${config.basePath}output-window/addOutput`, {
-      idProducto: event.idProducto,
-      balda: event.balda,
-      orden: event.orden,
-      apilamiento: event.apilamiento,
+      idProduct:event.idProduct,
+      productname:event.productname,
+      unidades:event.unidades,
+      modulo:event.modulo,
+      balda:event.balda,
+      seccion:event.seccion,
+      area:event.area
     })
     .subscribe();
   }
