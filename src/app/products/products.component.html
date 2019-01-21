@@ -1,9 +1,11 @@
-<div class="page">
-  <div class="padding-2">
-    <div class = "conttabla">
-        <ng2-smart-table [settings]="mainproducts" [source]="source" (deleteConfirm)="onDeleteProduct($event)" 
-        (createConfirm)="onCreateProduct($event)" (editConfirm)="onEditProduct($event)">
-      </ng2-smart-table>
-      </div>
-  </div>  
-</div>  
+<div style="margin: 0 1% 0 1%;">
+    
+  <nb-tabset>
+    <nb-tab tabTitle="Características del Producto" [active]="product-property">      
+  <app-product-property></app-product-property>
+    </nb-tab>
+    <nb-tab tabTitle="Exposición del Producto" [active]="product-expo">
+  <app-product-expo></app-product-expo>
+    </nb-tab>
+  </nb-tabset>
+</div>

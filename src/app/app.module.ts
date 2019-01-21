@@ -29,6 +29,11 @@ import { DistribucionComponent } from './distribucion/distribucion.component';
 import { AreatiendaComponent } from './areatienda/areatienda.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { BarPieComponent } from './bar-pie/bar-pie.component';
+import { ProductExpoComponent } from './product-expo/product-expo.component';
+import { ProductPropertyComponent } from './product-property/product-property.component';
+import { ZonasyseccionesComponent } from './zonasysecciones/zonasysecciones.component';
+import { LinealesComponent } from './lineales/lineales.component';
+import { ModulebaldaComponent } from './modulebalda/modulebalda.component';
 import { EstructuraTiendaModule } from './estructura-tienda/estructura-tienda.module';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { environment } from 'src/environments/environment';
@@ -43,6 +48,11 @@ import { EstructuraModuloModule } from './estructura-modulo/estructura-modulo.mo
     import { AreatiendaService } from './services/areatienda.service';
     import { DistribucionService } from './services/distribucion.service';
     import { DistritiendaService } from './services/distritienda.service';
+    import { ProductPropertyService } from './services/product-property.service';
+    import { ProductExpoService } from './services/product-expo.service';
+    import { LinealesService } from './services/lineales.service';
+    import { ModulebaldaService } from'./services/modulebalda.service';
+    import { ZonasyseccionesService } from './services/zonasysecciones.service';
 
 
 
@@ -59,7 +69,12 @@ import { EstructuraModuloModule } from './estructura-modulo/estructura-modulo.mo
     DistribucionComponent,
     AreatiendaComponent,
     BarChartComponent,
-    BarPieComponent
+    BarPieComponent,
+    ProductExpoComponent,
+    ProductPropertyComponent,
+    ZonasyseccionesComponent,
+    LinealesComponent,
+    ModulebaldaComponent
   ],
   imports: [
     BrowserModule,
@@ -84,6 +99,11 @@ import { EstructuraModuloModule } from './estructura-modulo/estructura-modulo.mo
     AreatiendaService,
     DistribucionService,
     DistritiendaService,
+    ProductPropertyService,
+    ProductExpoService,
+    LinealesService,
+    ModulebaldaService,
+    ZonasyseccionesService
   ],
   bootstrap: [AppComponent]
 })

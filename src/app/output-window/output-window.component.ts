@@ -14,9 +14,12 @@ export class OutputWindowComponent implements OnInit {
 
   settings = {
     actions: {
-      columnTitle: 'Acciones'
+      columnTitle: 'Acciones',
+      add: false,
+      delete: false,
+      edit: false
     },
-    
+   /* 
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
@@ -34,24 +37,40 @@ export class OutputWindowComponent implements OnInit {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true
     },
+    */
     columns: {
-      idProducto: {
-        title: 'Producto',
+      idProduct: {
+        title: 'ID Producto',
         filter: false,
         type: 'text'
+      },
+      productname: {
+        title: 'Nombre del producto',
+        filter: false,
+          type: 'text',
+      },
+      unidades: {
+        title: 'Unidades',
+        filter: false,
+          type: 'number',
+      },
+      modulo: {
+        title: 'Módulo',
+        filter: false,
+        type: 'number'
       },
       balda: {
         title: 'Balda',
         filter: false,
-          type: 'number',
+        type: 'number'
       },
-      orden: {
-        title: 'Orden',
+      seccion: {
+        title: 'Seccion',
         filter: false,
-          type: 'number',
+        type: 'text'
       },
-      apilamiento: {
-        title: 'Apilamiento',
+      area: {
+        title: 'Área que ocupa el producto',
         filter: false,
         type: 'number'
       }
@@ -86,13 +105,17 @@ export class OutputWindowComponent implements OnInit {
   result0:boolean;
   validardata0(newData) {
     if (
+    !isNaN(Number(newData.unidades)) &&
+    !isNaN(Number(newData.modulo)) &&
     !isNaN(Number(newData.balda)) &&
-    !isNaN(Number(newData.orden)) &&
-    !isNaN(Number(newData.apilamiento)) &&
-    newData.idProducto.length !== 0 &&
+    !isNaN(Number(newData.area)) &&
+    newData.idProduct.length !== 0 &&
+    newData.productname.length !== 0 &&
+    newData.unidades.length !== 0 &&
+    newData.modulo.length !== 0 &&
     newData.balda.length !== 0 &&
-    newData.orden.length !== 0 &&
-    newData.apilamiento.length !== 0){
+    newData.seccion.length !== 0 &&
+    newData.area.length !== 0){
       return true;
     } 
       return false;   
@@ -120,13 +143,17 @@ export class OutputWindowComponent implements OnInit {
   result:boolean;
   validardata(newData) {
     if (
-    !isNaN(Number(newData.balda)) &&
-    !isNaN(Number(newData.orden)) &&
-    !isNaN(Number(newData.apilamiento)) &&
-    newData.idProducto.length !== 0 &&
-    newData.balda.length !== 0 &&
-    newData.orden.length !== 0 &&
-    newData.apilamiento.length !== 0){
+      !isNaN(Number(newData.unidades)) &&
+      !isNaN(Number(newData.modulo)) &&
+      !isNaN(Number(newData.balda)) &&
+      !isNaN(Number(newData.area)) &&
+      newData.idProduct.length !== 0 &&
+      newData.productname.length !== 0 &&
+      newData.unidades.length !== 0 &&
+      newData.modulo.length !== 0 &&
+      newData.balda.length !== 0 &&
+      newData.seccion.length !== 0 &&
+      newData.area.length !== 0){
       return true;
     } 
       return false;   
