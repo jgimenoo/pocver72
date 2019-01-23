@@ -1,0 +1,85 @@
+{
+	"metadata": {
+		"version": 4.5,
+		"type": "Object",
+		"generator": "Object3D.toJSON"
+	},
+	"object": {
+		"uuid": "3741222A-BD8F-401C-A5D2-5A907E891896",
+		"type": "Scene",
+		"name": "Scene",
+		"layers": 1,
+		"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+		"children": [
+			{
+				"uuid": "AF7ABE7A-0F1C-4CB4-8C97-CF484B57C959",
+				"type": "DirectionalLight",
+				"name": "DirectionalLight",
+				"layers": 1,
+				"matrix": [17.07972,13.560973,-7.288283,0,-5.876388,2.73498,-8.682165,0,-0.01088,0.02126,0.014061,0,13.730765,12.819605,32.433996,1],
+				"color": 16777213,
+				"intensity": 1.5,
+				"shadow": {
+					"camera": {
+						"uuid": "4FD4BD84-7E5A-4C98-AF9C-932B309681AB",
+						"type": "OrthographicCamera",
+						"layers": 1,
+						"zoom": 1,
+						"left": -5,
+						"right": 5,
+						"top": 5,
+						"bottom": -5,
+						"near": 0.5,
+						"far": 500
+					}
+				}
+			},
+			{
+				"uuid": "1EFFDAC6-CCC5-4760-86FF-D865842A5447",
+				"type": "DirectionalLight",
+				"name": "DirectionalLight",
+				"layers": 1,
+				"matrix": [-4.309965,-7.494822,5.427003,0,16.822826,-9.925821,-0.347607,0,-12.725977,-20.236048,-38.053063,0,-40.952755,22.428171,1.43031,1],
+				"color": 16777215,
+				"intensity": 2,
+				"shadow": {
+					"camera": {
+						"uuid": "74656401-2819-4379-A0E5-4588BC24A7AF",
+						"type": "OrthographicCamera",
+						"layers": 1,
+						"zoom": 1,
+						"left": -5,
+						"right": 5,
+						"top": 5,
+						"bottom": -5,
+						"near": 0.5,
+						"far": 500
+					}
+				}
+			},
+			{
+				"uuid": "2777BDB7-D38E-433A-834A-B58C52AAFB9F",
+				"type": "DirectionalLight",
+				"name": "DirectionalLight",
+				"layers": 1,
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,3.406435,6.99685,47.367855,1],
+				"color": 16777215,
+				"intensity": 1.5,
+				"shadow": {
+					"camera": {
+						"uuid": "E4638284-50C6-426F-8820-FFDD991BF8C6",
+						"type": "OrthographicCamera",
+						"layers": 1,
+						"zoom": 1,
+						"left": -5,
+						"right": 5,
+						"top": 5,
+						"bottom": -5,
+						"near": 0.5,
+						"far": 500
+					}
+				}
+			}],
+		"background": 11184810
+	}
+}

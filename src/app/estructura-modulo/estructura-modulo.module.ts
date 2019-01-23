@@ -9,6 +9,7 @@ import { MenuModuloComponent } from './menu-modulo/menu-modulo.component';
 import { DraggableModule } from '../draggable/draggable.module';
 import { GrupoProductosComponent } from './grupo-productos/grupo-productos.component';
 import { ModuloVisualComponent } from './modulo-visual/modulo-visual.component';
+import { ModuloTridimensionalComponent } from './modulo-tridimensional/modulo-tridimensional.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { ModuloVisualComponent } from './modulo-visual/modulo-visual.component';
     ProductoVisualComponent,
     MenuModuloComponent,
     GrupoProductosComponent,
-    ModuloVisualComponent],
+    ModuloVisualComponent,
+    ModuloTridimensionalComponent],
   exports: [
     DetalleModuloComponent
   ],

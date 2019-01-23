@@ -5,11 +5,11 @@
         <h1>Distribución de productos en módulo {{idModulo}} de lineal {{idLineal}}</h1>
     </nb-layout-header>
 
-    <nb-sidebar>
+    <!-- <nb-sidebar>
         <app-menu-modulo (rotarModulo)="rotarModulo($event.x, $event.y)" (zoomModulo)="escalarModulo($event)"></app-menu-modulo>
-    </nb-sidebar>
+    </nb-sidebar> -->
     <nb-layout-column style="padding:0">
-        <app-modulo-visual [modulo]="modulo" [numBaldas]="numBaldas" [datosBalda]="datosBalda" [grupoProductos]="grupoProductos"></app-modulo-visual>
+        <app-modulo-tridimensional [modulo]="modulo" [datosBalda]="datosBalda" [grupoProductos]="grupoProductos"></app-modulo-tridimensional>
     </nb-layout-column>
 
 
