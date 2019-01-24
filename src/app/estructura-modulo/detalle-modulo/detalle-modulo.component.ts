@@ -542,7 +542,7 @@ export class DetalleModuloComponent implements OnInit, AfterViewInit {
       json: ''
     },
     seccion: 1,
-    cantidad: 5,
+    cantidad: 8,
     horizontal: false,
     productos: []
   }, {
@@ -590,8 +590,8 @@ export class DetalleModuloComponent implements OnInit, AfterViewInit {
       json: ''
     },
     seccion: 1,
-    cantidad: 7,
-    horizontal: true,
+    cantidad: 24,
+    horizontal: false,
     productos: []
   }
 
@@ -599,7 +599,7 @@ export class DetalleModuloComponent implements OnInit, AfterViewInit {
 
   this.seccion = {
     id: 1,
-    nombre: 'Chocolates'
+    nombre: 'Varios'
   };
   }
 

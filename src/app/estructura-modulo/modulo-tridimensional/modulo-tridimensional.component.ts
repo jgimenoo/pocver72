@@ -40,6 +40,10 @@ export class ModuloTridimensionalComponent implements OnInit {
     grupo.largo = grupo.largoReal / this.proporcion;
     grupo.ancho =  grupo.anchoReal / this.proporcion;
     grupo.alto =  grupo.altoReal / this.proporcion;
+    this.inicioX = -(this.modulo.ancho / 2); // Izquierda restar, derecha sumar
+    this.inicioY = (this.modulo.alto / 2) - (this.modulo.alto / this.modulo.numBaldas) + (this.datosBalda.altoBalda / 2);
+    this.inicioZ = this.modulo.largo - (this.modulo.grosor / 2);
+    this._finalX = this.inicioX;
     if (cambioBalda) {
       this._finalX = this.inicioX;
     }
@@ -58,10 +62,6 @@ export class ModuloTridimensionalComponent implements OnInit {
     let totalColumnas;
     const maxFilas = 1;
     if (grupo.horizontal) {
-      // totalFilas = Math.trunc(this.data.productos.length / maxProdsLargo);
-      // if ( (this.data.productos.length % maxProdsLargo) > 0) {
-      //   totalFilas += 1;
-      // }
       totalFilas = maxProdsLargo;
       maxProdsFila = Math.trunc(grupo.productos.length / totalFilas);
       if ( (grupo.productos.length % totalFilas) > 0) {
@@ -79,9 +79,13 @@ export class ModuloTridimensionalComponent implements OnInit {
     let contadorProductos = 0;
     let fila = 1;
     let columna = 1;
+    let altura = 1;
     let contadorX = inicioXGrupo;
     let contadorY = 0;  // Para ir apilando los productos si es en vertical, y si no siempre sera inicioY
     let contadorZ = this.inicioZ - (grupo.largo / 2);
+    console.log('cantidad=' + grupo.cantidad + ', maxProdsLargo=' + maxProdsLargo + ', maxProdsAlto='  +maxProdsAlto +
+    ', maxProdsFila=' + maxProdsFila + ', totalColumnas=' + totalColumnas);
+    console.log(grupo);
     grupo.productos.forEach( prod => {
       // NOTA: Las posiciones son respecto al centro del objeto
       // Los productos que se apilan en horizontal colocan todos los productos de una fila
@@ -103,15 +107,22 @@ export class ModuloTridimensionalComponent implements OnInit {
       prod.z = contadorZ;  // Hacia atras restar, hacia delante sumar
       contadorProductos ++;
       if (!grupo.horizontal) {  // vertical
-        if ((contadorProductos % maxProdsAlto) === 0 && !grupo.horizontal) {
-          columna ++;          
+        if ((contadorProductos % maxProdsAlto) === 0 && !grupo.horizontal) {  // Columna completa
+          // Otra columna o fila
+          if (fila < maxProdsFila) {
+            fila ++;
+          } else if(columna < maxProdsLargo) {
+            columna ++;
+          }
+          contadorX += grupo.ancho + this.separadorProducto;
           contadorY = 0;
           contadorZ -= prod.largo;
         } else {
+          altura ++;
           contadorY += grupo.alto + this.separadorProductoAlto;
         }
       } else {   // horizontal
-        if ((contadorProductos % maxProdsFila) === 0 && grupo.horizontal) {
+        if ((contadorProductos % maxProdsFila) === 0 && grupo.horizontal) { // Fila completa
           // Otra fila
           fila ++;
           this._finalX = prod.x + (grupo.ancho / 2);
@@ -120,7 +131,7 @@ export class ModuloTridimensionalComponent implements OnInit {
         } else {
           contadorX += grupo.ancho + this.separadorProducto;
         }
-      }      
+      }
     });
     // if (!grupo.horizontal) {
     //   this._finalX = inicioXGrupo + grupo.ancho + this.separadorProducto;
@@ -131,13 +142,83 @@ export class ModuloTridimensionalComponent implements OnInit {
     console.log(grupo);
   }
 
-  @HostListener('mousedown', ['$event'])
-  onPointerDown(event: MouseEvent): void {
-    const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2();
-    mouse.x = (event.clientX / this.renderer3D.domElement.clientWidth) * 2 - 1;
-    mouse.y = - (event.clientY / this.renderer3D.domElement.clientHeight) * 2 + 1;
-    raycaster.setFromCamera(mouse, this.camera);
+  cargaDatosProductosGrupo2(grupo, cambioBalda) {
+    grupo.largo = grupo.largoReal / this.proporcion;
+    grupo.ancho =  grupo.anchoReal / this.proporcion;
+    grupo.alto =  grupo.altoReal / this.proporcion;
+    // Posicion inicial del objeto para empezar a pintarlo sin sumarle nada.
+    this.inicioX = -(this.modulo.ancho / 2) + (grupo.ancho / 2); // Izquierda restar, derecha sumar.
+    this.inicioY = (this.modulo.alto / 2) - (this.modulo.alto / this.modulo.numBaldas) + (this.datosBalda.altoBalda / 2) + (grupo.alto / 2);
+    this.inicioZ = this.modulo.largo - (this.modulo.grosor / 2) - (grupo.largo / 2);
+    if (this.datosBalda.baldas[grupo.balda - 1].posXProductos) {
+      this._finalX = this.datosBalda.baldas[grupo.balda - 1].posXProductos + ( grupo.ancho / 2 );
+    } else {
+      this._finalX = this.inicioX;
+    }
+    for (let i = 0; i < grupo.cantidad; i++) {
+      grupo.productos.push({
+        x: 0,
+        y: 0,
+        z: 0
+      });
+    }
+    const maxProdsLargo = Math.trunc(this.datosBalda.largo / (grupo.largo + this.separadorProducto));
+    const maxProdsAlto = Math.trunc( (this.datosBalda.alto - this.datosBalda.altoBalda) / (grupo.alto + this.separadorProductoAlto));
+    let maxProdsFila;
+    let totalFilas;
+    const maxFilas = 1;
+    if (grupo.horizontal) {
+      totalFilas = maxProdsLargo;
+      maxProdsFila = Math.trunc(grupo.productos.length / totalFilas);
+      if ( (grupo.productos.length % totalFilas) > 0) {
+        maxProdsFila += 1;
+      }
+    }
+    let contadorProductos = 0;
+    let fila = 0;
+    let columna = 0;
+    let altura = 0;
+    let lastX = this.inicioX;  // Posicion x mas alejada de un producto del grupo. Inicialmente debe ser la primera posicion x
+    totalFilas = maxProdsLargo;
+    console.log('cantidad=' + grupo.cantidad + ', maxProdsLargo=' + maxProdsLargo + ', maxProdsAlto='  +maxProdsAlto +
+    ', maxProdsFila=' + maxProdsFila );
+    console.log(grupo);
+    grupo.productos.forEach( prod => {
+      // NOTA: Las posiciones son respecto al centro del objeto
+      prod.x = this._finalX + ( (this.separadorProducto + grupo.ancho) * (columna) );  // Izquierda es restar, derecha es sumar
+      prod.y = this.inicioY - (this.datosBalda.alto * (grupo.balda - 1) ) + ((grupo.alto + this.separadorProductoAlto) * (altura) );
+      prod.z = this.inicioZ - (grupo.largo * (fila) );
+      contadorProductos ++;
+      if (prod.x > lastX) {
+        lastX = prod.x;
+      }
+      if (!grupo.horizontal) {  // vertical
+        if ((contadorProductos % maxProdsAlto) === 0 && !grupo.horizontal) {  // Altura completa
+          // Otra columna o fila
+          if (fila < (totalFilas - 1) ) {
+            fila ++;
+          } else {
+            columna ++;
+            fila = 0;
+          }
+          altura = 0;
+        } else {
+          altura ++;
+        }
+      } else {   // horizontal
+        if ((contadorProductos % maxProdsFila) === 0 && grupo.horizontal) { // Fila completa
+          // Otra fila
+          fila ++;
+          columna = 0;
+          altura = 0;
+          lastX = prod.x;
+        } else {
+          columna++;
+        }
+      }
+    });
+    this.datosBalda.baldas[grupo.balda - 1].posXProductos = lastX + (grupo.ancho / 2);
+    console.log(grupo);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -173,7 +254,6 @@ export class ModuloTridimensionalComponent implements OnInit {
             me.scene.add( obj );
           }
         });
-        //me.renderer3D.render(me.scene, me.camera);
       });
   }
 
@@ -197,11 +277,6 @@ export class ModuloTridimensionalComponent implements OnInit {
   cargarEstanteria() {
     const objLoader = new THREE.GLTFLoader();
     const me = this;
-    // objLoader.load('../../../assets/img/models/estanteria5-2.glb', function(gltf){
-    //   const ob = gltf.scene.children[0];
-    //   me.scene.add(ob);
-    //   me.renderer3D.render(me.scene, me.camera);
-    //    }, me.onProgress, null);
     objLoader.load('../../../assets/img/models/estanteria/base.glb', function(gltf){
       let ob = gltf.scene.children[0];
       me.scene.add(ob);
@@ -221,7 +296,7 @@ export class ModuloTridimensionalComponent implements OnInit {
         }, null, null);
         me.renderer3D.render(me.scene, me.camera);
       }, null, null);
-       }, me.onProgress, null);    
+       }, me.onProgress, null);
   }
 
   cargarProductos(posGrupo?: number) {
@@ -272,10 +347,6 @@ export class ModuloTridimensionalComponent implements OnInit {
         posXProductos: 0
       });
     }
-    this.inicioX = -(this.modulo.ancho / 2);
-    this.inicioY = (this.modulo.alto / 2) - (this.modulo.alto / this.modulo.numBaldas) + (this.datosBalda.altoBalda / 2);
-    this.inicioZ = this.modulo.largo - (this.modulo.grosor / 2);
-    this._finalX = this.inicioX;
     let cambioBalda = false;
     for (let i = 0; i < this.grupoProductos.length; i++) {
       const grupo = this.grupoProductos[i];
@@ -284,7 +355,7 @@ export class ModuloTridimensionalComponent implements OnInit {
       } else {
         cambioBalda = false;
       }
-      this.cargaDatosProductosGrupo(grupo, cambioBalda);
+      this.cargaDatosProductosGrupo2(grupo, cambioBalda);
     }
     // Obtener escena 3D:
     const ancho = this.estanteriaRef.nativeElement.clientWidth;
@@ -300,25 +371,24 @@ export class ModuloTridimensionalComponent implements OnInit {
 
   exportar(scene){
     const exporter = new THREE.GLTFExporter();
-    // Parse the input and generate the glTF output
     const me = this;
     exporter.parse(scene, function (gltf) {
-      me.saveArrayBuffer( gltf, 'estanteria-rellena.glb' );
+      me._saveArrayBuffer( gltf, 'estanteria-rellena.glb' );
     }, { binary: true});
   }
 
-	save( blob, filename ) {
-    const link = document.createElement( 'a' );
+  save(blob, filename) {
+    const link = document.createElement('a');
     link.style.display = 'none';
-    document.body.appendChild( link ); // Firefox workaround, see #6594
-		link.href = URL.createObjectURL( blob );
-		link.download = filename || 'data.json';
-		link.click();
-	}
+    document.body.appendChild(link); // Firefox workaround, see #6594
+    link.href = URL.createObjectURL(blob);
+    link.download = filename || 'data.json';
+    link.click();
+  }
 
-	saveArrayBuffer( buffer, filename ) {
-		this.save( new Blob( [ buffer ], { type: 'application/octet-stream' } ), filename );
-	}
+  _saveArrayBuffer(buffer, filename) {
+    this.save(new Blob([buffer], { type: 'application/octet-stream' }), filename);
+  }
 
 
 
