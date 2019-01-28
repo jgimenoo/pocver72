@@ -64,8 +64,8 @@ export class LinealesComponent implements OnInit {
     }
   }  
 
-
-  datamodules = {   
+//Tabla datos 
+  datacomponents = {     
     actions: {
       columnTitle: 'Datos Módulos y Baldas',
       add: false,
@@ -85,14 +85,14 @@ export class LinealesComponent implements OnInit {
       },
     }
   }  
-  source: LocalDataSource;
+  source1: LocalDataSource;
+  source2: LocalDataSource;
 
   constructor(private service: LinealesService,
     private router: Router,
     private toastrService: NbToastrService) { 
-      this.source = new LocalDataSource(this.service.getdatavalores()); //create the source
-      this.source = new LocalDataSource(this.service.getdatatitle());
-      this.source = new LocalDataSource(this.service.getdatalineales());
+      this.source1 = new LocalDataSource(this.service.getdatavalores()); //create the source
+      this.source2 = new LocalDataSource(this.service.getdatalineales());
     }
 
   ngOnInit() {

@@ -29,3 +29,11 @@
       justify-content: center;
       width: 100%;  
     }
+    .right {
+      float: right;
+      width:48%;
+    }
+    .left{
+      float: left; 
+      width:48%;
+    }

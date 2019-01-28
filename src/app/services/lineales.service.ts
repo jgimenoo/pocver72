@@ -22,30 +22,42 @@ export class LinealesService {
     {value: 'Carne', title: 'Carne'},
   ]
 
-  valores=[
-    {value: 'Ancho Módulo(cm)', title: 'Ancho Módulo(cm)'},
-    {value: 'Largo Módulo(cm)', title: 'Largo Módulo(cm)'},
-    {value: 'Alto Módulo(cm)', title: 'Alto Módulo(cm)'},
-    {value: 'Ancho Balda(cm)', title: 'Ancho Balda(cm)'}, 
-    {value: 'Largo Balda(cm)', title: 'Largo Balda(cm)'},
-    {value: 'Alto Balda(cm)', title: 'Alto Balda(cm)'},
-    {value: 'Ancho Tienda(m)', title: 'Ancho Tienda(m)'},
-    {value: 'Largo Tienda(m)', title: 'Largo Tienda(m)'},
-    {value: '1 Lineal', title: '1 Lineal'},
-    {value: '1 Módulo', title: '1 Módulo'},
-  ]
-  titulos=[
-    {value: '120', title: '120'},
-    {value: '40', title: '40'},
-    {value: '180', title: '180'},
-    {value: '120', title: '120'}, 
-    {value: '35', title: '35'},
-    {value: '34', title: '34'},
-    {value: '50', title: '50'},
-    {value: '70', title: '70'},
-    {value: '3 modulos', title: '3 modulos'},
-    {value: '5 baldas', title: '5 baldas'}, 
-  ]
+
+  datacomponents = [
+  {
+      Componente: "Ancho Módulo(cm)",      
+      Valor: "120"
+          },
+  {
+      Componente: "Largo Módulo(cm)",      
+      Valor: "40"
+          },
+  {
+      Componente: "Alto Módulo(cm)",      
+      Valor: "180"
+          },   
+  {
+      Componente: "Ancho Balda(cm)",      
+      Valor: "120"
+          }, 
+  {
+      Componente: "Largo Balda(cm)",      
+      Valor: "35"
+         }, 
+  {
+      Componente: "Alto Balda(cm)",      
+      Valor: "34"
+        }, 
+  {
+      Componente: "1 Lineal",      
+      Valor: "3 Módulos"
+        }, 
+  {
+      Componente: "1 Módulo",      
+      Valor: "5 Baldas"
+        }, 
+]
+
   datalineales=[
     {
       NLineal: "1",               // id del lineal
@@ -63,17 +75,14 @@ export class LinealesService {
     return this.datalineales
   }
   getseccion0(){
-    return this.opcionesrefrigerado
+    return this.seccionesl
   }
   getlinealsino() {
-    return this.seccionesl;
+    return this.opcionesrefrigerado;
   }
 
   getdatavalores(){ 
-    return this.valores
-  }
-  getdatatitle(){
-    return this.titulos
+    return this.datacomponents
   }
 
   deleteLinealFeature(event): void {

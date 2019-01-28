@@ -60,7 +60,7 @@ export class ZonasyseccionesComponent implements OnInit {
     actions: {
       add: false,
       delete: false,
-      columnTitle: 'Zonas',
+      columnTitle: 'Secciones',
     },
     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
@@ -95,13 +95,15 @@ export class ZonasyseccionesComponent implements OnInit {
       } 
     }
   } 
-  source: LocalDataSource;
+  source1: LocalDataSource;
+  source2: LocalDataSource;
+
 
   constructor(private service: ZonasyseccionesService,
     private router: Router,
     private toastrService: NbToastrService) {
-      this.source = new LocalDataSource(this.service.getdataZona()); //create the source
-      this.source = new LocalDataSource(this.service.getdataSeccion()); //create the source
+      this.source1 = new LocalDataSource(this.service.getdataZona()); //create the source
+      this.source2 = new LocalDataSource(this.service.getdataSeccion()); //create the source
      }
 
   ngOnInit() {

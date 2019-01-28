@@ -1,9 +1,17 @@
 <div class="page">
   <div class="padding-2">
+      <div class="left">
     <div class = "conttabla">
-        <ng2-smart-table [settings]="zonefeat" [source]="source" (deleteConfirm)="onDeleteZoneFeature($event)" (createConfirm)="onCreateZoneFeature($event)"
+        <ng2-smart-table [settings]="zonefeat" [source]="source1" (deleteConfirm)="onDeleteZoneFeature($event)" (createConfirm)="onCreateZoneFeature($event)"
         (editConfirm)="onEditZoneFeature($event)"></ng2-smart-table>
       </div>
+    </div>
+    <div class="right">
+        <div class = "conttabla">
+            <ng2-smart-table [settings]="seccionfeat" [source]="source2" (deleteConfirm)="onDeleteSectionFeature($event)" (createConfirm)="onCreateSectionFeature($event)"
+            (editConfirm)="onEditSectionFeature($event)"></ng2-smart-table>
+          </div>
+    </div>
   </div>  
 </div>  
 <div>

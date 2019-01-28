@@ -28,7 +28,6 @@ import { DistritiendaComponent } from './distritienda/distritienda.component';
 import { DistribucionComponent } from './distribucion/distribucion.component';
 import { AreatiendaComponent } from './areatienda/areatienda.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
-import { BarPieComponent } from './bar-pie/bar-pie.component';
 import { ProductExpoComponent } from './product-expo/product-expo.component';
 import { ProductPropertyComponent } from './product-property/product-property.component';
 import { ZonasyseccionesComponent } from './zonasysecciones/zonasysecciones.component';
@@ -69,7 +68,6 @@ import { EstructuraModuloModule } from './estructura-modulo/estructura-modulo.mo
     DistribucionComponent,
     AreatiendaComponent,
     BarChartComponent,
-    BarPieComponent,
     ProductExpoComponent,
     ProductPropertyComponent,
     ZonasyseccionesComponent,

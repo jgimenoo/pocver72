@@ -1,9 +1,16 @@
 <div class="page">
   <div class="padding-2">
+      <div class="left">
     <div class = "conttabla">
-        <ng2-smart-table [settings]="linealfeat" [source]="source" (deleteConfirm)="onDeleteLinealFeature($event)" (createConfirm)="onCreateLinealFeature($event)"
+        <ng2-smart-table [settings]="linealfeat" [source]="source2" (deleteConfirm)="onDeleteLinealFeature($event)" (createConfirm)="onCreateLinealFeature($event)"
         (editConfirm)="onEditLinealFeature($event)"></ng2-smart-table>
       </div>
+    </div>
+    <div class="right">
+        <div class = "conttabla">
+            <ng2-smart-table [settings]="datacomponents" [source]="source1"></ng2-smart-table>
+          </div>
+    </div>
   </div>  
 </div>  
 <div>
