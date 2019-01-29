@@ -1,3 +1,17 @@
-<p>
-  modulebalda works!
-</p>
+<div class="page">
+  <div class="padding-2">
+      <div class="left">
+    <div class = "conttabla">
+        <ng2-smart-table [settings]="modulefeatures" [source]="source1"
+        (editConfirm)="onEditModuloFeature($event)"></ng2-smart-table>
+      </div>
+    </div>
+    <div class="right">
+        <div class = "conttabla">
+            <ng2-smart-table [settings]="baldasfeatures" [source]="source2" 
+            (editConfirm)="onEditModuloFeature($event)"></ng2-smart-table>
+          </div>
+    </div>
+  </div>  
+</div>  
+<div>

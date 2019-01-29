@@ -53,9 +53,13 @@ export class LinealesService {
       Valor: "3 Módulos"
         }, 
   {
-      Componente: "1 Módulo",      
+      Componente: "1 Módulo No Refrigerado",      
       Valor: "5 Baldas"
         }, 
+  {
+      Componente: "1 Módulo Refrigerado",      
+      Valor: "4 Baldas"
+        },
 ]
 
   datalineales=[
