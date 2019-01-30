@@ -33,18 +33,24 @@ export class DetalleModuloComponent implements OnInit, AfterViewInit {
   this.modulo = {
     id: this.idModulo,
     lineal: this.idLineal,
+    refrigerado: true,
     altoReal: 180,
     anchoReal: 120,
-    largoReal: 40,
-    grosorPared: 5,
-    numBaldas: 5,
+    //largoReal: 40, // no refrigerado. largo real incluido el grosor de pared
+    largoReal: 44, // refrigerado
+    //grosorPared: 5, // no refrigerado
+    grosorPared: 9.18, // refrigerado
+    numBaldas: 4,  // refrigerado
+    //numBaldas: 5,
     // alto: 500,
     // ancho: 400,
     // largo: 133.26,
     alto: 50.56,  // modelo 3D
     ancho: 33.71,  // modelo 3D
-    largo: 11.24,  // modelo 3D
-    grosor: 1.40,
+    //largo: 11.24,  // no refrigerado. modelo 3D, largo incluido el grosor de pared
+    largo: 12.37, // refrigerado
+    //grosor: 1.40,  // no refrigerado
+    grosor: 2.58, // refrigerado
     zoom: 1,
     girar: {
       x: 0,
@@ -59,9 +65,10 @@ export class DetalleModuloComponent implements OnInit, AfterViewInit {
     altoBaldaReal: 2,  // Alto util real de la balda
     altoReal: 34,  // Altura entre baldas
     largo: 9.84, // Hay que quitar el grosor del módulo en vertical
+    largoBase: 13, // para refrigerado, solo en apariencia
     ancho: 33.7,  // Ancho en pantalla de balda
     alto: 0, // Altura en pantalla entre baldas. Se calcula posteriormente
-    altoBalda: 0.56,  // Alto util de la balda en pantalla
+    altoBalda: 0.56,  // Alto util de la balda en pantalla    
     baldas: []  // Desde esto se saca el numero de baldas
   };
 
@@ -473,127 +480,128 @@ export class DetalleModuloComponent implements OnInit, AfterViewInit {
     cantidad: 12,
     horizontal: true,
     productos: []
-  }, {
-    id: 260,
-    balda: 5,
-    altoReal: 8.409,
-    anchoReal: 5.607,
-    largoReal: 5.607,
-    nombre: 'Fabada',
-    marca: 'La Asturiana',
-    imagen: {
-      top: null,
-      front: null,
-      left: null,
-      right: null
-    },
-    modelo: {
-      path: '../../../assets/img/models/',
-      nombre: 'fabada.glb',
-      textura: '',
-      json: ''
-    },
-    seccion: 1,
-    cantidad: 7,
-    horizontal: true,
-    productos: []
-  }, {
-    id: 261,
-    balda: 5,
-    altoReal: 8.971,
-    anchoReal: 23.674,
-    largoReal: 4.201,
-    nombre: 'Galletas',
-    marca: 'Principe',
-    imagen: {
-      top: null,
-      front: null,
-      left: null,
-      right: null
-    },
-    modelo: {
-      path: '../../../assets/img/models/',
-      nombre: 'galletas-principe.glb',
-      textura: '',
-      json: ''
-    },
-    seccion: 1,
-    cantidad: 5,
-    horizontal: true,
-    productos: []
-  }, {
-    id: 262,
-    balda: 5,
-    altoReal: 3.489,
-    anchoReal: 18.939,
-    largoReal: 17.871,
-    nombre: 'Surtido',
-    marca: 'Artiach',
-    imagen: {
-      top: null,
-      front: null,
-      left: null,
-      right: null
-    },
-    modelo: {
-      path: '../../../assets/img/models/',
-      nombre: 'artiach.glb',
-      textura: '',
-      json: ''
-    },
-    seccion: 1,
-    cantidad: 8,
-    horizontal: false,
-    productos: []
-  }, {
-    id: 263,
-    balda: 5,
-    altoReal: 15.735,
-    anchoReal: 15.059,
-    largoReal: 3.759,
-    nombre: 'Galletas',
-    marca: 'Marbú Dorada',
-    imagen: {
-      top: null,
-      front: null,
-      left: null,
-      right: null
-    },
-    modelo: {
-      path: '../../../assets/img/models/',
-      nombre: 'galletas-marbu.glb',
-      textura: '',
-      json: ''
-    },
-    seccion: 1,
-    cantidad: 5,
-    horizontal: true,
-    productos: []
-  }, {
-    id: 264,
-    balda: 5,
-    altoReal: 8.615,
-    anchoReal: 21,
-    largoReal: 7.12,
-    nombre: 'Galletas',
-    marca: 'Dinosaurius',
-    imagen: {
-      top: null,
-      front: null,
-      left: null,
-      right: null
-    },
-    modelo: {
-      path: '../../../assets/img/models/',
-      nombre: 'galletas-dino.glb',
-      textura: '',
-      json: ''
-    },
-    seccion: 1,
-    cantidad: 24,
-    horizontal: false,
-    productos: []
   }
+  // , {
+  //   id: 260,
+  //   balda: 5,
+  //   altoReal: 8.409,
+  //   anchoReal: 5.607,
+  //   largoReal: 5.607,
+  //   nombre: 'Fabada',
+  //   marca: 'La Asturiana',
+  //   imagen: {
+  //     top: null,
+  //     front: null,
+  //     left: null,
+  //     right: null
+  //   },
+  //   modelo: {
+  //     path: '../../../assets/img/models/',
+  //     nombre: 'fabada.glb',
+  //     textura: '',
+  //     json: ''
+  //   },
+  //   seccion: 1,
+  //   cantidad: 7,
+  //   horizontal: true,
+  //   productos: []
+  // }, {
+  //   id: 261,
+  //   balda: 5,
+  //   altoReal: 8.971,
+  //   anchoReal: 23.674,
+  //   largoReal: 4.201,
+  //   nombre: 'Galletas',
+  //   marca: 'Principe',
+  //   imagen: {
+  //     top: null,
+  //     front: null,
+  //     left: null,
+  //     right: null
+  //   },
+  //   modelo: {
+  //     path: '../../../assets/img/models/',
+  //     nombre: 'galletas-principe.glb',
+  //     textura: '',
+  //     json: ''
+  //   },
+  //   seccion: 1,
+  //   cantidad: 5,
+  //   horizontal: true,
+  //   productos: []
+  // }, {
+  //   id: 262,
+  //   balda: 5,
+  //   altoReal: 3.489,
+  //   anchoReal: 18.939,
+  //   largoReal: 17.871,
+  //   nombre: 'Surtido',
+  //   marca: 'Artiach',
+  //   imagen: {
+  //     top: null,
+  //     front: null,
+  //     left: null,
+  //     right: null
+  //   },
+  //   modelo: {
+  //     path: '../../../assets/img/models/',
+  //     nombre: 'artiach.glb',
+  //     textura: '',
+  //     json: ''
+  //   },
+  //   seccion: 1,
+  //   cantidad: 8,
+  //   horizontal: false,
+  //   productos: []
+  // }, {
+  //   id: 263,
+  //   balda: 5,
+  //   altoReal: 15.735,
+  //   anchoReal: 15.059,
+  //   largoReal: 3.759,
+  //   nombre: 'Galletas',
+  //   marca: 'Marbú Dorada',
+  //   imagen: {
+  //     top: null,
+  //     front: null,
+  //     left: null,
+  //     right: null
+  //   },
+  //   modelo: {
+  //     path: '../../../assets/img/models/',
+  //     nombre: 'galletas-marbu.glb',
+  //     textura: '',
+  //     json: ''
+  //   },
+  //   seccion: 1,
+  //   cantidad: 5,
+  //   horizontal: true,
+  //   productos: []
+  // }, {
+  //   id: 264,
+  //   balda: 5,
+  //   altoReal: 8.615,
+  //   anchoReal: 21,
+  //   largoReal: 7.12,
+  //   nombre: 'Galletas',
+  //   marca: 'Dinosaurius',
+  //   imagen: {
+  //     top: null,
+  //     front: null,
+  //     left: null,
+  //     right: null
+  //   },
+  //   modelo: {
+  //     path: '../../../assets/img/models/',
+  //     nombre: 'galletas-dino.glb',
+  //     textura: '',
+  //     json: ''
+  //   },
+  //   seccion: 1,
+  //   cantidad: 24,
+  //   horizontal: false,
+  //   productos: []
+  // }
 
 ];
 

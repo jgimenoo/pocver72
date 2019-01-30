@@ -40,115 +40,9 @@ export class ModuloTridimensionalComponent implements OnInit {
     grupo.largo = grupo.largoReal / this.proporcion;
     grupo.ancho =  grupo.anchoReal / this.proporcion;
     grupo.alto =  grupo.altoReal / this.proporcion;
-    this.inicioX = -(this.modulo.ancho / 2); // Izquierda restar, derecha sumar
-    this.inicioY = (this.modulo.alto / 2) - (this.modulo.alto / this.modulo.numBaldas) + (this.datosBalda.altoBalda / 2);
-    this.inicioZ = this.modulo.largo - (this.modulo.grosor / 2);
-    this._finalX = this.inicioX;
-    if (cambioBalda) {
-      this._finalX = this.inicioX;
-    }
-    const inicioXGrupo = this._finalX + (grupo.ancho / 2);
-    for (let i = 0; i < grupo.cantidad; i++) {
-      grupo.productos.push({
-        x: 0,
-        y: 0,
-        z: 0
-      });
-    }
-    const maxProdsLargo = Math.trunc(this.datosBalda.largo / (grupo.largo + this.separadorProducto));
-    const maxProdsAlto = Math.trunc( (this.datosBalda.alto - this.datosBalda.altoBalda) / (grupo.alto + this.separadorProductoAlto));
-    let maxProdsFila;
-    let totalFilas;
-    let totalColumnas;
-    const maxFilas = 1;
-    if (grupo.horizontal) {
-      totalFilas = maxProdsLargo;
-      maxProdsFila = Math.trunc(grupo.productos.length / totalFilas);
-      if ( (grupo.productos.length % totalFilas) > 0) {
-        maxProdsFila += 1;
-      }
-      totalColumnas = 1;
-    } else {
-      totalFilas = 1;
-      totalColumnas = Math.trunc(grupo.productos.length / maxProdsAlto);
-      if ( (grupo.productos.length % maxProdsAlto) > 0) {
-        totalColumnas += 1;
-      }
-      maxProdsFila = 1;
-    }
-    let contadorProductos = 0;
-    let fila = 1;
-    let columna = 1;
-    let altura = 1;
-    let contadorX = inicioXGrupo;
-    let contadorY = 0;  // Para ir apilando los productos si es en vertical, y si no siempre sera inicioY
-    let contadorZ = this.inicioZ - (grupo.largo / 2);
-    console.log('cantidad=' + grupo.cantidad + ', maxProdsLargo=' + maxProdsLargo + ', maxProdsAlto='  +maxProdsAlto +
-    ', maxProdsFila=' + maxProdsFila + ', totalColumnas=' + totalColumnas);
-    console.log(grupo);
-    grupo.productos.forEach( prod => {
-      // NOTA: Las posiciones son respecto al centro del objeto
-      // Los productos que se apilan en horizontal colocan todos los productos de una fila
-      // y luego la de detras si hay
-      // porque ya se han realizado los calculos de colocacion
-      // Si se apila en vertical
-      // TO DO: Falta ver como colocar los productos cuando exceda el apilamiento vertical
-      prod.x = this.separadorProducto + contadorX;  // Izquierda es restar, derecha es sumar
-      if (!grupo.horizontal) {
-        this._finalX = prod.x + (grupo.ancho / 2);
-      }
-      if (grupo.balda === 1) {
-        contadorY = this.inicioY;
-        prod.y = contadorY + (grupo.alto / 2);
-      } else {
-        prod.y = contadorY + (this.modulo.alto / 2) - (this.datosBalda.alto * grupo.balda) + (this.datosBalda.altoBalda / 2)
-        + (grupo.alto / 2); // Para bajar restar, para subir sumar
-      }
-      prod.z = contadorZ;  // Hacia atras restar, hacia delante sumar
-      contadorProductos ++;
-      if (!grupo.horizontal) {  // vertical
-        if ((contadorProductos % maxProdsAlto) === 0 && !grupo.horizontal) {  // Columna completa
-          // Otra columna o fila
-          if (fila < maxProdsFila) {
-            fila ++;
-          } else if(columna < maxProdsLargo) {
-            columna ++;
-          }
-          contadorX += grupo.ancho + this.separadorProducto;
-          contadorY = 0;
-          contadorZ -= prod.largo;
-        } else {
-          altura ++;
-          contadorY += grupo.alto + this.separadorProductoAlto;
-        }
-      } else {   // horizontal
-        if ((contadorProductos % maxProdsFila) === 0 && grupo.horizontal) { // Fila completa
-          // Otra fila
-          fila ++;
-          this._finalX = prod.x + (grupo.ancho / 2);
-          contadorX = inicioXGrupo;
-          contadorZ -= grupo.largo;
-        } else {
-          contadorX += grupo.ancho + this.separadorProducto;
-        }
-      }
-    });
-    // if (!grupo.horizontal) {
-    //   this._finalX = inicioXGrupo + grupo.ancho + this.separadorProducto;
-    // } else {
-    //   this._finalX = inicioXGrupo + ((this.separadorProducto + grupo.ancho) * maxProdsFila);
-    // }
-    this.datosBalda.baldas[grupo.balda - 1].posXProductos = this._finalX;
-    console.log(grupo);
-  }
-
-  cargaDatosProductosGrupo2(grupo, cambioBalda) {
-    grupo.largo = grupo.largoReal / this.proporcion;
-    grupo.ancho =  grupo.anchoReal / this.proporcion;
-    grupo.alto =  grupo.altoReal / this.proporcion;
     // Posicion inicial del objeto para empezar a pintarlo sin sumarle nada.
     this.inicioX = -(this.modulo.ancho / 2) + (grupo.ancho / 2); // Izquierda restar, derecha sumar.
-    this.inicioY = (this.modulo.alto / 2) - (this.modulo.alto / this.modulo.numBaldas) + (this.datosBalda.altoBalda / 2) + (grupo.alto / 2);
+    this.inicioY = (this.modulo.alto / 2) - (this.datosBalda.alto) + (this.datosBalda.altoBalda / 2) + (grupo.alto / 2);
     this.inicioZ = this.modulo.largo - (this.modulo.grosor / 2) - (grupo.largo / 2);
     if (this.datosBalda.baldas[grupo.balda - 1].posXProductos) {
       this._finalX = this.datosBalda.baldas[grupo.balda - 1].posXProductos + ( grupo.ancho / 2 );
@@ -277,24 +171,37 @@ export class ModuloTridimensionalComponent implements OnInit {
   cargarEstanteria() {
     const objLoader = new THREE.GLTFLoader();
     const me = this;
-    objLoader.load('../../../assets/img/models/estanteria/base.glb', function(gltf){
+    let estanteriaBase;
+    let baldaBase;
+    let largoBase;
+    if (! this.modulo.refrigerado) {
+      estanteriaBase = '../../../assets/img/models/estanteria/base.glb';
+      baldaBase = '../../../assets/img/models/estanteria/balda-base.glb';
+      largoBase = this.datosBalda.largo;
+    } else {
+      estanteriaBase = '../../../assets/img/models/estanteria/refrigerado.glb';
+      baldaBase = '../../../assets/img/models/estanteria/balda-base-r.glb';
+      largoBase = this.datosBalda.largoBase;
+    }
+    objLoader.load(estanteriaBase, function(gltf){
       let ob = gltf.scene.children[0];
       me.scene.add(ob);
       objLoader.load('../../../assets/img/models/estanteria/balda.glb', function(gltf2){
         const objectBalda = gltf2.scene.children[0];
-        for (let i = 1; i <= (me.modulo.numBaldas - 1); i++) {
-          ob = objectBalda.clone(true);
-          ob.position.y = (me.modulo.alto / 2) - (me.datosBalda.alto * i);
-          ob.position.z =  (me.datosBalda.largo / 2) + (me.modulo.grosor / 2);
-          me.scene.add(ob);
-        }
-        objLoader.load('../../../assets/img/models/estanteria/balda-base.glb', function(gltf3){
-          ob = gltf3.scene.children[0];
-          ob.position.y = (me.modulo.alto / 2) - (me.datosBalda.alto * me.modulo.numBaldas);
-          ob.position.z =  (me.datosBalda.largo / 2) + (me.modulo.grosor / 2);
-          me.scene.add(ob);
-        }, null, null);
-        me.renderer3D.render(me.scene, me.camera);
+          for (let i = 1; i <= (me.modulo.numBaldas - 1); i++) {
+            ob = objectBalda.clone(true);
+            ob.position.y = (me.modulo.alto / 2) - (me.datosBalda.alto * i);
+            ob.position.z =  (me.datosBalda.largo / 2) + (me.modulo.grosor / 2);
+            me.scene.add(ob);
+          }
+          objLoader.load(baldaBase, function(gltf3){
+            ob = gltf3.scene.children[0];
+            ob.position.y = (me.modulo.alto / 2) - (me.datosBalda.alto * me.modulo.numBaldas);
+            ob.position.z =  (largoBase / 2) + (me.modulo.grosor / 2);
+            me.scene.add(ob);
+            me.renderer3D.render(me.scene, me.camera);
+            // me.exportar(me.scene);
+          }, null, null);
       }, null, null);
        }, me.onProgress, null);
   }
@@ -305,7 +212,8 @@ export class ModuloTridimensionalComponent implements OnInit {
     posGrupo = posGrupo || 0;
     const grupoProducto = this.grupoProductos[posGrupo];
     const me = this;
-    objLoader.load(grupoProducto.modelo.path + grupoProducto.modelo.nombre, function(gltf){
+    if (grupoProducto) {
+      objLoader.load(grupoProducto.modelo.path + grupoProducto.modelo.nombre, function(gltf){
         const object = gltf.scene.children[0];
         if (object.geometry) {
            object.geometry.center();
@@ -320,10 +228,10 @@ export class ModuloTridimensionalComponent implements OnInit {
         if (posGrupo < (grupos.length - 1)) {
           me.cargarProductos(posGrupo + 1);
         } else {
-          me.renderer3D.render(me.scene, me.camera);
-          // me.exportar(me.scene);
+          me.renderer3D.render(me.scene, me.camera);          
         }
        }, me.onProgress, null);
+    }
   }
 
   public render() {
@@ -339,8 +247,11 @@ export class ModuloTridimensionalComponent implements OnInit {
 
   ngOnInit() {
     // Completar datos:
-    this.datosBalda.alto = (this.modulo.alto / this.modulo.numBaldas); // No es el alto util
-    console.log(this.datosBalda.alto);
+    if (! this.modulo.refrigerado) {
+      this.datosBalda.alto = (this.modulo.alto / this.modulo.numBaldas); // No es el alto util
+    } else {
+      this.datosBalda.alto = (this.modulo.alto / (this.modulo.numBaldas + 1) ); 
+    }
     for ( let aux = 0; aux < this.modulo.numBaldas; aux++) {
       this.datosBalda.baldas.push({
         num: aux + 1,
@@ -355,7 +266,7 @@ export class ModuloTridimensionalComponent implements OnInit {
       } else {
         cambioBalda = false;
       }
-      this.cargaDatosProductosGrupo2(grupo, cambioBalda);
+      this.cargaDatosProductosGrupo(grupo, cambioBalda);
     }
     // Obtener escena 3D:
     const ancho = this.estanteriaRef.nativeElement.clientWidth;
