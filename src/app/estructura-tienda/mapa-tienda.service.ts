@@ -15,7 +15,7 @@ export class MapaTiendaService {
 
   BASE_URL = 'localhost:4200';
 
-  obtenerZonasTienda(idTienda: number){
+  obtenerZonasTienda(idTienda: number) {
     // Sera la llamada get
     return this.http.get(this.BASE_URL + '/mapaTienda/' + idTienda).pipe(map( (resp: any) => {
       return this.procesarZonasTienda(resp);
