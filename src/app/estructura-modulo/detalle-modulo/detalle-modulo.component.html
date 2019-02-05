@@ -9,7 +9,7 @@
         <app-menu-modulo (rotarModulo)="rotarModulo($event.x, $event.y)" (zoomModulo)="escalarModulo($event)"></app-menu-modulo>
     </nb-sidebar> -->
     <nb-layout-column style="padding:0">
-        <app-modulo-tridimensional [modulo]="modulo" [datosBalda]="datosBalda" [grupoProductos]="grupoProductos"></app-modulo-tridimensional>
+        <app-modulo-tridimensional *ngIf="modulo" [modulo]="modulo" [datosBalda]="datosBalda" [grupoProductos]="grupoProductos"></app-modulo-tridimensional>
     </nb-layout-column>
 
 

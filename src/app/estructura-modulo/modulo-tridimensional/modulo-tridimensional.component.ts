@@ -20,6 +20,7 @@ export class ModuloTridimensionalComponent implements OnInit {
   inicioZ = 0;
   private _finalX = 0;
   private proporcion = 3.56;
+  private pathFicheros3d = '../../../assets/img/models/';
 
   separadorProducto = 0.01;
   separadorProductoAlto = 0.01;
@@ -42,7 +43,7 @@ export class ModuloTridimensionalComponent implements OnInit {
     grupo.alto =  grupo.altoReal / this.proporcion;
     // Posicion inicial del objeto para empezar a pintarlo sin sumarle nada.
     this.inicioX = -(this.modulo.ancho / 2) + (grupo.ancho / 2); // Izquierda restar, derecha sumar.
-    this.inicioY = (this.modulo.alto / 2) - (this.datosBalda.alto) + (this.datosBalda.altoBalda / 2) + (grupo.alto / 2);
+    this.inicioY = (this.modulo.alto / 2) - (this.datosBalda.separacion) + (this.datosBalda.alto / 2) + (grupo.alto / 2);
     this.inicioZ = this.modulo.largo - (this.modulo.grosor / 2) - (grupo.largo / 2);
     if (this.datosBalda.baldas[grupo.balda - 1].posXProductos) {
       this._finalX = this.datosBalda.baldas[grupo.balda - 1].posXProductos + ( grupo.ancho / 2 );
@@ -57,7 +58,7 @@ export class ModuloTridimensionalComponent implements OnInit {
       });
     }
     const maxProdsLargo = Math.trunc(this.datosBalda.largo / (grupo.largo + this.separadorProducto));
-    const maxProdsAlto = Math.trunc( (this.datosBalda.alto - this.datosBalda.altoBalda) / (grupo.alto + this.separadorProductoAlto));
+    const maxProdsAlto = Math.trunc( (this.datosBalda.separacion - this.datosBalda.alto) / (grupo.alto + this.separadorProductoAlto));
     let maxProdsFila;
     let totalFilas;
     const maxFilas = 1;
@@ -74,13 +75,12 @@ export class ModuloTridimensionalComponent implements OnInit {
     let altura = 0;
     let lastX = this.inicioX;  // Posicion x mas alejada de un producto del grupo. Inicialmente debe ser la primera posicion x
     totalFilas = maxProdsLargo;
-    console.log('cantidad=' + grupo.cantidad + ', maxProdsLargo=' + maxProdsLargo + ', maxProdsAlto='  +maxProdsAlto +
-    ', maxProdsFila=' + maxProdsFila );
-    console.log(grupo);
+    // console.log('cantidad=' + grupo.cantidad + ', maxProdsLargo=' + maxProdsLargo + ', maxProdsAlto='  +maxProdsAlto + ', maxProdsFila=' + maxProdsFila );
+    // console.log(grupo);
     grupo.productos.forEach( prod => {
       // NOTA: Las posiciones son respecto al centro del objeto
       prod.x = this._finalX + ( (this.separadorProducto + grupo.ancho) * (columna) );  // Izquierda es restar, derecha es sumar
-      prod.y = this.inicioY - (this.datosBalda.alto * (grupo.balda - 1) ) + ((grupo.alto + this.separadorProductoAlto) * (altura) );
+      prod.y = this.inicioY - (this.datosBalda.separacion * (grupo.balda - 1) ) + ((grupo.alto + this.separadorProductoAlto) * (altura) );
       prod.z = this.inicioZ - (grupo.largo * (fila) );
       contadorProductos ++;
       if (prod.x > lastX) {
@@ -112,7 +112,7 @@ export class ModuloTridimensionalComponent implements OnInit {
       }
     });
     this.datosBalda.baldas[grupo.balda - 1].posXProductos = lastX + (grupo.ancho / 2);
-    console.log(grupo);
+    // console.log(grupo);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -190,13 +190,13 @@ export class ModuloTridimensionalComponent implements OnInit {
         const objectBalda = gltf2.scene.children[0];
           for (let i = 1; i <= (me.modulo.numBaldas - 1); i++) {
             ob = objectBalda.clone(true);
-            ob.position.y = (me.modulo.alto / 2) - (me.datosBalda.alto * i);
+            ob.position.y = (me.modulo.alto / 2) - (me.datosBalda.separacion * i);
             ob.position.z =  (me.datosBalda.largo / 2) + (me.modulo.grosor / 2);
             me.scene.add(ob);
           }
           objLoader.load(baldaBase, function(gltf3){
             ob = gltf3.scene.children[0];
-            ob.position.y = (me.modulo.alto / 2) - (me.datosBalda.alto * me.modulo.numBaldas);
+            ob.position.y = (me.modulo.alto / 2) - (me.datosBalda.separacion * me.modulo.numBaldas);
             ob.position.z =  (largoBase / 2) + (me.modulo.grosor / 2);
             me.scene.add(ob);
             me.renderer3D.render(me.scene, me.camera);
@@ -213,7 +213,7 @@ export class ModuloTridimensionalComponent implements OnInit {
     const grupoProducto = this.grupoProductos[posGrupo];
     const me = this;
     if (grupoProducto) {
-      objLoader.load(grupoProducto.modelo.path + grupoProducto.modelo.nombre, function(gltf){
+      objLoader.load(me.pathFicheros3d + grupoProducto.fichero3d, function(gltf){
         const object = gltf.scene.children[0];
         if (object.geometry) {
            object.geometry.center();
@@ -228,7 +228,7 @@ export class ModuloTridimensionalComponent implements OnInit {
         if (posGrupo < (grupos.length - 1)) {
           me.cargarProductos(posGrupo + 1);
         } else {
-          me.renderer3D.render(me.scene, me.camera);          
+          me.renderer3D.render(me.scene, me.camera);
         }
        }, me.onProgress, null);
     }
@@ -247,17 +247,6 @@ export class ModuloTridimensionalComponent implements OnInit {
 
   ngOnInit() {
     // Completar datos:
-    if (! this.modulo.refrigerado) {
-      this.datosBalda.alto = (this.modulo.alto / this.modulo.numBaldas); // No es el alto util
-    } else {
-      this.datosBalda.alto = (this.modulo.alto / (this.modulo.numBaldas + 1) ); 
-    }
-    for ( let aux = 0; aux < this.modulo.numBaldas; aux++) {
-      this.datosBalda.baldas.push({
-        num: aux + 1,
-        posXProductos: 0
-      });
-    }
     let cambioBalda = false;
     for (let i = 0; i < this.grupoProductos.length; i++) {
       const grupo = this.grupoProductos[i];
