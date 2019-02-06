@@ -16,7 +16,7 @@ const appRoutes: Routes = [{
 }, {
   component: OutputWindowComponent, path: 'Output'
 }, {
-  component: DetalleModuloComponent, path: 'modulo/:idLineal/:idModulo'
+  component: DetalleModuloComponent, path: 'modulo/:idLineal/:idModulo/:refrigerado'
 }, {
     path: '**', redirectTo: '/main', pathMatch: 'full'
 }];

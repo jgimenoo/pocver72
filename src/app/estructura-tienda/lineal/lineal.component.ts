@@ -66,8 +66,7 @@ export class LinealComponent implements OnInit, AfterViewInit {
   }
 
   verProductosModulo(idLineal: number, idModulo: number){
-    console.log('doble click modulo');
-    this.router.navigate(['modulo', idLineal, idModulo]);
+    this.router.navigate(['modulo', idLineal, idModulo, this.datos.refrigerado]);
   }
 
 }

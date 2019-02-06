@@ -19,6 +19,7 @@ export class DetalleModuloComponent implements OnInit, AfterViewInit {
   datosBalda: any;
   grupoProductos: any;
   seccion: any;
+  refrigerado: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +28,7 @@ export class DetalleModuloComponent implements OnInit, AfterViewInit {
     this.route.params.subscribe(res => {
       this.idLineal = res.idLineal;
       this.idModulo = res.idModulo;
+      this.refrigerado = (res.refrigerado === 'true');
     });
   }
 
@@ -346,7 +348,12 @@ export class DetalleModuloComponent implements OnInit, AfterViewInit {
   };*/
 
   
-  this.moduloService.obtenerProductosModulo(1).subscribe(data => {
+  // Para la demo:
+  let param = 1;
+  if (this.refrigerado) {
+    param = 2; // Modulo 2
+  }
+  this.moduloService.obtenerProductosModulo(param).subscribe(data => {
     this.modulo = {
       id: data.id,
       lineal: data.lineal,
