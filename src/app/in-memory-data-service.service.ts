@@ -442,7 +442,31 @@ export class InMemoryDataServiceService implements InMemoryDbService{
           alto: 2,
           ancho: 120,
           largo: 35,
-          productos: []
+          productos: [{
+            id: 23,
+            nombre: 'Queso Finca la Cuadra',
+            variableLogistica: 1,
+            alto: 6.3,
+            ancho: 13.67,
+            largo: 13.67,
+            fichero3d: 'queso-manchego1.glb',
+            cantidad_total: 8,
+            cantidad_alto: 1,
+            cantidad_ancho: 2,
+            cantidad_largo: 4
+          }, {
+            id: 24,
+            nombre: 'Queso oveja añejo',
+            variableLogistica: 1,
+            alto: 6.3,
+            ancho: 10.8,
+            largo: 10.8,
+            fichero3d: 'queso-manchego2.glb',
+            cantidad_total: 8,
+            cantidad_alto: 1,
+            cantidad_ancho: 2,
+            cantidad_largo: 4
+          }]
         }, {
           id: 2,
           alto: 2,
