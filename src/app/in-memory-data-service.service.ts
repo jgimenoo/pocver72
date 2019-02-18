@@ -443,7 +443,157 @@ export class InMemoryDataServiceService implements InMemoryDbService{
           ancho: 120,
           largo: 35,
           productos: [{
-            id: 23,
+            id: 30,
+            nombre: 'Leche fresca Puleva',
+            variableLogistica: 1,
+            alto: 17.3,
+            ancho: 6.657,
+            largo: 6.657,
+            fichero3d: 'leche-fresca-puleva.glb',
+            cantidad_total: 12,
+            cantidad_alto: 1,
+            cantidad_ancho: 2,
+            cantidad_largo: 4
+          }, {
+            id: 31,
+            nombre: 'Crema de leche',
+            variableLogistica: 1,
+            alto: 15.878,
+            ancho: 6.4,
+            largo: 6.76,
+            fichero3d: 'crema-leche.glb',
+            cantidad_total: 8,
+            cantidad_alto: 1,
+            cantidad_ancho: 2,
+            cantidad_largo: 4
+          }, {
+            id: 32,
+            nombre: 'Leche Asturiana sin lactosa',
+            variableLogistica: 1,
+            alto: 21.36,
+            ancho: 7.12,
+            largo: 7.12,
+            fichero3d: 'asturiana-sinlactosa.glb',
+            cantidad_total: 14,
+            cantidad_alto: 1,
+            cantidad_ancho: 2,
+            cantidad_largo: 4
+          }, {
+            id: 33,
+            nombre: 'Leche Asturiana desnatada',
+            variableLogistica: 1,
+            alto: 21.36,
+            ancho: 7.12,
+            largo: 7.12,
+            fichero3d: 'asturiana-desnatada.glb',
+            cantidad_total: 14,
+            cantidad_alto: 1,
+            cantidad_ancho: 2,
+            cantidad_largo: 4
+          }]
+        }, {
+          id: 2,
+          alto: 2,
+          ancho: 120,
+          largo: 35,
+          productos: [{
+            id: 40,
+            nombre: 'Yogures Vitalinea',
+            variableLogistica: 1,
+            alto: 6.23,
+            ancho: 12.5,
+            largo: 12.5,
+            fichero3d: 'pack-vitalinea.glb',
+            cantidad_total: 24,
+            cantidad_alto: 2,
+            cantidad_ancho: 2,
+            cantidad_largo: 4
+          }, {
+            id: 41,
+            nombre: 'Yogures Nutricia blanco',
+            variableLogistica: 1,
+            alto: 6.62,
+            ancho: 10.53,
+            largo: 10.57,
+            fichero3d: 'pack-nutricia.glb',
+            cantidad_total: 24,
+            cantidad_alto: 2,
+            cantidad_ancho: 2,
+            cantidad_largo: 4
+          }, {
+            id: 42,
+            nombre: 'Yogures Activia',
+            variableLogistica: 1,
+            alto: 6.23,
+            ancho: 12.5,
+            largo: 12.5,
+            fichero3d: 'pack-activia.glb',
+            cantidad_total: 24,
+            cantidad_alto: 2,
+            cantidad_ancho: 2,
+            cantidad_largo: 4
+          }, {
+            id: 43,
+            nombre: 'Yogures Danone natural',
+            variableLogistica: 1,
+            alto: 6.23,
+            ancho: 12.5,
+            largo: 12.5,
+            fichero3d: 'pack-danone.glb',
+            cantidad_total: 15,
+            cantidad_alto: 2,
+            cantidad_ancho: 2,
+            cantidad_largo: 4
+          }]
+        }, {
+          id: 3,
+          alto: 2,
+          ancho: 120,
+          largo: 35,
+          productos: [{
+            id: 50,
+            nombre: 'Margarina Ligeresa',
+            variableLogistica: 1,
+            alto: 4.76,
+            ancho: 13.42,
+            largo: 7.83,
+            fichero3d: 'margarina-ligeresa.glb',
+            cantidad_total: 10,
+            cantidad_alto: 1,
+            cantidad_ancho: 2,
+            cantidad_largo: 4
+          }, {
+            id: 51,
+            nombre: 'Margarina Flora',
+            variableLogistica: 1,
+            alto: 4.76,
+            ancho: 13.42,
+            largo: 7.83,
+            fichero3d: 'margarina-flora.glb',
+            cantidad_total: 10,
+            cantidad_alto: 1,
+            cantidad_ancho: 2,
+            cantidad_largo: 4
+          }, {
+            id: 52,
+            nombre: 'Margarina Flora colesterol',
+            variableLogistica: 1,
+            alto: 4.76,
+            ancho: 13.42,
+            largo: 7.83,
+            fichero3d: 'margarina-flora-col.glb',
+            cantidad_total: 10,
+            cantidad_alto: 1,
+            cantidad_ancho: 2,
+            cantidad_largo: 4
+          }]
+        }, {
+          id: 4,
+          alto: 2,
+          ancho: 120,
+          largo: 35,
+          productos: [{
+            id: 60,
             nombre: 'Queso Finca la Cuadra',
             variableLogistica: 1,
             alto: 6.3,
@@ -455,7 +605,7 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             cantidad_ancho: 2,
             cantidad_largo: 4
           }, {
-            id: 24,
+            id: 61,
             nombre: 'Queso oveja añejo',
             variableLogistica: 1,
             alto: 6.3,
@@ -467,24 +617,6 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             cantidad_ancho: 2,
             cantidad_largo: 4
           }]
-        }, {
-          id: 2,
-          alto: 2,
-          ancho: 120,
-          largo: 35,
-          productos: []
-        }, {
-          id: 3,
-          alto: 2,
-          ancho: 120,
-          largo: 35,
-          productos: []
-        }, {
-          id: 4,
-          alto: 2,
-          ancho: 120,
-          largo: 35,
-          productos: []
         }]
       }]
     };

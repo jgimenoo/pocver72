@@ -142,9 +142,9 @@ export class ModuloTridimensionalComponent implements OnInit {
     // this.scene.add( directionalLight );
       const objectLoader = new THREE.ObjectLoader();
       const me = this;
-      objectLoader.load('../../../assets/img/models/luces.json', function ( grupo ) {
+      objectLoader.load('../../../assets/img/models/luces2.json', function ( grupo ) {
         grupo.children.forEach(obj => {
-          if (obj.type === 'DirectionalLight') {
+          if (obj.type.indexOf('Light') !== -1) {
             me.scene.add( obj );
           }
         });
@@ -229,6 +229,7 @@ export class ModuloTridimensionalComponent implements OnInit {
           me.cargarProductos(posGrupo + 1);
         } else {
           me.renderer3D.render(me.scene, me.camera);
+          // me.exportar(me.scene);
         }
        }, me.onProgress, null);
     }
