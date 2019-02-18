@@ -146,7 +146,7 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 14.97,
             largo: 8.031,
             fichero3d: 'cereales.glb',
-            cantidad_total: 15,
+            cantidad_total: 16,
             cantidad_alto: 1,
             cantidad_ancho: 4,
             cantidad_largo: 4
@@ -176,7 +176,7 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 7.298,
             largo: 2.955,
             fichero3d: 'jabon-dove.glb',
-            cantidad_total: 15,
+            cantidad_total: 16,
             cantidad_alto: 1,
             cantidad_ancho: 2,
             cantidad_largo: 8
@@ -188,7 +188,7 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 3.642,
             largo: 3.642,
             fichero3d: 'desodorante-dove.glb',
-            cantidad_total: 15,
+            cantidad_total: 16,
             cantidad_alto: 1,
             cantidad_ancho: 2,
             cantidad_largo: 8
@@ -212,7 +212,7 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 22.286,
             largo: 7.569,
             fichero3d: 'detergente-ariel.glb',
-            cantidad_total: 5,
+            cantidad_total: 6,
             cantidad_alto: 1,
             cantidad_ancho: 2,
             cantidad_largo: 3
@@ -254,7 +254,7 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 4.592,
             largo: 3.489,
             fichero3d: 'sobres-nescafe.glb',
-            cantidad_total: 20,
+            cantidad_total: 21,
             cantidad_alto: 1,
             cantidad_ancho: 3,
             cantidad_largo: 7
@@ -302,7 +302,7 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 4.95,
             largo: 4.95,
             fichero3d: 'vino.glb',
-            cantidad_total: 20,
+            cantidad_total: 21,
             cantidad_alto: 1,
             cantidad_ancho: 3,
             cantidad_largo: 7
@@ -374,7 +374,7 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 5.607,
             largo: 5.607,
             fichero3d: 'fabada.glb',
-            cantidad_total: 7,
+            cantidad_total: 8,
             cantidad_alto: 1,
             cantidad_ancho: 2,
             cantidad_largo: 4
