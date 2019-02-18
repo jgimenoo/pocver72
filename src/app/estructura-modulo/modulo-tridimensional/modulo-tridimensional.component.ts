@@ -144,12 +144,17 @@ export class ModuloTridimensionalComponent implements OnInit {
     // this.scene.add( directionalLight );
       const objectLoader = new THREE.ObjectLoader();
       const me = this;
-      objectLoader.load('../../../assets/img/models/luces2.json', function ( grupo ) {
-        grupo.children.forEach(obj => {
-          if (obj.type.indexOf('Light') !== -1) {
-            me.scene.add( obj );
-          }
-        });
+      let fichero;
+      if (! this.modulo.refrigerado) {
+        fichero = '../../../assets/img/models/luces.json';
+      } else {
+        fichero = '../../../assets/img/models/luces2.json';
+      }
+      objectLoader.load(fichero, function ( grupo ) {
+        const objs = Object.assign([], grupo.children);
+        for (let i = 0; i < objs.length; i++) {
+          me.scene.add( objs[i] );
+        }
       });
   }
 

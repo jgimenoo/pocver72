@@ -12,16 +12,16 @@
 		"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
 		"children": [
 			{
-				"uuid": "AF7ABE7A-0F1C-4CB4-8C97-CF484B57C959",
+				"uuid": "2777BDB7-D38E-433A-834A-B58C52AAFB9F",
 				"type": "DirectionalLight",
 				"name": "DirectionalLight",
 				"layers": 1,
-				"matrix": [17.07972,13.560973,-7.288283,0,-5.876388,2.73498,-8.682165,0,-0.01088,0.02126,0.014061,0,13.730765,12.819605,32.433996,1],
-				"color": 16777213,
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,3.406435,6.99685,47.367855,1],
+				"color": 16777215,
 				"intensity": 1,
 				"shadow": {
 					"camera": {
-						"uuid": "4FD4BD84-7E5A-4C98-AF9C-932B309681AB",
+						"uuid": "E4638284-50C6-426F-8820-FFDD991BF8C6",
 						"type": "OrthographicCamera",
 						"layers": 1,
 						"zoom": 1,
@@ -58,16 +58,16 @@
 				}
 			},
 			{
-				"uuid": "2777BDB7-D38E-433A-834A-B58C52AAFB9F",
+				"uuid": "AF7ABE7A-0F1C-4CB4-8C97-CF484B57C959",
 				"type": "DirectionalLight",
 				"name": "DirectionalLight",
 				"layers": 1,
-				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,3.406435,6.99685,47.367855,1],
-				"color": 16777215,
+				"matrix": [17.079714,13.560998,-7.288244,0,-5.876376,2.73498,-8.682169,0,-0.01088,0.02126,0.014061,0,13.730765,12.819605,32.433996,1],
+				"color": 16777213,
 				"intensity": 1,
 				"shadow": {
 					"camera": {
-						"uuid": "E4638284-50C6-426F-8820-FFDD991BF8C6",
+						"uuid": "4FD4BD84-7E5A-4C98-AF9C-932B309681AB",
 						"type": "OrthographicCamera",
 						"layers": 1,
 						"zoom": 1,
@@ -79,6 +79,15 @@
 						"far": 500
 					}
 				}
+			},
+			{
+				"uuid": "C3C5AEC5-7A8A-4F96-8F61-4C9BBDBAA152",
+				"type": "AmbientLight",
+				"name": "AmbientLight",
+				"layers": 1,
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+				"color": 2236962,
+				"intensity": 3
 			}],
 		"background": 11184810
 	}
