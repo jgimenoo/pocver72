@@ -450,9 +450,9 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 6.657,
             largo: 6.657,
             fichero3d: 'leche-fresca-puleva.glb',
-            cantidad_total: 12,
+            cantidad_total: 16,
             cantidad_alto: 1,
-            cantidad_ancho: 2,
+            cantidad_ancho: 4,
             cantidad_largo: 4
           }, {
             id: 31,
@@ -474,9 +474,9 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 7.12,
             largo: 7.12,
             fichero3d: 'asturiana-sinlactosa.glb',
-            cantidad_total: 14,
+            cantidad_total: 16,
             cantidad_alto: 1,
-            cantidad_ancho: 2,
+            cantidad_ancho: 4,
             cantidad_largo: 4
           }, {
             id: 33,
@@ -486,9 +486,9 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 7.12,
             largo: 7.12,
             fichero3d: 'asturiana-desnatada.glb',
-            cantidad_total: 14,
+            cantidad_total: 16,
             cantidad_alto: 1,
-            cantidad_ancho: 2,
+            cantidad_ancho: 4,
             cantidad_largo: 4
           }]
         }, {
@@ -504,10 +504,10 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 12.5,
             largo: 12.5,
             fichero3d: 'pack-vitalinea.glb',
-            cantidad_total: 24,
+            cantidad_total: 8,
             cantidad_alto: 2,
             cantidad_ancho: 2,
-            cantidad_largo: 4
+            cantidad_largo: 2
           }, {
             id: 41,
             nombre: 'Yogures Nutricia blanco',
@@ -516,10 +516,10 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 10.53,
             largo: 10.57,
             fichero3d: 'pack-nutricia.glb',
-            cantidad_total: 24,
+            cantidad_total: 8,
             cantidad_alto: 2,
             cantidad_ancho: 2,
-            cantidad_largo: 4
+            cantidad_largo: 2
           }, {
             id: 42,
             nombre: 'Yogures Activia',
@@ -528,10 +528,10 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 12.5,
             largo: 12.5,
             fichero3d: 'pack-activia.glb',
-            cantidad_total: 24,
+            cantidad_total: 12,
             cantidad_alto: 2,
-            cantidad_ancho: 2,
-            cantidad_largo: 4
+            cantidad_ancho: 3,
+            cantidad_largo: 2
           }, {
             id: 43,
             nombre: 'Yogures Danone natural',
@@ -540,10 +540,10 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 12.5,
             largo: 12.5,
             fichero3d: 'pack-danone.glb',
-            cantidad_total: 15,
+            cantidad_total: 12,
             cantidad_alto: 2,
-            cantidad_ancho: 2,
-            cantidad_largo: 4
+            cantidad_ancho: 3,
+            cantidad_largo: 2
           }]
         }, {
           id: 3,
@@ -558,8 +558,8 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 13.42,
             largo: 7.83,
             fichero3d: 'margarina-ligeresa.glb',
-            cantidad_total: 10,
-            cantidad_alto: 1,
+            cantidad_total: 16,
+            cantidad_alto: 2,
             cantidad_ancho: 2,
             cantidad_largo: 4
           }, {
@@ -570,8 +570,8 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 13.42,
             largo: 7.83,
             fichero3d: 'margarina-flora.glb',
-            cantidad_total: 10,
-            cantidad_alto: 1,
+            cantidad_total: 16,
+            cantidad_alto: 2,
             cantidad_ancho: 2,
             cantidad_largo: 4
           }, {
@@ -582,8 +582,8 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 13.42,
             largo: 7.83,
             fichero3d: 'margarina-flora-col.glb',
-            cantidad_total: 10,
-            cantidad_alto: 1,
+            cantidad_total: 16,
+            cantidad_alto: 2,
             cantidad_ancho: 2,
             cantidad_largo: 4
           }]
@@ -601,9 +601,9 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             largo: 13.67,
             fichero3d: 'queso-manchego1.glb',
             cantidad_total: 8,
-            cantidad_alto: 1,
+            cantidad_alto: 2,
             cantidad_ancho: 2,
-            cantidad_largo: 4
+            cantidad_largo: 2
           }, {
             id: 61,
             nombre: 'Queso oveja añejo',
@@ -613,9 +613,9 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             largo: 10.8,
             fichero3d: 'queso-manchego2.glb',
             cantidad_total: 8,
-            cantidad_alto: 1,
+            cantidad_alto: 2,
             cantidad_ancho: 2,
-            cantidad_largo: 4
+            cantidad_largo: 2
           }]
         }]
       }]

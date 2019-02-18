@@ -57,17 +57,19 @@ export class ModuloTridimensionalComponent implements OnInit {
         z: 0
       });
     }
-    const maxProdsLargo = Math.trunc(this.datosBalda.largo / (grupo.largo + this.separadorProducto));
-    const maxProdsAlto = Math.trunc( (this.datosBalda.separacion - this.datosBalda.alto) / (grupo.alto + this.separadorProductoAlto));
-    let maxProdsFila;
+    // const maxProdsLargo = Math.trunc(this.datosBalda.largo / (grupo.largo + this.separadorProducto));
+    // const maxProdsAlto = Math.trunc( (this.datosBalda.separacion - this.datosBalda.alto) / (grupo.alto + this.separadorProductoAlto));
+    const maxProdsLargo = grupo.cantidad_largo;
+    const maxProdsAlto = grupo.cantidad_alto;
+    const maxProdsAncho = grupo.cantidad_ancho;
     let totalFilas;
     const maxFilas = 1;
     if (grupo.horizontal) {
       totalFilas = maxProdsLargo;
-      maxProdsFila = Math.trunc(grupo.productos.length / totalFilas);
-      if ( (grupo.productos.length % totalFilas) > 0) {
-        maxProdsFila += 1;
-      }
+      // maxProdsAncho = Math.trunc(grupo.productos.length / totalFilas);
+      // if ( (grupo.productos.length % totalFilas) > 0) {
+      //   maxProdsAncho += 1;
+      // }
     }
     let contadorProductos = 0;
     let fila = 0;
@@ -75,7 +77,7 @@ export class ModuloTridimensionalComponent implements OnInit {
     let altura = 0;
     let lastX = this.inicioX;  // Posicion x mas alejada de un producto del grupo. Inicialmente debe ser la primera posicion x
     totalFilas = maxProdsLargo;
-    // console.log('cantidad=' + grupo.cantidad + ', maxProdsLargo=' + maxProdsLargo + ', maxProdsAlto='  +maxProdsAlto + ', maxProdsFila=' + maxProdsFila );
+    // console.log('cantidad=' + grupo.cantidad + ', maxProdsLargo=' + maxProdsLargo + ', maxProdsAlto='  +maxProdsAlto + ', maxProdsAncho=' + maxProdsAncho );
     // console.log(grupo);
     grupo.productos.forEach( prod => {
       // NOTA: Las posiciones son respecto al centro del objeto
@@ -100,7 +102,7 @@ export class ModuloTridimensionalComponent implements OnInit {
           altura ++;
         }
       } else {   // horizontal
-        if ((contadorProductos % maxProdsFila) === 0 && grupo.horizontal) { // Fila completa
+        if ((contadorProductos % maxProdsAncho) === 0 && grupo.horizontal) { // Fila completa
           // Otra fila
           fila ++;
           columna = 0;
