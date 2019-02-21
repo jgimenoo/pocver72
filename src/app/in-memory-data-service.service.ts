@@ -504,9 +504,9 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 12.5,
             largo: 12.5,
             fichero3d: 'pack-vitalinea.glb',
-            cantidad_total: 8,
+            cantidad_total: 4,
             cantidad_alto: 2,
-            cantidad_ancho: 2,
+            cantidad_ancho: 1,
             cantidad_largo: 2
           }, {
             id: 41,
@@ -528,9 +528,9 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 12.5,
             largo: 12.5,
             fichero3d: 'pack-activia.glb',
-            cantidad_total: 12,
+            cantidad_total: 8,
             cantidad_alto: 2,
-            cantidad_ancho: 3,
+            cantidad_ancho: 2,
             cantidad_largo: 2
           }, {
             id: 43,
@@ -540,6 +540,18 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             ancho: 12.5,
             largo: 12.5,
             fichero3d: 'pack-danone.glb',
+            cantidad_total: 12,
+            cantidad_alto: 2,
+            cantidad_ancho: 3,
+            cantidad_largo: 2
+          }, {
+            id: 44,
+            nombre: 'Yogur 500g de mango Pascual',
+            variableLogistica: 1,
+            alto: 9.78,
+            ancho: 8.2,
+            largo: 8.2,
+            fichero3d: 'yogur-grande.glb',
             cantidad_total: 12,
             cantidad_alto: 2,
             cantidad_ancho: 3,
@@ -616,6 +628,54 @@ export class InMemoryDataServiceService implements InMemoryDbService{
             cantidad_alto: 2,
             cantidad_ancho: 2,
             cantidad_largo: 2
+          }, {
+            id: 62,
+            nombre: 'Queso cuña Villacenteno',
+            variableLogistica: 1,
+            alto: 4.45,
+            ancho: 9.36,
+            largo: 8.4,
+            fichero3d: 'queso-cunya-m1.glb',
+            cantidad_total: 8,
+            cantidad_alto: 1,
+            cantidad_ancho: 2,
+            cantidad_largo: 4
+          }, {
+            id: 63,
+            nombre: 'Queso cuña oveja',
+            variableLogistica: 1,
+            alto: 4.45,
+            ancho: 9.36,
+            largo: 8.4,
+            fichero3d: 'queso-cunya-m2.glb',
+            cantidad_total: 8,
+            cantidad_alto: 1,
+            cantidad_ancho: 2,
+            cantidad_largo: 4
+          }, {
+            id: 64,
+            nombre: 'Queso cuña oveja',
+            variableLogistica: 1,
+            alto: 4.2,
+            ancho: 8.9,
+            largo: 8.1,
+            fichero3d: 'queso-cunya-m3.glb',
+            cantidad_total: 8,
+            cantidad_alto: 1,
+            cantidad_ancho: 2,
+            cantidad_largo: 4
+          }, {
+            id: 65,
+            nombre: 'Crema de queso Brie President',
+            variableLogistica: 1,
+            alto: 4.2,
+            ancho: 8.43,
+            largo: 8.47,
+            fichero3d: 'queso-untar-president.glb',
+            cantidad_total: 16,
+            cantidad_alto: 2,
+            cantidad_ancho: 2,
+            cantidad_largo: 4
           }]
         }]
       }]
