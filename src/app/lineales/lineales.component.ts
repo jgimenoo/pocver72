@@ -12,7 +12,7 @@ import { NbToastrService } from '@nebular/theme'
 export class LinealesComponent implements OnInit {
 //Tabla lineales
   //servicios tabla lineales
-  optionsseccionl = this.service.getseccion0();
+  optionszonal = this.service.getzona0();
   optionslinealsino = this.service.getlinealsino();
   linealfeat = {   
     actions: {
@@ -36,22 +36,27 @@ export class LinealesComponent implements OnInit {
       confirmDelete: true
           },
     columns: {
-      NLineal: {    
+      cod_lineal: {    
         title: 'Lineal número:',
         filter: false,
         type: 'number',
       },
-      Seccionlin: {
-        title: '¿A qué seccion pertenece el lineal?',
+      cod_zona: {    
+        title: 'Codigo de la Zona:',
+        filter: false,
+        type: 'number',
+      },
+      descripcion: {
+        title: '¿A qué zona pertenece el lineal?',
         filter: false,
         editor: {
           type: 'list',
           config: {
-            list: this.optionsseccionl
+            list: this.optionszonal
           }
         }    
       },
-      Refrigerado: {
+      refrigerado: {
         title: '¿Requiere un lineal refrigerado?',
         filter: false,
         editor: {
@@ -67,7 +72,7 @@ export class LinealesComponent implements OnInit {
 //Tabla datos 
   datacomponents = {     
     actions: {
-      columnTitle: 'Datos Módulos y Baldas',
+      columnTitle: 'Datos Coeficientes',
       add: false,
       delete: false,
       edit: false
@@ -110,10 +115,11 @@ export class LinealesComponent implements OnInit {
   
     result0:boolean;
     validardata0(newData) {
-      if (!isNaN(Number(newData.NLineal)) &&
-      newData.NLineal.length !== 0 &&
-      newData.Seccionlin.length !== 0 &&
-      newData.Refrigerado.length !== 0){
+      if (!isNaN(Number(newData.cod_lineal)) &&
+      newData.cod_lineal.length !== 0 &&
+      newData.cod_zona.length !== 0 &&
+      newData.descripcion.length !== 0 &&
+      newData.refrigerado.length !== 0){
         return true;
       } 
         return false;   
@@ -139,10 +145,11 @@ export class LinealesComponent implements OnInit {
   
     result1:boolean;
     validardata1(newData) {
-      if (!isNaN(Number(newData.NLineal)) &&
-      newData.NLineal.length !== 0 &&
-      newData.Seccionlin.length !== 0 &&
-      newData.Refrigerado.length !== 0){
+      if (!isNaN(Number(newData.cod_lineal)) &&
+      newData.cod_lineal.length !== 0 &&
+      newData.cod_zona.length !== 0 &&
+      newData.descripcion.length !== 0 &&
+      newData.refrigerado.length !== 0){
         return true;
       } 
         return false;   

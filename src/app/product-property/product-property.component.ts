@@ -13,6 +13,8 @@ export class ProductPropertyComponent implements OnInit {
 
   //servicios
   optionstipo = this.service.getSection();
+  optionsref = this.service.getRefrigerado();
+  optionsvar = this.service.getVariablelog();
 
   features = {
     actions: {
@@ -36,15 +38,15 @@ export class ProductPropertyComponent implements OnInit {
       confirmDelete: true
           },
           columns: {
-    idProduct: {
+    cod_prod: {
       title: 'ID Producto',
       filter: false,
       type: 'number',
           },
-    productname: {
+    descripcion: {
       title: 'Producto',
       filter: false,
-      type: 'number'
+      type: 'text'
     },
     seccion: {
       title: 'Categoría del producto',
@@ -56,31 +58,51 @@ export class ProductPropertyComponent implements OnInit {
         }
       }
     },
-      anchoproducto: {
-        title: '¿Como de ancho es el producto(cm)?',
+    refrigerado: {
+      title: '¿El producto es refrigerado o no?',
+      filter: false,
+      editor: {
+        type: 'list',
+        config: {
+          list: this.optionsref
+        }
+      }
+    },
+    variable_logistica_alm: {
+      title: '¿Cómo quiere almacenar su producto?',
+      filter: false,
+      editor: {
+        type: 'list',
+        config: {
+          list: this.optionsvar
+        }
+      }
+    },
+      ancho_alm: {
+        title: '¿Como de ancho es el producto en el almacen(cm)?',
         filter: false,
         type: 'number',
       },
-      altoproducto: {
-        title: '¿Como de alto es el producto(cm)?',
+      alto_alm: {
+        title: '¿Como de alto es el producto en el almacen(cm)?',
         filter: false,
         type: 'number',
       },
-      largoproducto: {
-        title: '¿Como de largo es el producto(cm)?',
+      largo_alm: {
+        title: '¿Como de largo es el producto en el almacen(cm)?',
         filter: false,
         type: 'number'
       },
-      volumentotal: {
-        title: 'Volumen Total',
+      volumen_alm: {
+        title: 'Volumen en el almacen',
         filter: false,
         type: 'number',
         //value: this.volumenproducto,
         editable: false,
         addable: false
       },
-      area: {
-        title: 'Area del producto',
+      area_alm: {
+        title: 'Area en el almacen',
         filter: false,
         type: 'number',
        // value:this.areaproducto,
@@ -142,15 +164,17 @@ export class ProductPropertyComponent implements OnInit {
     result0:boolean;
   
   validardata0(newData) {
-    if (!isNaN(Number(newData.anchoproducto)) &&
-    !isNaN(Number(newData.altoproducto)) &&
-    !isNaN(Number(newData.largoproducto)) &&
-    newData.idProduct.length !== 0 &&
-    newData.productname.length !== 0 &&
+    if (!isNaN(Number(newData.ancho_alm)) &&
+    !isNaN(Number(newData.alto_alm)) &&
+    !isNaN(Number(newData.largo_alm)) &&
+    newData.cod_prod.length !== 0 &&
+    newData.descripcion.length !== 0 &&
     newData.seccion.length !== 0 &&
-    newData.anchoproducto.length !== 0 &&
-    newData.altoproducto.length !== 0 &&
-    newData.largoproducto.length !== 0) {
+    newData.refrigerado.length !== 0 &&
+    newData.variable_logistica_alm.length !== 0 &&
+    newData.ancho_alm.length !== 0 &&
+    newData.alto_alm.length !== 0 &&
+    newData.largo_alm.length !== 0) {
     return true;
   }
       return false;   
@@ -176,15 +200,17 @@ export class ProductPropertyComponent implements OnInit {
     result:boolean;
   
   validardata(newData) {
-    if (!isNaN(Number(newData.anchoproducto)) &&
-    !isNaN(Number(newData.altoproducto)) &&
-    !isNaN(Number(newData.largoproducto)) &&
-    newData.idProduct.length !== 0 &&
-    newData.productname.length !== 0 &&
+    if (!isNaN(Number(newData.ancho_alm)) &&
+    !isNaN(Number(newData.alto_alm)) &&
+    !isNaN(Number(newData.largo_alm)) &&
+    newData.cod_prod.length !== 0 &&
+    newData.descripcion.length !== 0 &&
     newData.seccion.length !== 0 &&
-    newData.anchoproducto.length !== 0 &&
-    newData.altoproducto.length !== 0 &&
-    newData.largoproducto.length !== 0) {
+    newData.refrigerado.length !== 0 &&
+    newData.variable_logistica_alm.length !== 0 &&
+    newData.ancho_alm.length !== 0 &&
+    newData.alto_alm.length !== 0 &&
+    newData.largo_alm.length !== 0) {
     return true;
   }
       return false;   

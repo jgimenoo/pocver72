@@ -13,44 +13,81 @@ export class ZonasyseccionesComponent implements OnInit {
 
   //Tabla zonas
   //servicios tabla zona
-  optionssino = this.service.getSiNo();
+
   zonefeat = {   
     actions: {
-      add: false,
-      delete: false,
+      //add: false,
+      //delete: false,
       columnTitle: 'Zonas',
     },
-    edit: {
+    add: {
+      addButtonContent: '<i class="nb-plus"></i>',
+      createButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+      confirmCreate: true,
+      active: true
+          },
+     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
       confirmSave: true
-    },
+          },
+     delete: {
+      deleteButtonContent: '<i class="nb-trash"></i>',
+      confirmDelete: true
+          },
     columns: {
-      IDZona: {    
+      cod_zona: {    
         title: 'ID de la Zona',
         filter: false,
         editable:true,
         type: 'number',
-        addable: false
+        //addable: false
       },
-      Zona: {
+      descripcion: {
         title: 'Zona',
         editable:true,
         filter: false,
-        type: 'number',
-        addable: false
+        type: 'text ',
+        //addable: false
       },
-      Almacensn: {
-        title: '¿Contiene un almacén esta zona?',
+      ancho: {
+        title: 'Ancho de la Zona',
+        editable:true,
         filter: false,
-        editor: {
-          type: 'list',
-          config: {
-            list: this.optionssino
-          }
-        }       
-      } 
+        type: 'number',
+        //addable: false
+      },
+      alto: {
+        title: 'Alto de la Zona',
+        editable:true,
+        filter: false,
+        type: 'number',
+        //addable: false
+      },
+      tienda: {
+        title: '¿A qué tienda pertenece su zona?',
+        editable:true,
+        filter: false,
+        type: 'text',
+        //addable: false
+      },
+/*
+      almacen_x: {
+        title: 'Alto del almacen',
+        editable:true,
+        filter: false,
+        type: 'number', 
+        //addable: false
+      },
+      almacen_y: {
+        title: 'Ancho del almacen',
+        editable:true,
+        filter: false,
+        type: 'number',
+        //addable: false 
+      } */ 
     }
   }  
   //Tabla secciones
@@ -58,32 +95,57 @@ export class ZonasyseccionesComponent implements OnInit {
   optionsseccion = this.service.getSeccion();
   seccionfeat = {   
     actions: {
-      add: false,
-      delete: false,
+      //add: false,
+      //delete: false,
       columnTitle: 'Secciones',
     },
-    edit: {
+    add: {
+      addButtonContent: '<i class="nb-plus"></i>',
+      createButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+      confirmCreate: true,
+      active: true
+          },
+     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
       confirmSave: true
-    },
+          },
+     delete: {
+      deleteButtonContent: '<i class="nb-trash"></i>',
+      confirmDelete: true
+          },
     columns: {
-      IDSeccion: {    
-        title: 'ID de la Zona',
+      cod_seccion: {    
+        title: 'ID de la Seccion',
         filter: false,
         editable:true,
         type: 'number',
         addable: false
       },
-      Seccion: {
-        title: 'Zona',
+      descripcion: {
+        title: 'Seccion',
         editable:true,
         filter: false,
         type: 'number',
         addable: false
       },
-      Eligezona: {
+     /* color: {
+        title: 'Color de la seccion en hexadecimal',
+        editable:true,
+        filter: false,
+        type: 'number',
+        addable: false
+      },*/
+      cod_zona: {
+        title: 'Codigo Zona',
+        editable:true,
+        filter: false,
+        type: 'number',
+        addable: false
+      }, 
+      zona: {
         title: '¿En qué Zona desea ubicar esta sección?',
         filter: false,
         editor: {
@@ -92,7 +154,7 @@ export class ZonasyseccionesComponent implements OnInit {
             list: this.optionsseccion
           }
         }       
-      } 
+      }, 
     }
   } 
   source1: LocalDataSource;
@@ -121,10 +183,16 @@ export class ZonasyseccionesComponent implements OnInit {
   
     result0:boolean;
     validardata0(newData) {
-      if (!isNaN(Number(newData.IDZona)) &&
-      newData.IDZona.length !== 0 &&
-      newData.Zona.length !== 0 &&
-      newData.Almacensn.length !== 0){
+      if (!isNaN(Number(newData.cod_zona)) &&
+      !isNaN(Number(newData.alto)) &&
+      !isNaN(Number(newData.ancho)) &&
+      //!isNaN(Number(newData.almacen_x)) &&
+      //!isNaN(Number(newData.almacen_y)) &&
+      newData.cod_zona.length !== 0 &&
+      newData.descripcion.length !== 0 &&
+      newData.ancho.length !== 0 &&
+      newData.alto.length !== 0 &&
+      newData.tienda.length !== 0){
         return true;
       } 
         return false;   
@@ -150,15 +218,20 @@ export class ZonasyseccionesComponent implements OnInit {
   
     result1:boolean;
     validardata1(newData) {
-      if (!isNaN(Number(newData.IDZona)) &&
-      newData.IDZona.length !== 0 &&
-      newData.Zona.length !== 0 &&
-      newData.Almacensn.length !== 0){
+      if (!isNaN(Number(newData.cod_zona)) &&
+      !isNaN(Number(newData.alto)) &&
+      !isNaN(Number(newData.ancho)) &&
+      //!isNaN(Number(newData.almacen_x)) &&
+      //!isNaN(Number(newData.almacen_y)) &&
+      newData.cod_zona.length !== 0 &&
+      newData.descripcion.length !== 0 &&
+      newData.ancho.length !== 0 &&
+      newData.alto.length !== 0 &&
+      newData.tienda.length !== 0){
         return true;
       } 
         return false;   
         }
-        
     onCreateZoneFeature(event) {
       this.result1 = this.validardata1(event.newData);
      if (this.result1 == false){
@@ -188,10 +261,11 @@ export class ZonasyseccionesComponent implements OnInit {
     
       result2:boolean;
       validardata2(newData) {
-        if (!isNaN(Number(newData.IDSeccion)) &&
-        newData.IDSeccion.length !== 0 &&
-        newData.Seccion.length !== 0 &&
-        newData.Eligezona.length !== 0){
+        if (!isNaN(Number(newData.cod_seccion)) &&
+        newData.cod_seccion.length !== 0 &&
+        newData.descripcion.length !== 0 &&
+        newData.zona.length !== 0 &&
+        newData.color.length !== 0){
           return true;
         } 
           return false;   
@@ -216,14 +290,16 @@ export class ZonasyseccionesComponent implements OnInit {
     
       result3:boolean;
       validardata3(newData) {
-        if (!isNaN(Number(newData.IDSeccion)) &&
-        newData.IDSeccion.length !== 0 &&
-        newData.Seccion.length !== 0 &&
-        newData.Eligezona.length !== 0){
+        if (!isNaN(Number(newData.cod_seccion)) &&
+        newData.cod_seccion.length !== 0 &&
+        newData.descripcion.length !== 0 &&
+        newData.zona.length !== 0 &&
+        newData.color.length !== 0){
           return true;
         } 
           return false;   
           }
+    
           
       onCreateSectionFeature(event) {
         this.result3 = this.validardata3(event.newData);

@@ -9,61 +9,85 @@ export class ZonasyseccionesService {
   constructor(private http: HttpClient) { }
   datazona = [
     {
-      IDZona: "1",        // id de la zona
-      Zona: "Zona1",        // nombre de la zona
-      Almacensn: "No"     //Contiene o no almacen?
+      cod_zona: "1",        
+      descripcion: "Zona1", 
+      ancho: "25",    
+      alto:"20",
+      tienda:"1",
+      almacen_x:"50",
+      almacen_y:"50",
           },
     {
-      IDZona: "2",        // id de la zona
-      Zona: "Zona2",        // nombre de la zona
-      Almacensn: "Si"     //Contiene o no almacen?
+      cod_zona: "2",        
+      descripcion: "Zona2", 
+      ancho: "15",    
+      alto:"10",
+      tienda:"1",
+      almacen_x:"50",
+      almacen_y:"50",
     },
     {
-      IDZona: "3",        // id de la zona
-      Zona: "Zona3",        // nombre de la zona
-      Almacensn: "No"     //Contiene o no almacen?
+      cod_zona: "3",        
+      descripcion: "Zona3", 
+      ancho: "25",    
+      alto:"25",
+      tienda:"1",
+      almacen_x:"50",
+      almacen_y:"50",
     },
     {
-      IDZona: "4",        // id de la zona
-      Zona: "Zona4",        // nombre de la zona
-      Almacensn: "No"     //Contiene o no almacen?
+      cod_zona: "4",        
+      descripcion: "Zona4", 
+      ancho: "5",    
+      alto:"20",
+      tienda:"1",
+      almacen_x:"50",
+      almacen_y:"50",
     }
   ];
-    opcionesalmacen=[
-      {value: 'S', title: 'Si'},
-      {value: 'N', title: 'No'},
-    ]
 
     dataseccion = [
       {
-        IDSeccion: "1",         // id de la seccion
-        Seccion: "Perfumeria",  // nombre de la seccion
-        Eligezona: "Zona 1"     //Zona en la que se encuentra la seccion
+        cod_seccion: "1",         
+        descripcion: "Perfumeria", 
+        color: "uno",     
+        zona:"Zona 1",
+        cod_zona:"1",
             },
       {
-        IDSeccion: "2",        // id de la seccion
-        Seccion: "Alcoholes",  // nombre de la seccion
-        Eligezona: "Zona 1"    //Zona en la que se encuentra la seccion
+        cod_seccion: "2",         
+        descripcion: "Alcoholes", 
+        color: "otro",     
+        zona:"Zona 2",
+        cod_zona:"2",
       },
       {
-        IDSeccion: "3",          // id de la seccion
-        Seccion: "Horno",        // nombre de la seccion
-        Eligezona: "Zona 2"      //Zona en la que se encuentra la seccion
+        cod_seccion: "3",         
+        descripcion: "Horno", 
+        color: "otro mas",     
+        zona:"Zona 2",
+        cod_zona:"2",
       },
       {
-        IDSeccion: "4",         // id de la seccion
-        Seccion: "Pescado",     // nombre de la seccion
-        Eligezona: "Zona 3"     //Zona en la que se encuentra la seccion
+        cod_seccion: "4",         
+        descripcion: "Pescado", 
+        color: "otro diferente",     
+        zona:"Zona 3",
+        cod_zona:"3",
       },
       {
-        IDSeccion: "5",              // id de la seccion
-        Seccion: "Fruta y Verdura",  // nombre de la seccion
-        Eligezona: "Zona 3"          //Zona en la que se encuentra la seccion
+        cod_seccion: "5",         
+        descripcion: "Fruta y verdura", 
+        color: "uno q no ha salido",     
+        zona:"Zona 4",
+        cod_zona:"4",
       },
       {
-        IDSeccion: "6",           // id de la seccion
-        Seccion: "Carne",         // nombre de la seccion
-        Eligezona: "Zona 4"       //Zona en la que se encuentra la seccion
+        cod_seccion: "6",         
+        descripcion: "Carne", 
+        color: "dos",     
+        zona:"Zona 4",
+        cod_zona:"4",
       },
     ];
     opcionesseccion=[
@@ -74,9 +98,6 @@ export class ZonasyseccionesService {
     ]
     getSeccion(){
       return this.opcionesseccion
-    }
-    getSiNo() {
-      return this.opcionesalmacen;
     }
     getdataZona() {
       return this.datazona;

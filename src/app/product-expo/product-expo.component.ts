@@ -10,10 +10,7 @@ import { NbToastrService } from '@nebular/theme'
 })
 export class ProductExpoComponent implements OnInit {
 //servicios
-optionsTipolineal = this.service.getTipo();
-optionsApilamiento = this.service.getLineal();
-optionsAlmacenaje = this.service.getAlmacen();
-
+//
 features = {
   actions: {
     columnTitle: 'Exposicion del Producto',
@@ -38,63 +35,72 @@ features = {
 
   columns: {
     
-  idProduct: {
+  cod_prod: {
     title: 'ID Producto',
     filter: false,
     type: 'number',
         },
-  productname: {
+  descripcion: {
     title: 'Producto',
     filter: false,
     type: 'number'
   },
-  stock: {
+  prev_ventas: {
     title: 'Unidades',
     filter: false,
     type: 'number'
- 
   },
-  almacenaje: {
-    title: '¿Cómo desea almacenar su producto?',
+  variable_logistica_exp: {
+    title: 'Variable logística en exposición del producto',
     filter: false,
-
-    editor: {
-      type: 'list',
-      config: {
-        list: this.optionsAlmacenaje
-      }
-    }
+    type: 'number'
   },
-    tipolineal: {
-      title: '¿Qué tipo de lineal se utilizará?',
-      filter: false,
 
-      editor: {
-        type: 'list',
-        config: {
-          list: this.optionsTipolineal
-        }
-      }
-    },
-    apilamiento: {
-      title: '¿Cómo desea apilar su producto?',
-      filter: false,
-
-      editor: {
-        type: 'list',
-        config: {
-          list: this.optionsApilamiento
-        }
-      }
-    },
-    facingmin: {
+    facing_min: {
       title: 'Facing Mínimo',
       filter: false,
       type: 'number',
       editable: 'false'
     },
+    cant_alm_form_exp: {
+      title: 'Cantidad de exposicion por formato de almacenamiento',
+      filter: false,
+      type: 'number',
+      editable: 'false'
+    },
+    ancho_exp: {
+      title: '¿Como de ancho es el producto en exposicion(cm)?',
+      filter: false,
+      type: 'number',
+    },
+    alto_exp: {
+      title: '¿Como de alto es el producto en exposicion(cm)?',
+      filter: false,
+      type: 'number',
+    },
+    largo_exp: {
+      title: '¿Como de largo es el producto en exposicion(cm)?',
+      filter: false,
+      type: 'number'
+    },
+    volumen_exp: {
+      title: 'Volumen del producto en exposicion',
+      filter: false,
+      type: 'number',
+      //value: this.volumenproducto,
+      editable: false,
+      addable: false
+    },
+    area_exp: {
+      title: 'Area del producto en exposicion',
+      filter: false,
+      type: 'number',
+     // value:this.areaproducto,
+      editable: false,
+      addable: false
+    },
   }
-}
+ }
 
  source: LocalDataSource;
  dataproducts;
@@ -120,15 +126,25 @@ constructor(private service: ProductExpoService,
   result0:boolean;
 
 validardata0(newData) {
-  if (!isNaN(Number(newData.facingmin)) &&
-  !isNaN(Number(newData.stock)) &&
-  newData.idProduct.length !== 0 &&
-  newData.productname.length !== 0 &&
-  newData.stock.length !== 0 &&
-  newData.almacenaje.length !== 0 &&
-  newData.tipolineal.length !== 0 &&
-  newData.apilamiento.length !== 0 &&
-  newData.facingmin.length !== 0) {
+  if (!isNaN(Number(newData.facing_min)) &&
+  !isNaN(Number(newData.ancho_exp)) &&
+  !isNaN(Number(newData.largo_exp)) &&
+  !isNaN(Number(newData.alto_exp)) &&
+  !isNaN(Number(newData.volumen_exp)) &&
+  !isNaN(Number(newData.area_exp)) &&
+  !isNaN(Number(newData.prev_ventas)) &&
+  !isNaN(Number(newData.variable_logistica_exp)) &&
+  !isNaN(Number(newData.cant_alm_form_exp)) &&
+  newData.cod_prod.length !== 0 &&
+  newData.descripcion.length !== 0 &&
+  newData.prev_ventas.length !== 0 &&
+  newData.variable_logistica_exp.length !== 0 &&
+  newData.facing_min.length !== 0 &&
+  newData.alto_exp.length !== 0 &&
+  newData.ancho_exp.length !== 0 &&
+  newData.largo_exp.length !== 0 &&
+  newData.volumen_exp.length !== 0 &&
+  newData.area_exp.length !== 0) {
   return true;
 }
     return false;   
@@ -154,15 +170,25 @@ validardata0(newData) {
   result:boolean;
 
 validardata(newData) {
-  if (!isNaN(Number(newData.facingmin)) &&
-  !isNaN(Number(newData.stock)) &&
-  newData.idProduct.length !== 0 &&
-  newData.productname.length !== 0 &&
-  newData.stock.length !== 0 &&
-  newData.almacenaje.length !== 0 &&
-  newData.tipolineal.length !== 0 &&
-  newData.apilamiento.length !== 0 &&
-  newData.facingmin.length !== 0) {
+  if (!isNaN(Number(newData.facing_min)) &&
+  !isNaN(Number(newData.ancho_exp)) &&
+  !isNaN(Number(newData.largo_exp)) &&
+  !isNaN(Number(newData.alto_exp)) &&
+  !isNaN(Number(newData.volumen_exp)) &&
+  !isNaN(Number(newData.area_exp)) &&
+  !isNaN(Number(newData.prev_ventas)) &&
+  !isNaN(Number(newData.variable_logistica_exp)) &&
+  !isNaN(Number(newData.cant_alm_form_exp)) &&
+  newData.cod_prod.length !== 0 &&
+  newData.descripcion.length !== 0 &&
+  newData.prev_ventas.length !== 0 &&
+  newData.variable_logistica_exp.length !== 0 &&
+  newData.facing_min.length !== 0 &&
+  newData.alto_exp.length !== 0 &&
+  newData.ancho_exp.length !== 0 &&
+  newData.largo_exp.length !== 0 &&
+  newData.volumen_exp.length !== 0 &&
+  newData.area_exp.length !== 0) {
   return true;
 }
     return false;   

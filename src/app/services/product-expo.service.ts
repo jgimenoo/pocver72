@@ -10,48 +10,33 @@ export class ProductExpoService {
   constructor(private http: HttpClient) { }
   dataproducts = [
     {
-      idProduct: "1",                // id del producto
-      productname: "Ron",            // nombre del producto
-      stock:"20",                    // unidades totales del producto
-      almacenaje: "Pale",            // pale, medio pale o caja
-      tipolineal: "Refrigerado",     // lineal refrigerado o no
-      apilamiento:"Horizontal",      // tipo de apilamiento, horizontal o vertical
-      facingmin: "2",                // facing minimo del producto(cantidad que el usuario ve de primeras)
+      cod_prod: "1",                // id del producto
+      descripcion: "Ron",           // nombre del producto
+      facing_min:"2",               // facing minimo del producto(cantidad que el usuario ve de primeras)
+      prev_ventas: "200", 
+      variable_logistica_exp: "2",           
+      alto_exp: "30",     
+      ancho_exp:"5",      
+      largo_exp: "10",              
+      area_exp: "300",
+      volumen_exp: "2000",
+      cant_alm_form_exp: "50"
           },
     {
-      idProduct: "2",                // id del producto
-      productname: "Ginebra",        // nombre del producto
-      stock:"30",                    // unidades totales del producto
-      almacenaje: "Medio-Pale",      // pale, medio pale o caja
-      tipolineal: "No Refrigerado",  // lineal refrigerado o no
-      apilamiento:"Horizontal",      // tipo de apilamiento, horizontal o vertical
-      facingmin: "3",                // facing minimo del producto(cantidad que el usuario ve de primeras)
+      cod_prod: "2",                // id del producto
+      descripcion: "Ginebra",       // nombre del producto
+      facing_min:"3",               // facing minimo del producto(cantidad que el usuario ve de primeras)
+      prev_ventas: "250", 
+      variable_logistica_exp: "3",           
+      alto_exp: "40",     
+      ancho_exp:"5",    
+      largo_exp: "10",              
+      area_exp: "400",
+      volumen_exp: "2000", 
+      cant_alm_form_exp: "40"             
     }
   ];
-  tipolineal=[
-    {value: 'R', title: 'Refrigerado'},
-    {value: 'NR', title: 'No Refrigerado'},
-  ]
-  apilamiento=[
-    {value: 'H', title: 'Horizontal'},
-    {value: 'V', title: 'Vertical'},
-    {value: 'N/A', title: 'No Importa'},
-  ]
-  almacenaje=[
-    {value: 'P', title: 'Pale'},
-    {value: 'MP', title: 'Medio-Pale'},
-    {value: 'C', title: 'Caja'},
-  ]
 
-  getTipo(){
-    return this.tipolineal;
-  }
-  getLineal(){
-    return this.almacenaje;
-  }
-  getAlmacen(){
-    return this.apilamiento;
-  }
   getDataEProducts() {
     return this.dataproducts;
   }
@@ -67,13 +52,18 @@ export class ProductExpoService {
   editEProduct(event) {
     this.http
       .post<any>(`${config.basePath}product-expo/editEProduct`, {
-        idProduct: event.idProduct,
-        productname: event.productname,
-        stock: event.stock,
-        almacenaje: event.almacenaje,
-        tipolineal: event.tipolineal,
-        apilamiento: event.apilamiento,
-        facingmin: event.facingmin,
+        cod_prod: event.cod_prod,
+        descripcion: event.descripcion,
+        facing_min: event.facing_min,
+        cant_alm_form_exp: event.cant_alm_form_exp,
+        prev_ventas: event.prev_ventas,
+        variable_logistica_exp: event.variable_logistica_exp,
+        alto_exp: event.alto_exp,
+        ancho_exp: event.ancho_exp,
+        largo_exp: event.largo_exp,
+        area_exp: event.area.exp,
+        volumen_exp:event.volumen_exp,
+
       })
       .subscribe();
   }
@@ -81,13 +71,17 @@ export class ProductExpoService {
   addEProduct(event) {
     this.http
       .post<any>(`${config.basePath}product-expo/addEProduct`, {
-        idProduct: event.idProduct,
-        productname: event.productname,
-        stock: event.stock,
-        almacenaje: event.almacenaje,
-        tipolineal: event.tipolineal,
-        apilamiento: event.apilamiento,
-        facingmin: event.facingmin,
+        cod_prod: event.cod_prod,
+        descripcion: event.descripcion,
+        facing_min: event.facing_min,
+        cant_alm_form_exp: event.cant_alm_form_exp,
+        prev_ventas: event.prev_ventas,
+        variable_logistica_exp: event.variable_logistica_exp,
+        alto_exp: event.alto_exp,
+        ancho_exp: event.ancho_exp,
+        largo_exp: event.largo_exp,
+        area_exp: event.area.exp,
+        volumen_exp:event.volumen_exp,
       })
       .subscribe();
     }

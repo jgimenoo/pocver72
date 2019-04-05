@@ -9,12 +9,14 @@ import { NbToastrService } from '@nebular/theme'
   styleUrls: ['./modulebalda.component.css']
 })
 export class ModulebaldaComponent implements OnInit {
-
+//servicios:
+optionseccionm = this.service.getSectionm();
+optionsorden = this.service.getOrden();
   modulefeatures = {   
     actions: {
       columnTitle: 'Modulos',
-      add: false,
-      delete: false,
+      //add: false,
+      //delete: false,
       //edit: false
     },
     add: {
@@ -35,43 +37,69 @@ export class ModulebaldaComponent implements OnInit {
       confirmDelete: true
           },
     columns: {
-      IDModulo: {    
+      cod_modulo: {    
         title: 'ID del módulo:',
         filter: false,
         type: 'number',
       },
-      NLineal: {    
+      cod_lineal: {    
         title: 'Lineal al que pertenece:',
         filter: false,
         type: 'number',
       },
-      Orden: {    
-        title: 'Orden:',
+      seccion:{
+        title: '¿A qué seccion pertenece su módulo?',
         filter: false,
-        type: 'number',
+        editor: {
+          type: 'list',
+          config: {
+            list: this.optionseccionm
+          }
+        }
+      },
+      orden: {    
+        title: '¿Escoja el orden dentro del lineal?',
+        filter: false,
+        editor: {
+          type: 'list',
+          config: {
+            list: this.optionsorden
+          }
+        }
       },
     }
   }
     baldasfeatures = {     
       actions: {
         columnTitle: 'Baldas',
-        add: false,
-        delete: false,
+        //add: false,
+        //delete: false,
         //edit: false
       },
+      add: {
+        addButtonContent: '<i class="nb-plus"></i>',
+        createButtonContent: '<i class="nb-checkmark"></i>',
+        cancelButtonContent: '<i class="nb-close"></i>',
+        confirmCreate: true,
+        active: true
+            },
       edit: {
         editButtonContent: '<i class="nb-edit"></i>',
         saveButtonContent: '<i class="nb-checkmark"></i>',
         cancelButtonContent: '<i class="nb-close"></i>',
         confirmSave: true
       },
+      delete: {
+        deleteButtonContent: '<i class="nb-trash"></i>',
+        confirmDelete: true
+            },
       columns: {
-        IDBalda: {    
+        cod_balda: {    
           title: 'ID de la balda:',
           filter: false,
           type: 'text',
         },
-        Modulo: {
+        modulo: {
           title: '¿A qué módulo pertenece?',
           filter: false,
           type: 'text',    
@@ -95,11 +123,13 @@ export class ModulebaldaComponent implements OnInit {
   
     result0:boolean;
     validardata0(newData) {
-      if (!isNaN(Number(newData.NLineal)) &&
-      !isNaN(Number(newData.Orden)) &&
-      newData.IDModulo.length !== 0 &&
-      newData.NLineal.length !== 0 &&
-      newData.Orden.length !== 0){
+      if (!isNaN(Number(newData.cod_modulo)) &&
+      !isNaN(Number(newData.cod_lineal)) &&
+      !isNaN(Number(newData.orden)) &&
+      newData.cod_modulo.length !== 0 &&
+      newData.cod_lineal.length !== 0 &&
+      newData.seccion.length !== 0 &&
+      newData.orden.length !== 0){
         return true;
       } 
         return false;   
@@ -125,9 +155,10 @@ export class ModulebaldaComponent implements OnInit {
   
     result1:boolean;
     validardata1(newData) {
-      if (!isNaN(Number(newData.Modulo)) &&
-      newData.IDBalda.length !== 0 &&
-      newData.Modulo.length !== 0){
+      if (!isNaN(Number(newData.cod_balda)) &&
+      !isNaN(Number(newData.modulo)) &&
+      newData.cod_balda.length !== 0 &&
+      newData.modulo.length !== 0){
         return true;
       } 
         return false;   

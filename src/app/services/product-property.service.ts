@@ -11,24 +11,28 @@ export class ProductPropertyService {
   constructor(private http: HttpClient) { }
   dataproducts = [
     {
-      idProduct: "1",              // nombre del producto
-      productname: "Ron",          // pale, medio pale o caja
+      cod_prod: "1",               // nombre del producto
+      descripcion: "Ron",          // pale, medio pale o caja
       seccion:"Alcohol",           //seccion a la que pertenece
-      anchoproducto: "10",         // ancho del producto
-      altoproducto: "5",           // alto del producto
-      largoproducto:"10",          // largo del producto
-      volumentotal: "500",         // ancho x alto x largo
-      area: "50"                   //alto x ancho
+      refrigerado:"Si",
+      variable_logistica_alm:"Unidad",  
+      ancho_alm: "10",             // ancho del producto
+      alto_alm: "5",               // alto del producto
+      largo_alm:"10",              // largo del producto
+      volumen_alm: "500",          // ancho x alto x largo
+      area_alm: "50"               //alto x ancho
           },
     {
-      idProduct: "2",              // nombre del producto
-      productname: "Ginebra",      // pale, medio pale o caja
+      cod_prod: "2",               // nombre del producto
+      descripcion: "Ginebra",      // pale, medio pale o caja
       seccion:"Alcohol",           //seccion a la que pertenece
-      anchoproducto: "10",         // ancho del producto
-      altoproducto: "10",          // alto del producto
-      largoproducto:"10",          // largo del producto
-      volumentotal: "1000",        // ancho x alto x largo
-      area: "100"                  //alto x ancho
+      refrigerado:"No",
+      variable_logistica_alm:"Unidad",  
+      ancho_alm: "10",             // ancho del producto
+      alto_alm: "5",               // alto del producto
+      largo_alm:"10",              // largo del producto
+      volumen_alm: "500",          // ancho x alto x largo
+      area_alm: "50"               //alto x ancho
 
     }
   ];
@@ -40,11 +44,30 @@ export class ProductPropertyService {
     {value: 'Fruta y verdura', title: 'Fruta y verdura'},
     {value: 'Carne', title: 'Carne'},
   ]
+
+  refrigerado=[
+    {value: 'Si', title: 'Si'},
+    {value: 'No', title: 'No'},
+  ]
+
+  variablelog=[
+    {value: 'caja', title: 'Caja'},
+    {value: 'palet', title: 'Palet'}, 
+    {value: 'medio_palet', title: 'Medio Palet'},
+    {value: 'unidad', title: 'Unidades'},
+  ]
+
   getSection(){
     return this.secciones;
   }
+  getRefrigerado(){
+    return this.refrigerado;
+  }
   getDataProducts() {
     return this.dataproducts;
+  }
+  getVariablelog(){
+    return this.variablelog;
   }
   
 deleteProduct(event): void {
@@ -58,14 +81,16 @@ console.log(event);
 editProduct(event) {
   this.http
     .post<any>(`${config.basePath}product-property/editProduct`, {
-      idProduct: event.idProduct,
-      productname: event.productname,
+      cod_prod: event.cod_prod,
+      descripcion: event.descripcion,
       seccion: event.seccion,
-      anchoproducto: event.anchoproducto,
-      altoproducto: event.altoproducto,
-      largoproducto: event.largoproducto,
-      volumentotal: event.volumentotal,
-      area: event.area,
+      refrigerado: event.refrigerado,
+      variable_logistica_alm: event.variable_logistica_alm,
+      ancho_alm: event.ancho_alm,
+      alto_alm: event.alto_alm,
+      largo_alm: event.largo_alm,
+      volumen_alm: event.volumen_alm,
+      area_alm: event.area_alm,
     })
     .subscribe();
 }
@@ -73,14 +98,16 @@ editProduct(event) {
 addProduct(event) {
   this.http
     .post<any>(`${config.basePath}product-property/addProduct`, {
-      idProduct: event.idProduct,
-      productname: event.productname,
+      cod_prod: event.cod_prod,
+      descripcion: event.descripcion,
       seccion: event.seccion,
-      anchoproducto: event.anchoproducto,
-      altoproducto: event.altoproducto,
-      largoproducto: event.largoproducto,
-      volumentotal: event.volumentotal,
-      area: event.area,
+      refrigerado: event.refrigerado,
+      variable_logistica_alm: event.variable_logistica_alm,
+      ancho_alm: event.ancho_alm,
+      alto_alm: event.alto_alm,
+      largo_alm: event.largo_alm,
+      volumen_alm: event.volumen_alm,
+      area_alm: event.area_alm,
     })
     .subscribe();
   }

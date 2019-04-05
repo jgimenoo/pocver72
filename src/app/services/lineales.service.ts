@@ -13,13 +13,11 @@ export class LinealesService {
     {value: 'S', title: 'Si'},
     {value: 'N', title: 'No'},
   ]
-  seccionesl=[
-    {value: 'Perfumeria', title: 'Perfumeria'},
-    {value: 'Alcoholes', title: 'Alcoholes'},
-    {value: 'Horno', title: 'Horno'},
-    {value: 'Pescado', title: 'Pescado'}, 
-    {value: 'Fruta y verdura', title: 'Fruta y verdura'},
-    {value: 'Carne', title: 'Carne'},
+  zonasl=[
+    {value: 'Zona 1', title: 'Zona 1'},
+    {value: 'Zona 2', title: 'Zona 2'},
+    {value: 'Zona 3', title: 'Zona 3'},
+    {value: 'Zona 4', title: 'Zona 4'}, 
   ]
 
 
@@ -60,26 +58,45 @@ export class LinealesService {
       Componente: "1 Módulo Refrigerado",      
       Valor: "4 Baldas"
         },
+  {
+      Componente: "Caja",      
+      Valor: "0"
+       },
+  {
+      Componente: "Palet",      
+      Valor: "1"
+      },
+  {
+      Componente: "Medio-Palet",      
+      Valor: "2"
+      },
+  {
+      Componente: "Unidad",      
+      Valor: "3"
+     },
+
 ]
 
   datalineales=[
     {
-      NLineal: "1",               // id del lineal
-      Seccionlin: "Perfumeria",   // nombre de la seccion
-      Refrigerado: "No"       //Zona en la que se encuentra la seccion
+      cod_lineal: "1",  
+      cod_zona: "1",    
+      descripcion: "Zona 1",
+      refrigerado: "Si" 
      },
      {
-      NLineal: "2",               // id del lineal
-      Seccionlin: "Alcoholes",   // nombre de la seccion
-      Refrigerado: "No"       //Zona en la que se encuentra la seccion
+      cod_lineal: "2",  
+      cod_zona: "2",    
+      descripcion: "Zona 2",
+      refrigerado: "Si" 
     },
   ]
 
   getdatalineales(){
     return this.datalineales
   }
-  getseccion0(){
-    return this.seccionesl
+  getzona0(){
+    return this.zonasl
   }
   getlinealsino() {
     return this.opcionesrefrigerado;
@@ -99,9 +116,10 @@ export class LinealesService {
   editLinealFeature(event) {
     this.http
       .post<any>(`${config.basePath}lineales/editLinealfeat`, {
-        NLineal: event.NLineal,     
-        Seccionlin: event.Seccionlin,
-        Refrigerado: event.Refrigerado
+        cod_lineal: event.cod_lineal,     
+        cod_zona: event.cod_zona,
+        descripcion: event.descripcion,
+        refrigerado: event.refrigerado
       })
       .subscribe();
   }
