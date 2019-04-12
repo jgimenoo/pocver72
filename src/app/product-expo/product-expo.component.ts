@@ -155,7 +155,7 @@ validardata0(newData) {
     if (this.result0 == false){
       
        this.toastrService.show(
-         'Rellena todos los campos con el formato correcto para añadir el producto',
+         'Rellena todos los campos con el formato correcto para modificar el producto',
          `Toaster numero: ${++this.index}`,
          );
      }else if (window.confirm('Estás seguro de modificar el producto?')) {

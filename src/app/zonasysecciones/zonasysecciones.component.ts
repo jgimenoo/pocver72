@@ -203,7 +203,7 @@ export class ZonasyseccionesComponent implements OnInit {
       if (this.result0 == false){
         
          this.toastrService.show(
-           'Rellena todos los campos con el formato correcto para añadir la tienda',
+           'Rellena todos los campos con el formato correcto para editar la zona',
            `Toaster numero: ${++this.index0}`,
            );
     }else if  (window.confirm('Estás seguro de modificar la zona?')) {
@@ -237,7 +237,7 @@ export class ZonasyseccionesComponent implements OnInit {
      if (this.result1 == false){
        
         this.toastrService.show(
-          'Rellena todos los campos con el formato correcto para añadir la tienda',
+          'Rellena todos los campos con el formato correcto para añadir la zona',
           `Toaster numero: ${++this.index1}`,
           );
       }else if (window.confirm('Estás seguro de añadir la zona?')) {
@@ -276,7 +276,7 @@ export class ZonasyseccionesComponent implements OnInit {
         if (this.result2 == false){
           
            this.toastrService.show(
-             'Rellena todos los campos con el formato correcto para añadir la tienda',
+             'Rellena todos los campos con el formato correcto para editar la seccion',
              `Toaster numero: ${++this.index2}`,
              );
       }else if  (window.confirm('Estás seguro de modificar las secciones?')) {
@@ -306,7 +306,7 @@ export class ZonasyseccionesComponent implements OnInit {
        if (this.result3 == false){
          
           this.toastrService.show(
-            'Rellena todos los campos con el formato correcto para añadir la tienda',
+            'Rellena todos los campos con el formato correcto para añadir la sección',
             `Toaster numero: ${++this.index3}`,
             );
         }else if (window.confirm('Estás seguro de añadir una sección?')) {

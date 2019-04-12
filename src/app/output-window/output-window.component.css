@@ -1,5 +1,5 @@
 :host /deep/ ng2-smart-table tbody > tr > td:nth-child(1)  { 
-  text-align: center;
+  text-align: right;
 
 }
 :host /deep/ ng2-smart-table tbody > tr > td:nth-child(2)  { 
@@ -15,11 +15,27 @@
   text-align: right;
 }
 :host /deep/ ng2-smart-table tbody > tr > td:nth-child(6)  { 
-  text-align: center;
+  text-align: right;
  
 }
 :host /deep/ ng2-smart-table tbody > tr > td:nth-child(7)  { 
-  text-align: right;  
+  text-align: center;  
+}
+:host /deep/ ng2-smart-table tbody > tr > td:nth-child(8)  { 
+  text-align: right;
+ 
+}
+:host /deep/ ng2-smart-table tbody > tr > td:nth-child(9)  { 
+  text-align: right;
+ 
+}
+:host /deep/ ng2-smart-table tbody > tr > td:nth-child(10)  { 
+  text-align: right;
+ 
+}
+:host /deep/ ng2-smart-table tbody > tr > td:nth-child(11)  { 
+  text-align: right;
+ 
 }
 
 :host /deep/ ng2-smart-table input {

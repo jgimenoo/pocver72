@@ -130,7 +130,7 @@ export class LinealesComponent implements OnInit {
       if (this.result0 == false){
         
          this.toastrService.show(
-           'Rellena todos los campos con el formato correcto para añadir la tienda',
+           'Rellena todos los campos con el formato correcto para añadir el lineal',
            `Toaster numero: ${++this.index0}`,
            );
     }else if  (window.confirm('Estás seguro de modificar el lineal?')) {
@@ -160,7 +160,7 @@ export class LinealesComponent implements OnInit {
      if (this.result1 == false){
        
         this.toastrService.show(
-          'Rellena todos los campos con el formato correcto para añadir la tienda',
+          'Rellena todos los campos con el formato correcto para añadir el lineal',
           `Toaster numero: ${++this.index1}`,
           );
       }else if (window.confirm('Estás seguro de añadir el lineal?')) {

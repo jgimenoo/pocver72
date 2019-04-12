@@ -39,20 +39,25 @@ export class OutputWindowComponent implements OnInit {
     },
     */
     columns: {
-      idProduct: {
+      cod_producto: {
         title: 'ID Producto',
         filter: false,
         type: 'text'
       },
-      productname: {
+      descripcion: {
         title: 'Nombre del producto',
         filter: false,
           type: 'text',
       },
-      unidades: {
+      unidades_producto: {
         title: 'Unidades',
         filter: false,
           type: 'number',
+      },
+      lineal: {
+        title: 'Lineal',
+        filter: false,
+        type: 'number'
       },
       modulo: {
         title: 'Módulo',
@@ -69,7 +74,22 @@ export class OutputWindowComponent implements OnInit {
         filter: false,
         type: 'text'
       },
-      area: {
+      cantidad_alto: {
+        title: 'Cantidad de productos en alto',
+        filter: false,
+        type: 'text'
+      },
+      cantidad_ancho: {
+        title: 'Cantidad de productos a lo ancho',
+        filter: false,
+        type: 'text'
+      },
+      cantidad_largo: {
+        title: 'Cantidad de productos a lo largo',
+        filter: false,
+        type: 'text'
+      },
+      area_ocupada: {
         title: 'Área que ocupa el producto',
         filter: false,
         type: 'number'
@@ -105,17 +125,26 @@ export class OutputWindowComponent implements OnInit {
   result0:boolean;
   validardata0(newData) {
     if (
-    !isNaN(Number(newData.unidades)) &&
+    !isNaN(Number(newData.cod_producto)) &&
+    !isNaN(Number(newData.unidades_producto)) &&
+    !isNaN(Number(newData.lineal)) &&
     !isNaN(Number(newData.modulo)) &&
     !isNaN(Number(newData.balda)) &&
-    !isNaN(Number(newData.area)) &&
-    newData.idProduct.length !== 0 &&
-    newData.productname.length !== 0 &&
-    newData.unidades.length !== 0 &&
+    !isNaN(Number(newData.cantidad_ancho)) &&
+    !isNaN(Number(newData.cantidad_alto)) &&
+    !isNaN(Number(newData.cantidad_largo)) &&
+    !isNaN(Number(newData.area_ocupada)) &&
+    newData.cod_producto.length !== 0 &&
+    newData.descripcion.length !== 0 &&
+    newData.unidades_producto.length !== 0 &&
+    newData.lineal.length !== 0 &&
     newData.modulo.length !== 0 &&
     newData.balda.length !== 0 &&
     newData.seccion.length !== 0 &&
-    newData.area.length !== 0){
+    newData.cantidad_largo.length !== 0 &&
+    newData.cantidad_ancho.length !== 0 &&
+    newData.cantidad_alto.length !== 0 &&
+    newData.area_ocupada.length !== 0){
       return true;
     } 
       return false;   
@@ -143,27 +172,36 @@ export class OutputWindowComponent implements OnInit {
   result:boolean;
   validardata(newData) {
     if (
-      !isNaN(Number(newData.unidades)) &&
+      !isNaN(Number(newData.cod_producto)) &&
+      !isNaN(Number(newData.unidades_producto)) &&
+      !isNaN(Number(newData.lineal)) &&
       !isNaN(Number(newData.modulo)) &&
       !isNaN(Number(newData.balda)) &&
-      !isNaN(Number(newData.area)) &&
-      newData.idProduct.length !== 0 &&
-      newData.productname.length !== 0 &&
-      newData.unidades.length !== 0 &&
+      !isNaN(Number(newData.cantidad_ancho)) &&
+      !isNaN(Number(newData.cantidad_alto)) &&
+      !isNaN(Number(newData.cantidad_largo)) &&
+      !isNaN(Number(newData.area_ocupada)) &&
+      newData.cod_producto.length !== 0 &&
+      newData.descripcion.length !== 0 &&
+      newData.unidades_producto.length !== 0 &&
+      newData.lineal.length !== 0 &&
       newData.modulo.length !== 0 &&
       newData.balda.length !== 0 &&
       newData.seccion.length !== 0 &&
-      newData.area.length !== 0){
-      return true;
-    } 
-      return false;   
-      }
+      newData.cantidad_largo.length !== 0 &&
+      newData.cantidad_ancho.length !== 0 &&
+      newData.cantidad_alto.length !== 0 &&
+      newData.area_ocupada.length !== 0){
+        return true;
+      } 
+        return false;   
+        }
   onCreateOutput(event) {
     this.result = this.validardata(event.newData);
    if (this.result == false){
      
       this.toastrService.show(
-        'Rellena todos los campos con el formato correcto para añadir la distribucion',
+        'Rellena todos los campos con el formato correcto para añadir el producto',
         `Toaster numero: ${++this.index}`,
         );
     }else if (window.confirm('Estás seguro de añadir el producto?')) {

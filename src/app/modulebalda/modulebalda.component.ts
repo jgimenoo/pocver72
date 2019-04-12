@@ -47,8 +47,13 @@ optionsorden = this.service.getOrden();
         filter: false,
         type: 'number',
       },
+      cod_seccion: {    
+        title: 'Código de la seccion a la que pertenece el módulo:',
+        filter: false,
+        type: 'number',
+      },
       seccion:{
-        title: '¿A qué seccion pertenece su módulo?',
+        title: '¿A qué sección pertenece su módulo?',
         filter: false,
         editor: {
           type: 'list',
@@ -119,15 +124,29 @@ optionsorden = this.service.getOrden();
   ngOnInit() {
   }
 
+  onDeleteModulo(event) {
+    
+    if (window.confirm('Estás seguro de eliminar el módulo?')) {
+        event.confirm.resolve(event.datamodulo);
+        this.service.deleteModuloFeature(event.datamodulo);
+        
+      } else {
+        event.confirm.reject();
+      
+      }
+    }
+
   private index0: number = 0; 
   
     result0:boolean;
     validardata0(newData) {
       if (!isNaN(Number(newData.cod_modulo)) &&
       !isNaN(Number(newData.cod_lineal)) &&
+      !isNaN(Number(newData.cod_seccion)) &&
       !isNaN(Number(newData.orden)) &&
       newData.cod_modulo.length !== 0 &&
       newData.cod_lineal.length !== 0 &&
+      newData.cod_seccion.length !== 0 &&
       newData.seccion.length !== 0 &&
       newData.orden.length !== 0){
         return true;
@@ -140,7 +159,7 @@ optionsorden = this.service.getOrden();
       if (this.result0 == false){
         
          this.toastrService.show(
-           'Rellena todos los campos con el formato correcto para editar el lineal',
+           'Rellena todos los campos con el formato correcto para editar el modulo',
            `Toaster numero: ${++this.index0}`,
            );
     }else if  (window.confirm('Estás seguro de modificar el módulo?')) {
@@ -152,8 +171,55 @@ optionsorden = this.service.getOrden();
     }
 
     private index1: number = 0; 
-  
     result1:boolean;
+    validardata(newData) {
+    if (!isNaN(Number(newData.cod_modulo)) &&
+    !isNaN(Number(newData.cod_lineal)) &&
+    !isNaN(Number(newData.cod_seccion)) &&
+    !isNaN(Number(newData.orden)) &&
+    newData.cod_modulo.length !== 0 &&
+    newData.cod_lineal.length !== 0 &&
+    newData.cod_seccion.length !== 0 &&
+    newData.seccion.length !== 0 &&
+    newData.orden.length !== 0){
+      return true;
+    } 
+      return false;   
+      }
+
+  onCreateModuloFeature(event) {
+    this.result1 = this.validardata(event.newData);
+   if (this.result1 == false){
+     
+      this.toastrService.show(
+        'Rellena todos los campos con el formato correcto para añadir el modulo',
+        `Toaster numero: ${++this.index1}`,
+        );
+    }else if (window.confirm('Estás seguro de añadir el modulo?')) {
+      event.confirm.resolve(event.newData);
+      this.service.addModuloFeature(event.newData);
+      
+    } else {
+      event.confirm.reject();
+     
+    }
+  }
+
+  onDeleteBalda(event) {
+    
+    if (window.confirm('Estás seguro de eliminar la balda?')) {
+        event.confirm.resolve(event.databaldas);
+        this.service.deleteBaldaFeature(event.databaldas);
+        
+      } else {
+        event.confirm.reject();
+      
+      }
+    }
+
+    private index2: number = 0;  
+    result2:boolean;
+
     validardata1(newData) {
       if (!isNaN(Number(newData.cod_balda)) &&
       !isNaN(Number(newData.modulo)) &&
@@ -165,18 +231,49 @@ optionsorden = this.service.getOrden();
         }
   
     onEditBaldaFeature(event) {
-      this.result1 = this.validardata1(event.newData);
-      if (this.result1 == false){
+      this.result2 = this.validardata1(event.newData);
+      if (this.result2 == false){
         
          this.toastrService.show(
-           'Rellena todos los campos con el formato correcto para editar el lineal',
-           `Toaster numero: ${++this.index1}`,
+           'Rellena todos los campos con el formato correcto para editar la balda',
+           `Toaster numero: ${++this.index2}`,
            );
     }else if  (window.confirm('Estás seguro de modificar la balda?')) {
         event.confirm.resolve(event.newData);
         this.service.editBaldaFeature(event.newData);
       } else {
         event.confirm.reject();
+      }
+    }
+
+    private index3: number = 0;  
+    result3:boolean;
+
+    validardata2(newData) {
+      if (!isNaN(Number(newData.cod_balda)) &&
+      !isNaN(Number(newData.modulo)) &&
+      newData.cod_balda.length !== 0 &&
+      newData.modulo.length !== 0){
+        return true;
+      } 
+        return false;   
+        }
+
+    onCreateBaldaFeature(event) {
+      this.result3 = this.validardata(event.newData);
+     if (this.result3 == false){
+       
+        this.toastrService.show(
+          'Rellena todos los campos con el formato correcto para añadir la balda',
+          `Toaster numero: ${++this.index3}`,
+          );
+      }else if (window.confirm('Estás seguro de añadir la balda?')) {
+        event.confirm.resolve(event.newData);
+        this.service.addBaldaFeature(event.newData);
+        
+      } else {
+        event.confirm.reject();
+       
       }
     }
 

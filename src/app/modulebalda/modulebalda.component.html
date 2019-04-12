@@ -2,14 +2,14 @@
   <div class="padding-2">
       <div class="left">
     <div class = "conttabla">
-        <ng2-smart-table [settings]="modulefeatures" [source]="source1"
+        <ng2-smart-table [settings]="modulefeatures" [source]="source1" (deleteConfirm)="onDeleteModuloFeature($event)" (createConfirm)="onCreateModuloFeature($event)"
         (editConfirm)="onEditModuloFeature($event)"></ng2-smart-table>
       </div>
     </div>
     <div class="right">
         <div class = "conttabla">
-            <ng2-smart-table [settings]="baldasfeatures" [source]="source2" 
-            (editConfirm)="onEditModuloFeature($event)"></ng2-smart-table>
+            <ng2-smart-table [settings]="baldasfeatures" [source]="source2" (deleteConfirm)="onDeleteBaldaFeature($event)" (createConfirm)="onCreateBaldaFeature($event)"
+            (editConfirm)="onEditBaldaFeature($event)"></ng2-smart-table>
           </div>
     </div>
   </div>  
