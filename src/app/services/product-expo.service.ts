@@ -37,11 +37,11 @@ export class ProductExpoService {
     }
   ];
 
-  getDataEProducts() {
+  GetProductos() {
     return this.dataproducts;
   }
 
-  deleteEProduct(event): void {
+  RemoveProducto(event): void {
     this.http
    .post<any>(`${config.basePath}product-expo/deleteEProduct`, {  
   })
@@ -49,7 +49,7 @@ export class ProductExpoService {
   
   }
   
-  editEProduct(event) {
+  UpdateProducto(event) {
     this.http
       .post<any>(`${config.basePath}product-expo/editEProduct`, {
         cod_prod: event.cod_prod,
@@ -68,7 +68,7 @@ export class ProductExpoService {
       .subscribe();
   }
   
-  addEProduct(event) {
+  InsertProducto(event) {
     this.http
       .post<any>(`${config.basePath}product-expo/addEProduct`, {
         cod_prod: event.cod_prod,

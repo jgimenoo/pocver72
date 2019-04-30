@@ -108,7 +108,7 @@ features = {
 constructor(private service: ProductExpoService,
   private toastrService: NbToastrService,
   private router: Router) {
-    this.source = new LocalDataSource(this.service.getDataEProducts()); //create the source
+    this.source = new LocalDataSource(this.service.GetProductos()); //create the source
    }
    ngOnInit() {
   }
@@ -116,7 +116,7 @@ constructor(private service: ProductExpoService,
     //console.log("Delete Event In Console")
   if (window.confirm('Estás seguro de eliminar el producto?')) {
       event.confirm.resolve(event.dataproducts);
-      this.service.deleteEProduct(event.dataproducts);
+      this.service.RemoveProducto(event.dataproducts);
     } else {
       event.confirm.reject(); 
     }
@@ -160,7 +160,7 @@ validardata0(newData) {
          );
      }else if (window.confirm('Estás seguro de modificar el producto?')) {
       event.confirm.resolve(event.newData);
-      this.service.editEProduct(event.newData);
+      this.service.UpdateProducto(event.newData);
     } else {
       event.confirm.reject();
     }
@@ -204,7 +204,7 @@ if (this.result == false){
      );
  }else if (window.confirm('Estás seguro de añadir el producto?')) {
    event.confirm.resolve(event.newData);
-   this.service.addEProduct(event.newData);
+   this.service.InsertProducto(event.newData);
  } else {
    event.confirm.reject();
  }

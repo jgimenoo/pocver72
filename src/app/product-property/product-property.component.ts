@@ -4,6 +4,7 @@ import { ProductPropertyService } from '../services/product-property.service';
 import { Router } from '@angular/router';
 import { NbToastrService } from '@nebular/theme'
 
+
 @Component({
   selector: 'app-product-property',
   templateUrl: './product-property.component.html',
@@ -14,7 +15,9 @@ export class ProductPropertyComponent implements OnInit {
   //servicios
   optionstipo = this.service.getSection();
   optionsref = this.service.getRefrigerado();
-  optionsvar = this.service.getVariablelog();
+ optionsvar = this.service.getVariablelog();
+
+  dataproductos = [];
 
   features = {
     actions: {
@@ -112,17 +115,53 @@ export class ProductPropertyComponent implements OnInit {
     }
    }
 
-   source: LocalDataSource;
-   dataproducts;
+   source: LocalDataSource = new LocalDataSource();
+   sourceOutput: LocalDataSource = new LocalDataSource();
+   ngOnInit() {
+    this.service.getProductos();
+
+    /*this.service.getProductos().subscribe(dataProductos => {
+      console.log('aaaaaaaaaaaaaaaaaa');
+      console.log(dataProductos);
+     
+      if (dataProductos != null) {
+        console.log(dataProductos);
+       // this.dataProductos = dataProductos;
+       //    this.service.setProductos(dataProductos);
+        
+      //   const loadData = new Array();
+      //  this.source.load(loadData);
+      //   this.loadContentOutputTable();
+      }
+    }); */
+
+ /* this.service.getProductos().subscribe((dataProductos: productos[]) => {
+    this.productos = productos;
+
+    this.service.getProductos().subscribe(dataProductos => {
+      if (dataProductos != null) {
+        this.dataProductos = dataProductos;
+        this.service.setProductos(dataProductos);
+        
+        const loadData = new Array();
+        this.source.load(loadData);
+        this.loadContentOutputTable();
+      }
+    });
+  }); */
+
+  
+}
+
+ 
+
 
   constructor(private service: ProductPropertyService,
     private toastrService: NbToastrService,
     private router: Router) {
-      this.source = new LocalDataSource(this.service.getDataProducts()); //create the source
      }
 
-  ngOnInit() {
- }
+
 
  /*function calcular() {
   // obtenemos todas las filas del tbody
@@ -154,7 +193,7 @@ export class ProductPropertyComponent implements OnInit {
       //console.log("Delete Event In Console")
     if (window.confirm('Estás seguro de eliminar el producto?')) {
         event.confirm.resolve(event.dataproducts);
-        this.service.deleteProduct(event.dataproducts);
+        this.service.RemoveProducto(event.dataproducts);
       } else {
         event.confirm.reject(); 
       }
@@ -190,7 +229,7 @@ export class ProductPropertyComponent implements OnInit {
            );
        }else if (window.confirm('Estás seguro de modificar el producto?')) {
         event.confirm.resolve(event.newData);
-        this.service.editProduct(event.newData);
+        this.service.UpdateProducto(event.newData);
       } else {
         event.confirm.reject();
       }
@@ -226,7 +265,7 @@ export class ProductPropertyComponent implements OnInit {
        );
    }else if (window.confirm('Estás seguro de añadir el producto?')) {
      event.confirm.resolve(event.newData);
-     this.service.addProduct(event.newData);
+     this.service.InsertProducto(event.newData);
    } else {
      event.confirm.reject();
    }

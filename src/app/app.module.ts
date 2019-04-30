@@ -51,7 +51,8 @@ import { EstructuraModuloModule } from './estructura-modulo/estructura-modulo.mo
     import { ProductExpoService } from './services/product-expo.service';
     import { LinealesService } from './services/lineales.service';
     import { ModulebaldaService } from'./services/modulebalda.service';
-    import { ZonasyseccionesService } from './services/zonasysecciones.service';
+    import { ZonasyseccionesService } from './services/zonasysecciones.service'; 
+    
 
 
 

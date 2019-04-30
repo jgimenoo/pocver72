@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { config } from '../config';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+//import { map, catchError } from 'rxjs/operators'; 
+import { map, filter, switchMap, retry } from 'rxjs/operators'; 
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductPropertyService {
-  product: any[] = [];
+  productos: any[] = [];
 
   constructor(private http: HttpClient) { }
-  dataproducts = [
+  /*dataproducts = [
     {
       cod_prod: "1",               // nombre del producto
       descripcion: "Ron",          // pale, medio pale o caja
@@ -34,9 +38,11 @@ export class ProductPropertyService {
       volumen_alm: "500",          // ancho x alto x largo
       area_alm: "50"               //alto x ancho
 
-    }
-  ];
-  secciones=[
+    } 
+
+  ];*/
+
+  secciones= [
     {value: 'Perfumeria', title: 'Perfumeria'},
     {value: 'Alcoholes', title: 'Alcoholes'},
     {value: 'Horno', title: 'Horno'},
@@ -56,29 +62,74 @@ export class ProductPropertyService {
     {value: 'medio_palet', title: 'Medio Palet'},
     {value: 'unidad', title: 'Unidades'},
   ]
+  /*GetProductos() {
+    return this.product;
+  } */
+  getVariablelog(){
+  return this.variablelog;
+}
+
 
   getSection(){
     return this.secciones;
   }
+  setSection(cod_seccion: number,descripcion: string ){
+    return this.http
+      .post<any>(`${config.basePath}secciones`, {
+        cod_seccion: cod_seccion,
+        descripcion: descripcion,
+      })
+  }
   getRefrigerado(){
     return this.refrigerado;
   }
-  getDataProducts() {
+  setRefrigerado(refrigerado: any){
+    this.refrigerado = refrigerado;
+  }
+  /*getDataProducts() {
     return this.dataproducts;
   }
-  getVariablelog(){
-    return this.variablelog;
+  setDataProducts(dataproducts: any){
+    this.dataproducts = dataproducts;
+  } */
+ 
+ /* getProductos(): Observable<any>{
+    return this.http.get(`${config.basePath}getproducto`).pipe(map(data => {})).subscribe(result => {
+      console.log(result);
+    });
+  }*/
+
+  
+  getProductos(): Observable<any> {
+   return this.http.get(`${config.basePath}getproducto`).pipe(map(response => {
+      return response;
+    }));
+   // return this.http.get('http://10.80.93.17:8080/getproductos')
+   // .pipe(map(res => res));
+
   }
   
-deleteProduct(event): void {
+  
+    setProductos(dataProductos: any){
+      this.productos = dataProductos;
+    }
+
+
+
+
+  
+  
+  //Servicios Krud
+RemoveProducto(event): void {
   this.http
  .post<any>(`${config.basePath}product-property/deleteProduct`, {  
 })
 console.log(event);
+//.subscribe();
 
 }
 
-editProduct(event) {
+UpdateProducto(event) {
   this.http
     .post<any>(`${config.basePath}product-property/editProduct`, {
       cod_prod: event.cod_prod,
@@ -95,7 +146,8 @@ editProduct(event) {
     .subscribe();
 }
 
-addProduct(event) {
+
+InsertProducto(event) {
   this.http
     .post<any>(`${config.basePath}product-property/addProduct`, {
       cod_prod: event.cod_prod,
@@ -111,7 +163,6 @@ addProduct(event) {
     })
     .subscribe();
   }
-  getProduct() {
-    return this.product;
-  }
+
 }
+
